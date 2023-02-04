@@ -65,3 +65,7 @@ yarn-error.log
 
 .xcode.*
 ios/*
+.bundle/*
+.node-version
+.ruby-version
+.watchmanconfig
