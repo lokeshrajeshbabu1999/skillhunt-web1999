@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-skillarena-dev-30603-authRole",
+      "UnauthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillarena-dev-30603-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillarena-dev-30603-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-skillarena-dev-30603-deployment",
+      "UnauthRoleName": "amplify-skillarena-dev-30603-unauthRole",
+      "StackName": "amplify-skillarena-dev-30603",
+      "StackId": "arn:aws:cloudformation:ap-south-1:169064206213:stack/amplify-skillarena-dev-30603/9d7ca9b0-a399-11ed-9d7b-0a07694b29de",
+      "AmplifyAppId": "d2kcdaxmbya09d"
+    },
+    "categories": {
+      "auth": {
+        "skillarenae9c8a678": {}
+      }
+    }
+  }
+}
