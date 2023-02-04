@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,7 +25,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import {Amplify} from 'aws-amplify';
-import {Authenticator} from '@aws-amplify/ui-react-native';
+import {
+  withAuthenticator,
+  useAuthenticator,
+} from '@aws-amplify/ui-react-native';
 
 import awsExports from './src/aws-exports';
 Amplify.configure(awsExports);
@@ -59,6 +63,11 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
+function SignOutButton(): JSX.Element {
+  const {signOut} = useAuthenticator();
+  return <Button title="Sign Out" onPress={signOut} />;
+}
+
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -67,30 +76,28 @@ function App(): JSX.Element {
   };
 
   return (
-    <Authenticator.Provider>
-      <Authenticator>
-        <SafeAreaView style={backgroundStyle}>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}>
-            <Header />
-            <View
-              style={{
-                backgroundColor: isDarkMode ? Colors.black : Colors.white,
-              }}>
-              <Section title="Learn More">
-                Read the docs to discover what to do next:
-              </Section>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </Authenticator>
-    </Authenticator.Provider>
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <SignOutButton />
+
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -113,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default withAuthenticator(App);
