@@ -77,8 +77,7 @@ function App(): JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+            Setup reach native it is time to add more stuff into it
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
