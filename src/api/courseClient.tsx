@@ -14,13 +14,13 @@ courseClient.interceptors.request.use(request => {
   // const token = API_USERNAME + ':' + API_PASSWORD;
   // const encodedToken = Buffer.from(token).toString('base64');
   // request.headers.Authorization = 'Basic ' + encodedToken;
-  console.log(request);
+  // console.log(request);
   return request;
 });
 
 courseClient.interceptors.request.use(request => {
   // replace console with our logger of choice
-  console.log('Request Base & Url : ', request.baseURL, request.url);
+  // console.log('Request Base & Url : ', request.baseURL, request.url);
   // console.log(request);
   return request;
 });

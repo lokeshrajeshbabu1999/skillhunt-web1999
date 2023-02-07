@@ -1,24 +1,17 @@
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
 
-const useHome = () => {
-  const [homeContent, setHomeContent] = useState([]);
+const useCourseDetail = (courseId: number) => {
+  const [courseDetail, setCourseDetail] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const sortSection = (sections: any) => {
-    return sections.sort((a: { order: number }, b: { order: number }) => {
-      return a.order < b.order;
-    });
-  };
-
-  const fetchApi = () => {
+  const loadCourse = () => {
     setIsLoading(true);
     courseClient
-      .get('/home')
+      .get('/course', { params: { course_id: courseId } })
       .then(response => {
-        console.log(response.data);
-        setHomeContent(sortSection(response.data));
+        setCourseDetail(response.data);
         setErrorMessage('');
         setIsLoading(false);
       })
@@ -30,11 +23,10 @@ const useHome = () => {
   };
 
   useEffect(() => {
-    fetchApi();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadCourse();
   }, []);
 
-  return [homeContent, errorMessage, isLoading];
+  return [courseDetail, errorMessage, isLoading];
 };
 
-export default useHome;
+export default useCourseDetail;
