@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { React, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';

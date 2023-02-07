@@ -7,8 +7,8 @@ const useCourse = category => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const sortCourses = courses => {
-    return courses.sort((a, b) => {
+  const sortCourses = coursesParam => {
+    return coursesParam.sort((a, b) => {
       return a.order > b.order;
     });
   };
