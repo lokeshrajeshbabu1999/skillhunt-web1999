@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Icon } from '@rneui/base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import { useState } from 'react';
 import {
@@ -77,7 +77,8 @@ const Home = ({ navigation }) => {
         <TouchableOpacity>
           <IconView>
             <Icon
-              name="search"
+              name="layers-search"
+              size={26}
               color={theme.BACKGROUND_COLOR}
               onPress={() => swapSearchBarDisplay()}
             />

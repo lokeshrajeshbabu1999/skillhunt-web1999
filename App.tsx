@@ -10,6 +10,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import NewScreen from './src/features/reference/screens/NewScreen';
+import { CourseNavigator } from './src/features/course/components/CourseStack';
 
 Amplify.configure(awsExports);
 
@@ -45,7 +46,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Course"
-                component={NewScreen}
+                component={CourseNavigator}
                 options={{
                   tabBarLabel: 'Courses',
                   tabBarIcon: ({ color }) => (
