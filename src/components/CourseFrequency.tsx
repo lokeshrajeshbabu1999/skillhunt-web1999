@@ -16,27 +16,27 @@ const CourseFrequency = ({ course }) => {
       break;
   }
 
-  const getPrice = course => {
+  const getPrice = (courseInput: { price: string }) => {
     let price = '';
-    if (course.price) {
-      if (course.price === 'Free') {
+    if (courseInput.price) {
+      if (courseInput.price === 'Free') {
         price = 'Free';
       } else {
-        price = course.price;
+        price = courseInput.price;
       }
     }
-    if (course.price) {
-      if (course.price === '200') {
+    if (courseInput.price) {
+      if (courseInput.price === '200') {
         price = 'Rs 200';
       } else {
-        price = course.price;
+        price = courseInput.price;
       }
     }
     return price;
   };
 
-  const displayPriceBadge = course => {
-    return course.price ? <Badge value={getPrice(course)} /> : <></>;
+  const displayPriceBadge = (courseInput: { price: any }) => {
+    return courseInput.price ? <Badge value={getPrice(courseInput)} /> : <></>;
   };
 
   return (

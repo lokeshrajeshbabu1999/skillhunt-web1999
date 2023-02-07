@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Icon } from '@rneui/base';
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import { useState } from 'react';
@@ -26,6 +27,7 @@ import useHome from '../hooks/useHome';
 import { useTheme } from 'styled-components';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import React from 'react';
 
 const Home = ({ navigation }) => {
   const [homeContent, errorMessage, isLoading] = useHome();
@@ -47,7 +49,7 @@ const Home = ({ navigation }) => {
     }
   };
 
-  const collectCoursesBySearchTerm = searchTerm => {
+  const collectCoursesBySearchTerm = (searchTerm: any) => {
     courseClient
       .post('/search', { term: searchTerm })
       .then(response => {
@@ -68,25 +70,24 @@ const Home = ({ navigation }) => {
     }
   };
 
-  // React.useEffect(() => {
-  //   // Use `setOptions` to update the button that we previously specified
-  //   // Now the button includes an `onPress` handler to update the count
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <TouchableOpacity>
-  //         <IconView>
-  //           <Icon
-  //             name="search"
-  //             color={theme.BACKGROUND_COLOR}
-  //             onPress={() => swapSearchBarDisplay()}
-  //           />
-  //         </IconView>
-  //       </TouchableOpacity>
-  //     ),
-  //   });
-  // }, [navigation]);
+  React.useEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerRight: () => (
+        <TouchableOpacity>
+          <IconView>
+            <Icon
+              name="search"
+              color={theme.BACKGROUND_COLOR}
+              onPress={() => swapSearchBarDisplay()}
+            />
+          </IconView>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
 
-  const renderSearchBar = showSearchBarFlag => {
+  const renderSearchBar = (showSearchBarFlag: boolean) => {
     if (showSearchBarFlag) {
       return (
         <SearchBar

@@ -22,5 +22,9 @@ Let Metro Bundler run in its own terminal. Open a new terminal inside your React
 npx react-native run-android
 ```
 
+### Lint Checking
+
+- Run 'npm run lint:fix' to check and fix lint errors
+
 
 <!-- FIXME : Fill up with instruction for running the app on ios  -->
