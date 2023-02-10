@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { ThemeProvider } from 'styled-components';
 import { Amplify } from 'aws-amplify';
-import { Authenticator } from '@aws-amplify/ui-react-native';
+// import { Authenticator } from '@aws-amplify/ui-react-native';
 
-import awsExports from './src/aws-exports';
+// import awsExports from './src/aws-exports';
 import { lightTheme } from './src/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -12,7 +12,7 @@ import { HomeNavigator } from './src/features/home/components/HomeStack';
 import NewScreen from './src/features/reference/screens/NewScreen';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 
-Amplify.configure(awsExports);
+// Amplify.configure(awsExports);
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,8 +28,8 @@ function App(): JSX.Element {
   // };
 
   return (
-    <Authenticator.Provider>
-      <Authenticator>
+    // <Authenticator.Provider>
+      // <Authenticator>
         <ThemeProvider theme={lightTheme}>
           <NavigationContainer>
             <Tab.Navigator
@@ -81,8 +81,8 @@ function App(): JSX.Element {
             </Tab.Navigator>
           </NavigationContainer>
         </ThemeProvider>
-      </Authenticator>
-    </Authenticator.Provider>
+      // </Authenticator>
+    // </Authenticator.Provider>
   );
 }
 

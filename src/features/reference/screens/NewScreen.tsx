@@ -1,8 +1,15 @@
-import { Text } from 'react-native';
+import { Text } from "@rneui/themed";
+import userSchedule from "../../course/hooks/userSchedule";
 
-const NewScreen = () => {
-  const name = 'React Native';
-  return <Text>Hello, I am {name}!</Text>;
-};
 
-export default NewScreen;
+const ScheduleScreen = () => {
+  // const [UserSchedule] = userSchedule();
+
+  // const displayHomeContent = () => {
+  return (
+    <Text>hai im here how r u there</Text>
+  )
+}
+
+// }
+export default ScheduleScreen;
