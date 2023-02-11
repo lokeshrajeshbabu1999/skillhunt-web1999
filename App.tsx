@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import NewScreen from './src/features/reference/screens/NewScreen';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
+import UserProfile from './src/features/profile/screens/UserProfile';
 
 Amplify.configure(awsExports);
 
@@ -70,7 +71,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Profile"
-                component={NewScreen}
+                component={UserProfile}
                 options={{
                   tabBarLabel: 'Account',
                   tabBarIcon: ({ color }) => (
