@@ -3,7 +3,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react-native';
 
 const UserProfile = () => {
   const { user, signOut } = useAuthenticator();
-  // console.log(user);
+  console.log(user.signInUserSession);
   return (
     <View>
       <Text>Hello {user.username}</Text>
