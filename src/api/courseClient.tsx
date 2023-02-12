@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { API_URL } from '@env';
 // import { Buffer } from 'buffer';
 
-const API_URL = 'https://1gdj7ukr44.execute-api.ap-south-1.amazonaws.com/Prod';
+const API_URL = 'https://kcs3mbhdtf.execute-api.ap-south-1.amazonaws.com/Prod';
 const courseClient = axios.create({
   baseURL: API_URL.trim(),
 });
