@@ -12,6 +12,7 @@ import { HomeNavigator } from './src/features/home/components/HomeStack';
 import NewScreen from './src/features/reference/screens/NewScreen';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
+import UserSchedule from './src/features/schedule/screens/UserSchedule';
 
 Amplify.configure(awsExports);
 
@@ -57,7 +58,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Schedule"
-                component={NewScreen}
+                component={UserSchedule}
                 options={{
                   tabBarLabel: 'Schedule',
                   tabBarIcon: ({ color }) => (

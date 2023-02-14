@@ -18,7 +18,7 @@ import CourseFrequency from '../../../components/CourseFrequency';
 import Course from '../components/Course';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import useCourseSchedule from '../hooks/useSchedule';
+import useCourseSchedule from '../hooks/useCourseSchedule';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import Divider from '../../../components/Divider';
 
