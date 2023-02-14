@@ -14,7 +14,7 @@ const UserSchedule = () => {
         horizontal={true}
         data={userSchedule}
         renderItem={renderCourseCard}
-        keyExtractor={item => item.id}
+        // keyExtractor={item => item.id}
         showsHorizontalScrollIndicator={false}
       />
     </View>
