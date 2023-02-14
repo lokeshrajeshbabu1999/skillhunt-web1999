@@ -1,11 +1,12 @@
-import userApi from '../../../api/userApi';
+import userApi from '../../../api/userClient';
 import { useEffect, useState } from 'react';
+import userClient from '../../../api/userClient';
 
 const useSchedule = (userid: number) => {
   const [userSchedule, setUserSchedule] = useState([]);
 
   const loadUserSchedule = () => {
-    userApi
+    userClient
       .get('/user-schedule')
       .then(response => {
         setUserSchedule(response.data);

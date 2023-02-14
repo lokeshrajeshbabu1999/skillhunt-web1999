@@ -1,14 +1,12 @@
 import { FlatList, Text, View } from 'react-native';
 import useSchedule from '../hooks/useSchedule';
+import Schedule from './Schedule';
 
 const UserSchedule = () => {
   const [userSchedule] = useSchedule([]);
-  const renderCourseCard = ({ item }) => <Text>Text here</Text>;
-  //   const Schedule = ({ schedule }) => (
-  //     <View>
-  //       <Text>Dummy {schedule.id}</Text>
-  //     </View>
-  //   );
+  const renderCourseCard = ({ item, navigation }) => (
+    <Schedule schedule={item} navigation={navigation} />
+  );
 
   return (
     <View>
@@ -16,7 +14,7 @@ const UserSchedule = () => {
         horizontal={true}
         data={userSchedule}
         renderItem={renderCourseCard}
-        keyExtractor={item => item.userid}
+        keyExtractor={item => item.id}
         showsHorizontalScrollIndicator={false}
       />
     </View>
