@@ -8,6 +8,7 @@ const Schedule = ({ schedule }) => {
             <Text>{schedule.courseid}</Text>
             <Text>{schedule.userid}</Text>
             <Text>{schedule.userscheduleid}</Text>
+            <Text>{schedule.scheduleid}</Text>
         </View>
     );
 };
