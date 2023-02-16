@@ -21,13 +21,16 @@ import Message from '../../../components/Message';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import Divider from '../../../components/Divider';
+import useSchedulePost from '../../schedule/hooks/useSchedulePost';
+import useSchedule from '../../schedule/hooks/useSchedule';
+import { useAuthenticator } from '@aws-amplify/ui-react-native';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
   const [courseSchedule] = useCourseSchedule(route.params.id);
-
+  const [addSchedule] = useSchedulePost([]);
   const skillActivityIndicator = () => {
     return <Loader />;
   };
@@ -51,6 +54,11 @@ const CourseDetail = ({ route }) => {
       </View>
     );
   };
+  // const enrollSchedule = () => {
+  //   const userid = user.username as string;
+  //   return (addSchedule[userid]);
+  // }
+
 
   const isButtonDisabled = schedule => {
     return schedule.status !== 'upcoming';
@@ -110,6 +118,7 @@ const CourseDetail = ({ route }) => {
                     <Button
                       disabled={isButtonDisabled(schedule)}
                       title="Enroll"
+                      onPress={()=>addSchedule}
                     />
                   </ButtonView>
                 </ScheduleView>
