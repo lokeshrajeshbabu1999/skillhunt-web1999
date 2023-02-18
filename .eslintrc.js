@@ -1,4 +1,8 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  extends: [
+    '@react-native-community',
+    'plugin:prettier/recommended',
+    'plugin:react/jsx-runtime',
+  ],
 };
