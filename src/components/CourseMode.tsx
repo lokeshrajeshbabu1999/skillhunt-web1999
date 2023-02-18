@@ -7,11 +7,11 @@ const CourseMode = ({ course }) => {
   switch (course.mode) {
     case 'recorded':
       iconName = 'headphones';
-      iconFamily = 'font-awesome-5';
+      iconFamily = 'material-community';
       break;
     case 'inperson':
       iconName = 'people';
-      iconFamily = 'material';
+      iconFamily = 'material-community';
       break;
     default:
       iconName = 'google-classroom';
