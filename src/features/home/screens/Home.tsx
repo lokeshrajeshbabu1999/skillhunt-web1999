@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Card, ListItem, SearchBar } from '@rneui/themed';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
-  TouchableOpacity,
-  View,
-  Text,
   ScrollView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTheme } from 'styled-components';
 import {
   CourseAuthor,
   CourseContainer,
@@ -17,17 +18,15 @@ import {
   CourseView,
   FlexView,
   FlexWrap,
-  IconView,
+  IconView
 } from '../../../../style';
 import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
+import Loader from '../../../components/Loader';
+import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
-import { useTheme } from 'styled-components';
-import Loader from '../../../components/Loader';
-import Message from '../../../components/Message';
-import React from 'react';
 
 const Home = ({ navigation }) => {
   const [homeContent, errorMessage, isLoading] = useHome();
@@ -164,6 +163,12 @@ const Home = ({ navigation }) => {
     return errorMessage === '' ? displayHomeContent() : skillMessage();
   };
 
+  const displayMainContent = () => {
+    return (
+      <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>
+    );
+  };
+
   const displayHomeContent = () => {
     return (
       <ScrollView
@@ -183,8 +188,7 @@ const Home = ({ navigation }) => {
   return (
     <View>
       {renderSearchBar(showSearchBar)}
-      {showResults ? displaySearchResults() : displayHomeContent()}
-      <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>
+      {showResults ? displaySearchResults() : displayMainContent()}
     </View>
   );
 };

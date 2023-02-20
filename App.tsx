@@ -1,18 +1,17 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { ThemeProvider } from 'styled-components';
-import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react-native';
+import { Amplify } from 'aws-amplify';
+import { ThemeProvider } from 'styled-components';
 
-import awsExports from './src/aws-exports';
-import { lightTheme } from './src/theme';
-import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { HomeNavigator } from './src/features/home/components/HomeStack';
-import NewScreen from './src/features/reference/screens/NewScreen';
+import awsExports from './src/aws-exports';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
+import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
 import UserSchedule from './src/features/schedule/screens/UserSchedule';
+import { lightTheme } from './src/theme';
 
 Amplify.configure(awsExports);
 
