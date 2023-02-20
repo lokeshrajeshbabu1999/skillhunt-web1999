@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.BACKGROUND_COLOR};
-  ${'' /* padding-top: ${Constants.statusBarHeight + 'px'}; */}
+  margin-top: 8px;
 `;
 
 export const CategoryContainer = styled.View`

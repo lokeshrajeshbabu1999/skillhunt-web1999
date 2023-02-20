@@ -10,6 +10,19 @@
 - Run `git clone https://github.com/CodrixWorkspace/SkillHunt.git' to close the repo locally
 - Run 'npm install' into the project main folder to install the required packages
 
+### Actions on save
+
+- Make the below changes to the perform formatting and organize import 
+
+```
+"editor.formatOnSave": true,
+"editor.codeActionsOnSave": {
+  "source.fixAll.eslint": true,
+  "source.organizeImports": true
+}
+```
+
+
 ### Start Metro
 
 - To start Metro run 'npx react-native start' inside your project folder
@@ -40,3 +53,5 @@ npx react-native run-android --deviceId 'deviceid'
 - Go to Wireless `debugging > Pair device with pairing code`
 - Run `adb pair 10.0.0.243:42095` to pair your device (Use your device ip and port)
 - Run `adb connect 10.0.0.243:42095` to connect your device 
+
+
