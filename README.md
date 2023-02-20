@@ -55,3 +55,27 @@ npx react-native run-android --deviceId 'deviceid'
 - Run `adb connect 10.0.0.243:42095` to connect your device 
 
 
+## Release setup and packging
+
+### Release setup
+
+- An upload key was genrated using [keytool](https://reactnative.dev/docs/signed-apk-android)
+- The below properties were set in the `~/.gradle/gradle.properties` file
+
+```text
+  MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
+  MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
+  MYAPP_UPLOAD_STORE_PASSWORD=*****
+  MYAPP_UPLOAD_KEY_PASSWORD=*****
+```
+
+- Signing config was added to the `android/app/build.gradle` config file
+
+### Genrating the release AAB
+
+Run the following in a terminal:
+
+```bash
+cd android
+./gradlew bundleRelease
+```
