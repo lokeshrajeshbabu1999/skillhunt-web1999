@@ -21,19 +21,40 @@ import Message from '../../../components/Message';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import Divider from '../../../components/Divider';
-import useSchedulePost from '../../schedule/hooks/useSchedulePost';
 import useSchedule from '../../schedule/hooks/useSchedule';
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
+import userClient from '../../../api/userClient';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
   const [courseSchedule] = useCourseSchedule(route.params.id);
-  const [addSchedule] = useSchedulePost([]);
+  const { user } = useAuthenticator();
+  const enrollSchedule = () => {
+    // const post = { userid: user }
+    console.log("schedule")
+    userClient
+      .post('/user-schedule', JSON.stringify({
+        userid: user.username
+      }),
+        {
+          headers: {
+            'Content-Type': "application/json",
+            'Accept': "application/json",
+          }
+        })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  };
   const skillActivityIndicator = () => {
     return <Loader />;
   };
+
 
   const skillMessage = () => {
     return (
@@ -118,7 +139,7 @@ const CourseDetail = ({ route }) => {
                     <Button
                       disabled={isButtonDisabled(schedule)}
                       title="Enroll"
-                      onPress={()=>addSchedule}
+                      onPress={enrollSchedule}
                     />
                   </ButtonView>
                 </ScheduleView>

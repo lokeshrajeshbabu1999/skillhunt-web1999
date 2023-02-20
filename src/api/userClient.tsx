@@ -9,7 +9,16 @@ const userClient = axios.create({
 userClient.interceptors.request.use(request => {
     // replace console with our logger of choice
     console.log('Request Base & Url : ', request.baseURL, request.url);
-    // console.log(request);
+    console.log(request);
     return request;
 });
+userClient.interceptors.response.use(
+    response => {
+        console.log("Response : ", response);
+        return response;
+    },
+    error => {
+        console.log("Error:", error);
+    },
+);
 export default userClient;

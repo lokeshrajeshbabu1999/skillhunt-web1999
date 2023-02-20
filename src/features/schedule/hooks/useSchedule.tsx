@@ -16,9 +16,12 @@ const useSchedule = (userid: number) => {
         console.log('Error:', error);
       });
   };
+
+
   useEffect(() => {
     loadUserSchedule();
   }, []);
+
   return [userSchedule];
 };
 export default useSchedule;
