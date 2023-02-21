@@ -49,6 +49,18 @@ const CourseDetail = ({ route }) => {
         console.log('Error:', error);
       });
   };
+  const getSchedule = (schedule) => {
+    userClient
+      .get('/user-schedule')
+      .then(response => {
+        (response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  };
+
   const skillActivityIndicator = () => {
     return <Loader />;
   };
@@ -149,14 +161,15 @@ const CourseDetail = ({ route }) => {
       </ScrollView>
     );
   };
-
   return (
     <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
       {courseSchedule ? displaySchedule() : displayNoSchedule()}
+      {getSchedule() ? skillActivityIndicator() : displayResult}
     </View>
   );
 };
+
 
 export default CourseDetail;
 
