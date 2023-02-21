@@ -20,6 +20,7 @@ import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import { courseImage } from '../../../utils/ImageUtil';
+import useSchedule from '../../schedule/hooks/useSchedule';
 import Course from '../components/Course';
 import useCourseDetail from '../hooks/useCourseDetail';
 import useCourseSchedule from '../hooks/useCourseSchedule';
@@ -30,6 +31,7 @@ const CourseDetail = ({ route }) => {
   );
   const [courseSchedule] = useCourseSchedule(route.params.id);
   const { user } = useAuthenticator();
+  const [userSchedule] = useSchedule([])
   const enrollSchedule = schedule => {
     //FIXME - Write an utility method to get user email
     // console.log('Param schedule', schedule);
@@ -49,17 +51,17 @@ const CourseDetail = ({ route }) => {
         console.log('Error:', error);
       });
   };
-  const getSchedule = (schedule) => {
-    userClient
-      .get('/user-schedule')
-      .then(response => {
-        (response.data);
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log('Error:', error);
-      });
-  };
+  // const getSchedule = (schedule) => {
+  //   userClient
+  //     .get('/user-schedule')
+  //     .then(response => {
+  //       (response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error:', error);
+  //     });
+  // };
 
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -165,7 +167,7 @@ const CourseDetail = ({ route }) => {
     <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
       {courseSchedule ? displaySchedule() : displayNoSchedule()}
-      {getSchedule() ? skillActivityIndicator() : displayResult}
+      {/* {getSchedule() ? skillActivityIndicator() : displayResult} */}
     </View>
   );
 };
