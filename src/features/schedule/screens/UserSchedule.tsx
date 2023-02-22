@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import useSchedule from '../hooks/useSchedule';
 import Schedule from './Schedule';
 
