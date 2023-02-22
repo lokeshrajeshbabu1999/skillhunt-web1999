@@ -73,6 +73,8 @@ npx react-native run-android --deviceId 'deviceid'
 
 ### Genrating the release AAB
 
+Update the versionCode and versionName in build.gradle file.  
+
 Run the following in a terminal:
 
 ```bash
