@@ -8,8 +8,13 @@ const userClient = axios.create({
 
 userClient.interceptors.request.use(request => {
   // replace console with our logger of choice
-  console.log('Request Base & Url : ', request.baseURL, request.url);
-  console.log(request.data);
+  console.log(
+    'Request Base Url Params : ',
+    request.baseURL,
+    request.url,
+    request.params,
+  );
+  // console.log(request);
   return request;
 });
 

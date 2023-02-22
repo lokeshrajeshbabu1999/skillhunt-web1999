@@ -5,6 +5,7 @@ const useUser = () => {
   const { user } = useAuthenticator();
 
   const initUser = () => {
+    console.log('Auth User', user.attributes.email);
     setUserEmail(user.attributes.email);
   };
 
