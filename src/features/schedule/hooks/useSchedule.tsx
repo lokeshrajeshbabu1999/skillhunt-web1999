@@ -1,11 +1,11 @@
-import userApi from '../../../api/userClient';
 import { useEffect, useState } from 'react';
 import userClient from '../../../api/userClient';
 
-const useSchedule = (userid: number) => {
+const useSchedule = (userEmail: string) => {
   const [userSchedule, setUserSchedule] = useState([]);
 
   const loadUserSchedule = () => {
+    console.log('Load schedule for user ', userEmail);
     userClient
       .get('/user-schedule')
       .then(response => {
@@ -16,7 +16,6 @@ const useSchedule = (userid: number) => {
         console.log('Error:', error);
       });
   };
-
 
   useEffect(() => {
     loadUserSchedule();

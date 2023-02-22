@@ -1,4 +1,3 @@
-import { useAuthenticator } from '@aws-amplify/ui-react-native';
 import { Card, Text } from '@rneui/themed';
 import { Button, ScrollView, StyleSheet, View } from 'react-native';
 import styled from 'styled-components/native';
@@ -18,6 +17,7 @@ import CourseMode from '../../../components/CourseMode';
 import Divider from '../../../components/Divider';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import useUser from '../../../hooks/useUser';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import { courseImage } from '../../../utils/ImageUtil';
 import useSchedule from '../../schedule/hooks/useSchedule';
@@ -30,16 +30,17 @@ const CourseDetail = ({ route }) => {
     route.params.id,
   );
   const [courseSchedule] = useCourseSchedule(route.params.id);
-  const { user } = useAuthenticator();
-  const [userSchedule] = useSchedule([])
+  const [userSchedule] = useSchedule(userEmail);
+  const [userEmail] = useUser();
   const enrollSchedule = schedule => {
     //FIXME - Write an utility method to get user email
     // console.log('Param schedule', schedule);
+    console.log('Auth User', userEmail);
     userClient
       .post(
         '/user-schedule',
         JSON.stringify({
-          user: user.username,
+          user: userEmail,
           course_id: courseDetail.course_id,
           schedule_id: schedule.schedule_id,
         }),
@@ -171,7 +172,6 @@ const CourseDetail = ({ route }) => {
     </View>
   );
 };
-
 
 export default CourseDetail;
 
