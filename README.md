@@ -71,16 +71,18 @@ npx react-native run-android --deviceId 'deviceid'
 
 - Signing config was added to the `android/app/build.gradle` config file
 
-### Genrating the release AAB
+### Generating the release AAB
 
-Update the versionCode and versionName in build.gradle file.  
+- Update the versionCode and versionName in build.gradle file.  
 
-Run the following in a terminal:
+- Run the following in a terminal:
 
 ```bash
 cd android
 ./gradlew bundleRelease
 ```
+
+- Ensure the App access provided for review is working
 
 ### Internal distribution validation
 
@@ -90,7 +92,7 @@ Install the app from [Play Store](https://play.google.com/store/apps/details?id=
 
 ## Managing Git Branches
 
-Run ```git fetch -p``` to get your local brances in sync with repo
+Run ```git fetch -p``` to get your local branches in sync with repo
 
 Run ``` git branch --merged| egrep -v "(^\*|master|main|dev)" ``` to view already merged local branches
 
