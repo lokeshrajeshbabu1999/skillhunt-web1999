@@ -6,8 +6,12 @@ import { ThemeProvider } from 'styled-components';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import awsExports from './src/aws-exports';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
+import UserProfile from './src/features/profile/screens/UserProfile';
+import UserSchedule from './src/features/schedule/screens/UserSchedule';
+import { lightTheme } from './src/theme';
 
 Amplify.configure(awsExports);
 
