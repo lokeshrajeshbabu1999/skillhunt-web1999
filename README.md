@@ -82,7 +82,13 @@ cd android
 ./gradlew bundleRelease
 ```
 
-#### Managing Git Branches
+### Internal distribution validation
+
+Become a part of our internal testing [team](https://play.google.com/apps/internaltest/4701438721505499078)  
+
+Install the app from [Play Store](https://play.google.com/store/apps/details?id=com.codrix.skill&hl=en-US&ah=0S_CC-tVBeRQh2KARpnLmSLljpg&pli=1)  
+
+## Managing Git Branches
 
 Run ```git fetch -p``` to get your local brances in sync with repo
 
