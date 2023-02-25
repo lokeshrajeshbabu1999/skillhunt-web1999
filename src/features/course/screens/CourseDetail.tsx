@@ -1,6 +1,7 @@
-import { Text, Card } from '@rneui/themed';
-import useCourseDetail from '../hooks/useCourseDetail';
-import { View, StyleSheet, Button, ScrollView } from 'react-native';
+import { useAuthenticator } from '@aws-amplify/ui-react-native';
+import { Card, Text } from '@rneui/themed';
+import { Button, ScrollView, StyleSheet, View } from 'react-native';
+import styled from 'styled-components/native';
 import {
   CourseAuthor,
   CourseContainer,
@@ -9,24 +10,58 @@ import {
   CourseDetailModeView,
   CourseTitle,
   FlexView,
-  FrequencyView,
+  FrequencyView
 } from '../../../../style';
-import styled from 'styled-components/native';
-import CourseMode from '../../../components/CourseMode';
-import { courseImage } from '../../../utils/ImageUtil';
+import userClient from '../../../api/userClient';
 import CourseFrequency from '../../../components/CourseFrequency';
-import Course from '../components/Course';
+import CourseMode from '../../../components/CourseMode';
+import Divider from '../../../components/Divider';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import useCourseSchedule from '../hooks/useSchedule';
 import { toDisplayDate } from '../../../utils/DateUtil';
-import Divider from '../../../components/Divider';
+import { courseImage } from '../../../utils/ImageUtil';
+import useSchedule from '../../schedule/hooks/useSchedule';
+import Course from '../components/Course';
+import useCourseDetail from '../hooks/useCourseDetail';
+import useCourseSchedule from '../hooks/useCourseSchedule';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
   const [courseSchedule] = useCourseSchedule(route.params.id);
+  const { user } = useAuthenticator();
+  const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
+  const enrollSchedule = schedule => {
+    //FIXME - Write an utility method to get user email
+    // console.log('Param schedule', schedule);
+    userClient
+      .post(
+        '/user-schedule',
+        JSON.stringify({
+          user: user.attributes.email,
+          course_id: courseDetail.course_id,
+          schedule_id: schedule.schedule_id,
+        }),
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  };
+  // const getSchedule = (schedule) => {
+  //   userClient
+  //     .get('/user-schedule')
+  //     .then(response => {
+  //       (response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error:', error);
+  //     });
+  // };
 
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -51,6 +86,10 @@ const CourseDetail = ({ route }) => {
       </View>
     );
   };
+  // const enrollSchedule = () => {
+  //   const userid = user.username as string;
+  //   return (addSchedule[userid]);
+  // }
 
   const isButtonDisabled = schedule => {
     return schedule.status !== 'upcoming';
@@ -110,6 +149,7 @@ const CourseDetail = ({ route }) => {
                     <Button
                       disabled={isButtonDisabled(schedule)}
                       title="Enroll"
+                      onPress={() => enrollSchedule(schedule)}
                     />
                   </ButtonView>
                 </ScheduleView>
@@ -123,11 +163,11 @@ const CourseDetail = ({ route }) => {
       </ScrollView>
     );
   };
-
   return (
     <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
       {courseSchedule ? displaySchedule() : displayNoSchedule()}
+      {/* {getSchedule() ? skillActivityIndicator() : displayResult} */}
     </View>
   );
 };

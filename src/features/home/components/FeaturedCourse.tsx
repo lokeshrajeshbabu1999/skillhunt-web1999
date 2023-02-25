@@ -1,17 +1,17 @@
-import { View, TouchableOpacity, Text } from 'react-native';
 import { Card } from '@rneui/themed';
+import { Text, TouchableOpacity, View } from 'react-native';
 import {
   CourseAuthor,
   CourseImage,
   CourseTitle,
-  FlexWrap,
-  FlexView,
-  FrequencyView,
   CourseView,
+  FlexView,
+  FlexWrap,
+  FrequencyView
 } from '../../../../style';
-import { courseImage } from '../../../utils/ImageUtil';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
+import { courseImage } from '../../../utils/ImageUtil';
 
 const FeaturedCourse = ({ course, navigation }) => (
   <View>
@@ -28,15 +28,13 @@ const FeaturedCourse = ({ course, navigation }) => (
           />
           <View>
             <CourseTitle>
-              <Text>Home screen : {course.title}</Text>
+              <Text>{course.title}</Text>
             </CourseTitle>
 
             <FlexView direction="row">
               <FlexView direction="column">
-                <CourseAuthor>
-                  <Text>{course.author}</Text>
-                </CourseAuthor>
-                <Text>{course.price}</Text>
+                <CourseAuthor>{course.author}</CourseAuthor>
+                {/* <Text>{course.price}</Text> */}
                 <FrequencyView>
                   <CourseFrequency course={course} />
                 </FrequencyView>

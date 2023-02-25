@@ -6,11 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import awsExports from './src/aws-exports';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
-import NewScreen from './src/features/reference/screens/NewScreen';
-import { lightTheme } from './src/theme';
 
 Amplify.configure(awsExports);
 
@@ -56,7 +53,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Schedule"
-                component={NewScreen}
+                component={UserSchedule}
                 options={{
                   tabBarLabel: 'Schedule',
                   tabBarIcon: ({ color }) => (
@@ -70,7 +67,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Profile"
-                component={NewScreen}
+                component={UserProfile}
                 options={{
                   tabBarLabel: 'Account',
                   tabBarIcon: ({ color }) => (

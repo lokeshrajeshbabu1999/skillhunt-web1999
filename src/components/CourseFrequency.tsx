@@ -1,18 +1,19 @@
 import { Badge } from '@rneui/themed';
 import { Text } from 'react-native';
 import { FlexView, PriceView } from '../../style';
+import Global from '../utils/Global';
 
 const CourseFrequency = ({ course }) => {
   let frequencyName = null;
   switch (course.frequency) {
-    case 'single':
-      frequencyName = '1 Session';
+    case Global.Constant.CourseFrequency.Recurring:
+      frequencyName = 'recurring';
       break;
-    case 'multi':
-      frequencyName = '4 Sessions';
+    case Global.Constant.CourseFrequency.Multi:
+      frequencyName = course.frequency;
       break;
     default:
-      frequencyName = 'recurring';
+      frequencyName = '1 Session';
       break;
   }
 
@@ -22,14 +23,7 @@ const CourseFrequency = ({ course }) => {
       if (courseInput.price === 'Free') {
         price = 'Free';
       } else {
-        price = courseInput.price;
-      }
-    }
-    if (courseInput.price) {
-      if (courseInput.price === '200') {
-        price = 'Rs 200';
-      } else {
-        price = courseInput.price;
+        price = 'Rs ' + courseInput.price;
       }
     }
     return price;
@@ -46,5 +40,10 @@ const CourseFrequency = ({ course }) => {
     </FlexView>
   );
 };
+
+// export const ErrorMessageView = styled.Badge`
+//   align-items: center;
+//   flex: 1;
+// `;
 
 export default CourseFrequency;
