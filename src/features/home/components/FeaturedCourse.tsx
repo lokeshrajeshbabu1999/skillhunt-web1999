@@ -33,10 +33,8 @@ const FeaturedCourse = ({ course, navigation }) => (
 
             <FlexView direction="row">
               <FlexView direction="column">
-                <CourseAuthor>
-                  <Text>{course.author}</Text>
-                </CourseAuthor>
-                <Text>{course.price}</Text>
+                <CourseAuthor>{course.author}</CourseAuthor>
+                {/* <Text>{course.price}</Text> */}
                 <FrequencyView>
                   <CourseFrequency course={course} />
                 </FrequencyView>
