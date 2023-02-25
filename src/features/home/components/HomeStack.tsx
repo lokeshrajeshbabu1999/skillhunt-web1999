@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Global from '../../../utils/Global';
-import Home from '../screens/Home';
 import { useTheme } from 'styled-components';
+import Global from '../../../utils/Global';
 import CourseDetail from '../../course/screens/CourseDetail';
+import Home from '../screens/Home';
 
 export const HomeStack = createStackNavigator();
 // export const SearchStack = createStackNavigator();
