@@ -81,3 +81,11 @@ Run the following in a terminal:
 cd android
 ./gradlew bundleRelease
 ```
+
+#### Managing Git Branches
+
+Run ```git fetch -p``` to get your local brances in sync with repo
+
+Run ``` git branch --merged| egrep -v "(^\*|master|main|dev)" ``` to view already merged local branches
+
+Switch to main branch and Run ```git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d``` to delete all local branches that are already merged into the currently checked out branch
