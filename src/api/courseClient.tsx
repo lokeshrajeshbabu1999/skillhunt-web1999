@@ -1,8 +1,7 @@
+import { API_URL } from '@env';
 import axios from 'axios';
-// import { API_URL } from '@env';
 // import { Buffer } from 'buffer';
-
-const API_URL = 'https://kcs3mbhdtf.execute-api.ap-south-1.amazonaws.com/Prod';
+console.log('API_URL', API_URL);
 const courseClient = axios.create({
   baseURL: API_URL.trim(),
 });
@@ -20,7 +19,12 @@ courseClient.interceptors.request.use(request => {
 
 courseClient.interceptors.request.use(request => {
   // replace console with our logger of choice
-  console.log('Request Base & Url : ', request.baseURL, request.url);
+  console.log(
+    'Request Base & Url : ',
+    request.baseURL,
+    request.url,
+    request.method,
+  );
   // console.log(request);
   return request;
 });
