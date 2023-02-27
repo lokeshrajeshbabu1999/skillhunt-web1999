@@ -1,9 +1,9 @@
-import { API_URL } from '@env';
+import { COURSE_API_URL } from '@env';
 import axios from 'axios';
 // import { Buffer } from 'buffer';
-console.log('API_URL', API_URL);
+console.log('Course API_URL', COURSE_API_URL);
 const courseClient = axios.create({
-  baseURL: API_URL.trim(),
+  baseURL: COURSE_API_URL.trim(),
 });
 
 courseClient.interceptors.request.use(request => {
