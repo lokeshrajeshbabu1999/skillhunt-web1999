@@ -97,31 +97,33 @@ const CourseDetail = ({ route }) => {
 
   const renderCourseCard = () => {
     return (
-      <ScrollView>
-        <View style={styles.view}>
-          <CourseDetailImage
-            source={{
-              uri: courseImage(courseDetail.image),
-            }}
-          />
-          <Text>
-            {courseDetail.header} {courseDetail.Category}
-          </Text>
-          <CourseTitle>{courseDetail.title}</CourseTitle>
-          <FlexView direction="row">
-            <FlexView direction="column">
-              <CourseDesc>{courseDetail.desc}</CourseDesc>
-              <CourseAuthor>{courseDetail.author}</CourseAuthor>
-              <FrequencyView>
-                <CourseFrequency course={Course} />
-              </FrequencyView>
+      <Card>
+        <ScrollView>
+          <View style={styles.view}>
+            <CourseDetailImage
+              source={{
+                uri: courseImage(courseDetail.image),
+              }}
+            />
+            <Text>
+              {courseDetail.header} {courseDetail.Category}
+            </Text>
+            <CourseTitle>{courseDetail.title}</CourseTitle>
+            <FlexView direction="row">
+              <FlexView direction="column">
+                <CourseDesc>{courseDetail.desc}</CourseDesc>
+                <CourseAuthor>{courseDetail.author}</CourseAuthor>
+                <FrequencyView>
+                  <CourseFrequency course={Course} />
+                </FrequencyView>
+              </FlexView>
             </FlexView>
-          </FlexView>
-          <CourseDetailModeView>
-            <CourseMode course={courseDetail} />
-          </CourseDetailModeView>
-        </View>
-      </ScrollView>
+            <CourseDetailModeView>
+              <CourseMode course={courseDetail} />
+            </CourseDetailModeView>
+          </View>
+        </ScrollView>
+      </Card>
     );
   };
 
