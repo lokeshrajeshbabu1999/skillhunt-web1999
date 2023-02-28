@@ -51,17 +51,6 @@ const CourseDetail = ({ route }) => {
         console.log('Error:', error);
       });
   };
-  // const getSchedule = (schedule) => {
-  //   userClient
-  //     .get('/user-schedule')
-  //     .then(response => {
-  //       (response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log('Error:', error);
-  //     });
-  // };
 
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -86,10 +75,6 @@ const CourseDetail = ({ route }) => {
       </View>
     );
   };
-  // const enrollSchedule = () => {
-  //   const userid = user.username as string;
-  //   return (addSchedule[userid]);
-  // }
 
   const isButtonDisabled = schedule => {
     return schedule.status !== 'upcoming';
@@ -169,7 +154,6 @@ const CourseDetail = ({ route }) => {
     <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
       {courseSchedule ? displaySchedule() : displayNoSchedule()}
-      {/* {getSchedule() ? skillActivityIndicator() : displayResult} */}
     </View>
   );
 };
