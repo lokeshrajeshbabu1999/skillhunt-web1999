@@ -18,12 +18,13 @@ import { courseImage } from '../../../utils/ImageUtil';
 import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
+import useCourseSchedule from '../hooks/useCourseSchedule';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
-  // const [courseSchedule] = useCourseSchedule(route.params.id);
+  const [courseSchedule] = useCourseSchedule(route.params.id);
   // const { user } = useAuthenticator();
   // const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
   // const enrollSchedule = schedule => {
@@ -113,9 +114,7 @@ const CourseDetail = ({ route }) => {
             </CourseDetailModeView>
           </View>
         </ScrollView>
-      </Card><CourseAppSchedule params={{
-        id: ''
-      }} /></>
+      </Card><CourseAppSchedule course={courseDetail} schedule={courseSchedule} /></>
     );
   };
 

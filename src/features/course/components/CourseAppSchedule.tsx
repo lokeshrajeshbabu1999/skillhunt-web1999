@@ -1,26 +1,19 @@
 import { useAuthenticator } from "@aws-amplify/ui-react-native";
 import { Button, Card, Text } from "@rneui/themed";
 import { ScrollView, StyleSheet, View } from 'react-native';
-
-// import { View } from "react-native/Libraries/Components/View/View";
-// import { StyleSheet } from "react-native/Libraries/StyleSheet/StyleSheet";
 import styled from 'styled-components/native';
 import userClient from '../../../api/userClient';
 import Divider from "../../../components/Divider";
 import { toDisplayDate } from "../../../utils/DateUtil";
-import useSchedule from '../../schedule/hooks/useSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 
-const CourseAppSchedule = (route: {
-    params: {
-        code(code: any): [any]; id: string | number;
-    };
-}, props: any) => {
-    const [courseDetail] = useCourseDetail(route.params.code);
-    const [courseSchedule] = useCourseSchedule(route.params.id);
+const CourseAppSchedule = ({ course, schedule }) => {
+    console.log("courseview", course)
+    const [courseDetail] = useCourseDetail(course);
+    const [courseSchedule] = useCourseSchedule(schedule);
     const { user } = useAuthenticator();
-    const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
+    const [userSchedule] = useSchedule(user.attributes?.email, schedule);
 
     const enrollSchedule = (schedule: { schedule_id: any; }) => {
         console.log(enrollSchedule);
@@ -63,7 +56,8 @@ const CourseAppSchedule = (route: {
     };
 
 
-    const displaySchedule = () => {
+    const displaySchedule = (schedule) => {
+        console.log(schedule)
         return (
             <ScrollView>
                 <Card>
@@ -104,7 +98,6 @@ const CourseAppSchedule = (route: {
     return (
         <View>
             {courseSchedule ? displaySchedule() : displayNoSchedule()}
-            console.log(courseSchedule)
         </View>
     );
 };
