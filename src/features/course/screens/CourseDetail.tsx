@@ -1,7 +1,5 @@
-import { useAuthenticator } from '@aws-amplify/ui-react-native';
 import { Card, Text } from '@rneui/themed';
-import { Button, ScrollView, StyleSheet, View } from 'react-native';
-import styled from 'styled-components/native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   CourseAuthor,
   CourseContainer,
@@ -12,45 +10,41 @@ import {
   FlexView,
   FrequencyView
 } from '../../../../style';
-import userClient from '../../../api/userClient';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
-import Divider from '../../../components/Divider';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import { toDisplayDate } from '../../../utils/DateUtil';
 import { courseImage } from '../../../utils/ImageUtil';
-import useSchedule from '../../schedule/hooks/useSchedule';
 import Course from '../components/Course';
+import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-import useCourseSchedule from '../hooks/useCourseSchedule';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
-  const [courseSchedule] = useCourseSchedule(route.params.id);
-  const { user } = useAuthenticator();
-  const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
-  const enrollSchedule = schedule => {
-    //FIXME - Write an utility method to get user email
-    // console.log('Param schedule', schedule);
-    userClient
-      .post(
-        '/user-schedule',
-        JSON.stringify({
-          user: user.attributes.email,
-          course_id: courseDetail.course_id,
-          schedule_id: schedule.schedule_id,
-        }),
-      )
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log('Error:', error);
-      });
-  };
+  // const [courseSchedule] = useCourseSchedule(route.params.id);
+  // const { user } = useAuthenticator();
+  // const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
+  // const enrollSchedule = schedule => {
+  //   //FIXME - Write an utility method to get user email
+  //   // console.log('Param schedule', schedule);
+  //   userClient
+  //     .post(
+  //       '/user-schedule',
+  //       JSON.stringify({
+  //         user: user.attributes.email,
+  //         course_id: courseDetail.course_id,
+  //         schedule_id: schedule.schedule_id,
+  //       }),
+  //     )
+  //     .then(response => {
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error:', error);
+  //     });
+  // };
 
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -68,28 +62,39 @@ const CourseDetail = ({ route }) => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
 
-  const displayNoSchedule = () => {
-    return (
-      <View>
-        <Text>Allow user to show interest</Text>
-      </View>
-    );
-  };
+  // const displayNoSchedule = () => {
+  //   return (
+  //     <View>
+  //       <Text>Allow user to show interest</Text>
+  //     </View>
+  //   );
+  // };
 
-  const isButtonDisabled = schedule => {
-    return schedule.status !== 'upcoming';
-  };
+  // const isButtonDisabled = schedule => {
+  //   return schedule.status !== 'upcoming';
+  // };
+
+  // const isDisabled = () => {
+  //   if (courseDetail.course_id === userSchedule.course_id) {
+  //     console.log(courseDetail.course_id);
+  //     return ("enrolled")
+  //   }
+
+  // };
+  // const enrollButton = (schedule, item) => {
+  //   return userSchedule ? isDisabled(item) : enrollSchedule(schedule);
+  // };
+
 
   const renderCourseCard = () => {
     return (
-      <Card>
+      <><Card>
         <ScrollView>
           <View style={styles.view}>
             <CourseDetailImage
               source={{
                 uri: courseImage(courseDetail.image),
-              }}
-            />
+              }} />
             <Text>
               {courseDetail.header} {courseDetail.Category}
             </Text>
@@ -108,68 +113,70 @@ const CourseDetail = ({ route }) => {
             </CourseDetailModeView>
           </View>
         </ScrollView>
-      </Card>
+      </Card><CourseAppSchedule params={{
+        id: ''
+      }} /></>
     );
   };
 
-  const displaySchedule = () => {
-    return (
-      <ScrollView>
-        <Card>
-          {courseSchedule.map((schedule, i) => {
-            return (
-              <View key={i}>
-                <ScheduleView>
-                  <View>
-                    <Text style={styles.text}>
-                      {toDisplayDate(schedule.start_date)}-{' '}
-                      {toDisplayDate(schedule.end_date)}
-                    </Text>
-                    <Text>
-                      {schedule.day}-({schedule.reps} Sessions)
-                    </Text>
-                    <Text>
-                      {schedule.start_time} to {schedule.end_time} IST
-                    </Text>
-                  </View>
-                  <ButtonView>
-                    <Button
-                      disabled={isButtonDisabled(schedule)}
-                      title="Enroll"
-                      onPress={() => enrollSchedule(schedule)}
-                    />
-                  </ButtonView>
-                </ScheduleView>
-                <View>
-                  <Divider />
-                </View>
-              </View>
-            );
-          })}
-        </Card>
-      </ScrollView>
-    );
-  };
+  // const displaySchedule = () => {
+  //   return (
+  //     <ScrollView>
+  //       <Card>
+  //         {courseSchedule.map((schedule, i) => {
+  //           return (
+  //             <View key={i}>
+  //               <ScheduleView>
+  //                 <View>
+  //                   <Text style={styles.text}>
+  //                     {toDisplayDate(schedule.start_date)}-{' '}
+  //                     {toDisplayDate(schedule.end_date)}
+  //                   </Text>
+  //                   <Text>
+  //                     {schedule.day}-({schedule.reps} Sessions)
+  //                   </Text>
+  //                   <Text>
+  //                     {schedule.start_time} to {schedule.end_time} IST
+  //                   </Text>
+  //                 </View>
+  //                 <ButtonView>
+  //                   <Button
+  //                     disabled={isButtonDisabled(schedule)}
+  //                     title="Enroll"
+  //                     onPress={enrollButton}
+  //                   />
+  //                 </ButtonView>
+  //               </ScheduleView>
+  //               <View>
+  //                 <Divider />
+  //               </View>
+  //             </View>
+  //           );
+  //         })}
+  //       </Card>
+  //     </ScrollView>
+  //   );
+  // };
   return (
     <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
-      {courseSchedule ? displaySchedule() : displayNoSchedule()}
+      {/* {courseSchedule ? displaySchedule() : displayNoSchedule()} */}
     </View>
   );
 };
 
 export default CourseDetail;
 
-export const ScheduleView = styled.View`
-  // display: flex;
-  flex-direction: ${props => props.direction || 'row'};
-  justify-content: space-between;
-  flex-grow: ${props => props.grow || 1};
-`;
+// export const ScheduleView = styled.View`
+//   // display: flex;
+//   flex-direction: ${props => props.direction || 'row'};
+//   justify-content: space-between;
+//   flex-grow: ${props => props.grow || 1};
+// `;
 
-export const ButtonView = styled.View`
-  margin-top: 20px;
-`;
+// export const ButtonView = styled.View`
+//   margin-top: 20px;
+// `;
 
 const styles = StyleSheet.create({
   view: {
