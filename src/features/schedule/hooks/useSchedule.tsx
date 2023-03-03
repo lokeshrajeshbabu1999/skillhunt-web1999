@@ -6,13 +6,18 @@ const useSchedule = (userEmail: string, courseId: string) => {
 
   const loadUserSchedule = () => {
     console.log('Load schedule for user ', userEmail);
-    const params = { userEMail: userEmail, course_id: courseId };
+    const params = { user: userEmail, course_id: courseId };
 
     userClient
       .get('/user-schedule', { params })
       .then(response => {
+        console.log(
+          'Course User %s schedule for %s',
+          userEmail,
+          courseId,
+          response.data,
+        );
         setUserSchedule(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         console.log('Error:', error);

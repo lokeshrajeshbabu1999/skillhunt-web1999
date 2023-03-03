@@ -18,13 +18,12 @@ import { courseImage } from '../../../utils/ImageUtil';
 import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-import useCourseSchedule from '../hooks/useCourseSchedule';
 
 const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading] = useCourseDetail(
     route.params.id,
   );
-  const [courseSchedule] = useCourseSchedule(route.params.id);
+  //const [courseSchedule] = useCourseSchedule(route.params.id);
   // const { user } = useAuthenticator();
   // const [userSchedule] = useSchedule(user.attributes.email, route.params.id);
   // const enrollSchedule = schedule => {
@@ -86,35 +85,38 @@ const CourseDetail = ({ route }) => {
   //   return userSchedule ? isDisabled(item) : enrollSchedule(schedule);
   // };
 
-
   const renderCourseCard = () => {
     return (
-      <><Card>
-        <ScrollView>
-          <View style={styles.view}>
-            <CourseDetailImage
-              source={{
-                uri: courseImage(courseDetail.image),
-              }} />
-            <Text>
-              {courseDetail.header} {courseDetail.Category}
-            </Text>
-            <CourseTitle>{courseDetail.title}</CourseTitle>
-            <FlexView direction="row">
-              <FlexView direction="column">
-                <CourseDesc>{courseDetail.desc}</CourseDesc>
-                <CourseAuthor>{courseDetail.author}</CourseAuthor>
-                <FrequencyView>
-                  <CourseFrequency course={Course} />
-                </FrequencyView>
+      <>
+        <Card>
+          <ScrollView>
+            <View style={styles.view}>
+              <CourseDetailImage
+                source={{
+                  uri: courseImage(courseDetail.image),
+                }}
+              />
+              <Text>
+                {courseDetail.header} {courseDetail.Category}
+              </Text>
+              <CourseTitle>{courseDetail.title}</CourseTitle>
+              <FlexView direction="row">
+                <FlexView direction="column">
+                  <CourseDesc>{courseDetail.desc}</CourseDesc>
+                  <CourseAuthor>{courseDetail.author}</CourseAuthor>
+                  <FrequencyView>
+                    <CourseFrequency course={Course} />
+                  </FrequencyView>
+                </FlexView>
               </FlexView>
-            </FlexView>
-            <CourseDetailModeView>
-              <CourseMode course={courseDetail} />
-            </CourseDetailModeView>
-          </View>
-        </ScrollView>
-      </Card><CourseAppSchedule course={courseDetail} schedule={courseSchedule} /></>
+              <CourseDetailModeView>
+                <CourseMode course={courseDetail} />
+              </CourseDetailModeView>
+            </View>
+          </ScrollView>
+        </Card>
+        <CourseAppSchedule course={courseDetail} />
+      </>
     );
   };
 

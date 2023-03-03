@@ -10,8 +10,8 @@ const useCourseSchedule = (courseId: string) => {
     courseClient
       .get('/schedule', { params: { course_id: courseId } })
       .then(response => {
+        console.log('Schedule for course %s', courseId, response.data);
         setCourseSchedule(response.data);
-        console.log(response.data);
         setIsLoading(false);
       })
       .catch(error => {

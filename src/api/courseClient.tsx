@@ -16,6 +16,7 @@ courseClient.interceptors.request.use(async request => {
     request.baseURL,
     request.url,
     request.method,
+    request.params,
   );
   return request;
 });

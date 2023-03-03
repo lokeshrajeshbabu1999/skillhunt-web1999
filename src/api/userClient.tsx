@@ -16,7 +16,7 @@ userClient.interceptors.request.use(async request => {
     request.baseURL,
     request.url,
     request.method,
-    request.headers,
+    request.params,
   );
   return request;
 });
