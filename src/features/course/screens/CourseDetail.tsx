@@ -9,8 +9,7 @@ import {
   CourseDetailImage,
   CourseDetailModeView,
   CourseTitle,
-  FlexView,
-  FrequencyView
+  FlexView, FrequencyView
 } from '../../../../style';
 import userClient from '../../../api/userClient';
 import CourseFrequency from '../../../components/CourseFrequency';
@@ -97,13 +96,13 @@ const CourseDetail = ({ route }) => {
 
   const renderCourseCard = () => {
     return (
+
       <ScrollView>
         <View style={styles.view}>
           <CourseDetailImage
             source={{
               uri: courseImage(courseDetail.image),
-            }}
-          />
+            }} />
           <Text>
             {courseDetail.header} {courseDetail.Category}
           </Text>

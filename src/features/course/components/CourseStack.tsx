@@ -1,8 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
+import { useTheme } from 'styled-components';
+import Global from '../../../utils/Global';
+import CourseDetail from '../screens/CourseDetail';
 import ListCategory from '../screens/ListCategory';
 import ListCourse from '../screens/ListCourse';
-import Global from '../../../utils/Global';
-import { useTheme } from 'styled-components';
 
 export const CourseStack = createStackNavigator();
 
@@ -25,6 +26,10 @@ export const CourseNavigator = () => {
         }}
       />
       <CourseStack.Screen name="ListCourse" component={ListCourse} />
+      <CourseStack.Screen name="CourseDetail" component={CourseDetail}
+        options={{ title: Global.Constant.appName }}
+      />
+
     </CourseStack.Navigator>
   );
 };
