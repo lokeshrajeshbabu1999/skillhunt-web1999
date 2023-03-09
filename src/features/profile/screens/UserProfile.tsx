@@ -1,9 +1,10 @@
-import { Button, Text, View } from 'react-native';
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
+import { Button, Text, View } from 'react-native';
+import log from '../../../utils/Loggers';
 
 const UserProfile = () => {
   const { user, signOut } = useAuthenticator();
-  console.log(user.signInUserSession);
+  log.debug(user.signInUserSession);
   return (
     <View>
       <Text>Hello {user.username}</Text>
