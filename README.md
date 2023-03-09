@@ -12,7 +12,7 @@
 
 ### Actions on save
 
-- Make the below changes to the perform formatting and organize import 
+- Make the below changes to settings.json that performs formatting and organize import during save
 
 ```
 "editor.formatOnSave": true,

@@ -1,12 +1,10 @@
-import { Text } from 'react-native';
 import { useEffect, useState } from 'react';
-import userApi from '../../../api/userApi';
-
+import userClient from '../../../api/userClient';
 const userSchedule = () => {
     const [UserSchedule, setUserSchedule] = useState([]);
 
     const loadSchedule = () => {
-        userApi
+        userClient
             .get('/user-schedule')
             .then(response => {
                 setUserSchedule(response.data);
@@ -16,7 +14,7 @@ const userSchedule = () => {
                 console.log('Error :', error);
             });
     };
-    
+
     useEffect(() => {
         loadSchedule();
     }, []);
