@@ -1,6 +1,7 @@
 import { COURSE_API_URL } from '@env';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
+import shLogger from '../utils/Loggers';
 
 console.log('Course API_URL', COURSE_API_URL);
 const courseClient = axios.create({
@@ -11,7 +12,7 @@ courseClient.interceptors.request.use(async request => {
   const currentSession = await Auth.currentSession();
   // console.log('User JWT Token', currentSession.getAccessToken().getJwtToken());
   request.headers.Authorization = currentSession.getAccessToken().getJwtToken();
-  console.log(
+  shLogger.debug(
     'Request Base & Url : ',
     request.baseURL,
     request.url,
