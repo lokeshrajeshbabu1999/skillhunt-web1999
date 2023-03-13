@@ -10,7 +10,7 @@ const CourseMode = ({ course }) => {
       iconFamily = 'material-community';
       break;
     case 'inperson':
-      iconName = 'people';
+      iconName = 'human-male-board';
       iconFamily = 'material-community';
       break;
     default:
