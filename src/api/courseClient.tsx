@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import shLogger from '../utils/Loggers';
 
-console.log('Course API_URL', COURSE_API_URL);
+// console.log('Course API_URL', COURSE_API_URL);
 const courseClient = axios.create({
   baseURL: COURSE_API_URL.trim(),
 });

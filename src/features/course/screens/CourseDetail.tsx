@@ -1,4 +1,4 @@
-import { Text } from '@rneui/themed';
+import { Card, Text } from '@rneui/themed';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   CourseAuthor,
@@ -15,6 +15,7 @@ import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
 import Course from '../components/Course';
+import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
 const CourseDetail = ({ route }) => {
@@ -40,30 +41,35 @@ const CourseDetail = ({ route }) => {
 
   const renderCourseCard = () => {
     return (
-      <ScrollView>
-        <View style={styles.view}>
-          <CourseDetailImage
-            source={{
-              uri: courseImage(courseDetail.image),
-            }} />
-          <Text>
-            {courseDetail.header} {courseDetail.Category}
-          </Text>
-          <CourseTitle>{courseDetail.title}</CourseTitle>
-          <FlexView direction="row">
-            <FlexView direction="column">
-              <CourseDesc>{courseDetail.desc}</CourseDesc>
-              <CourseAuthor>{courseDetail.author}</CourseAuthor>
-              <FrequencyView>
-                <CourseFrequency course={Course} />
-              </FrequencyView>
+      <><Card>
+        <ScrollView>
+          <View style={styles.view}>
+            <CourseDetailImage
+              source={{
+                uri: courseImage(courseDetail.image),
+              }} />
+            <Text>
+              {courseDetail.header} {courseDetail.Category}
+            </Text>
+            <CourseTitle>{courseDetail.title}</CourseTitle>
+            <FlexView direction="row">
+              <FlexView direction="column">
+                <CourseDesc>{courseDetail.desc}</CourseDesc>
+                <CourseAuthor>{courseDetail.author}</CourseAuthor>
+                <FrequencyView>
+                  <CourseFrequency course={Course} />
+                </FrequencyView>
+              </FlexView>
             </FlexView>
-          </FlexView>
-          <CourseDetailModeView>
-            <CourseMode course={courseDetail} />
-          </CourseDetailModeView>
-        </View>
-      </ScrollView>
+            <CourseDetailModeView>
+              <CourseMode course={courseDetail} />
+            </CourseDetailModeView>
+          </View>
+        </ScrollView>
+      </Card>
+        <Card>
+          <CourseAppSchedule course={courseDetail} />
+        </Card></>
     );
   };
 
