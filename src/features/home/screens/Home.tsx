@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import React, { useState } from 'react';
+
 import {
-  ScrollView,
+  RefreshControl, ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -24,6 +25,7 @@ import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import onRefresh from '../../../components/Refresher';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
@@ -35,7 +37,7 @@ const Home = ({ navigation }) => {
   const [searchResults, setSearchResults] = useState('');
   const [showResults, setShowResults] = useState(false);
   const theme = useTheme();
-
+  const [refreshing] = onRefresh([])
   const searchCourses = text => {
     // Check if searched text is not blank
     if (text && text.length > 3) {
@@ -112,6 +114,9 @@ const Home = ({ navigation }) => {
   const displaySearchResults = () => {
     return (
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} />
+        }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {searchResults.map((course, i) => (
