@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import React, { useState } from 'react';
-
 import {
-  RefreshControl, ScrollView,
+  RefreshControl,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -114,25 +114,25 @@ const Home = ({ navigation }) => {
   const displaySearchResults = () => {
     return (
       <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} />
-        }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {searchResults.map((course, i) => (
           <ListItem key={i} bottomDivider>
             <FlexWrap>
+
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate('CourseDetail', { id: course.course_id })
                 }>
                 <Card>
+
                   <CourseImage
                     source={{
                       uri: courseImage(course.image),
                     }}
                   />
                   <View>
+
                     <CourseTitle>{course.title}</CourseTitle>
                     <FlexView direction="row">
                       <FlexView direction="column">
@@ -177,6 +177,9 @@ const Home = ({ navigation }) => {
   const displayHomeContent = () => {
     return (
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} />
+        }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {homeContent.map(courseSec => (
