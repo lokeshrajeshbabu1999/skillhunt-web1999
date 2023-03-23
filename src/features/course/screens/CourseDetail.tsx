@@ -14,7 +14,7 @@ import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import onRefresh from '../../../components/Refresher';
+import onRefresh from '../../../components/onRefresh';
 import { courseImage } from '../../../utils/ImageUtil';
 import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';

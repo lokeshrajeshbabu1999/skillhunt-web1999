@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
-import { FlatList, RefreshControl, ScrollView } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import onRefresh from '../../../components/Refresher';
+import onRefresh from '../../../components/onRefresh';
 import Course from '../components/Course';
 import useCourse from '../hooks/useCourse';
 
@@ -36,6 +37,14 @@ const ListCourse = ({ route, navigation }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseList() : skillMessage();
   };
+  const FlatListHeader = () => {
+    return (
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} />
+        }></ScrollView>
+    )
+  }
 
   const renderCourseList = () => {
     return (
@@ -43,14 +52,13 @@ const ListCourse = ({ route, navigation }) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} />
         }>
-        <ScrollView>
-          <FlatList
-            data={courses}
-            showsVerticalScrollIndicator={false}
-            renderItem={renderCourseCard}
-            keyExtractor={item => item.course_id}
-          />
-        </ScrollView>
+        <FlatList
+          data={courses}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderCourseCard}
+          keyExtractor={item => item.course_id}
+          ListHeaderComponent={FlatListHeader}
+        />
       </ScrollView>
     );
   };
