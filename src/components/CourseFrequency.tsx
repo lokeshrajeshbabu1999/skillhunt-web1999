@@ -10,10 +10,10 @@ const CourseFrequency = ({ course }) => {
       frequencyName = 'recurring';
       break;
     case Global.Constant.CourseFrequency.Multi:
-      frequencyName = course.frequency;
+      frequencyName = course.duration + ' Minutes' + '\\' + course.sessions;
       break;
     default:
-      frequencyName = '1 Session';
+      frequencyName = course.duration + ' Minutes';
       break;
   }
 
