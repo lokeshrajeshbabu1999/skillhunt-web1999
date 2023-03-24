@@ -37,14 +37,6 @@ const ListCourse = ({ route, navigation }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseList() : skillMessage();
   };
-  const FlatListHeader = () => {
-    return (
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} />
-        }></ScrollView>
-    )
-  }
 
   const renderCourseList = () => {
     return (
@@ -57,7 +49,6 @@ const ListCourse = ({ route, navigation }) => {
           showsVerticalScrollIndicator={false}
           renderItem={renderCourseCard}
           keyExtractor={item => item.course_id}
-          ListHeaderComponent={FlatListHeader}
         />
       </ScrollView>
     );
