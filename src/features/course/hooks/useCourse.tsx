@@ -6,6 +6,7 @@ const useCourse = category => {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
 
   const sortCourses = coursesParam => {
     return coursesParam.sort((a, b) => {
@@ -22,19 +23,25 @@ const useCourse = category => {
         console.log(response.data);
         setErrorMessage('');
         setIsLoading(false);
+        setRefreshing(false);
       })
       .catch(error => {
         console.log('Error :', error);
         setErrorMessage('Failed to collect course list.');
         setIsLoading(false);
+        setRefreshing(false);
       });
   };
+  const onDataRefresh = () => {
+      setRefreshing(true);
+      loadCourses();
+    };
 
   useEffect(() => {
     loadCourses();
   }, []);
 
-  return [courses, errorMessage, isLoading];
+  return [courses, errorMessage, isLoading, refreshing, onDataRefresh];
 };
 
 export default useCourse;

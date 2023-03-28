@@ -21,10 +21,9 @@ import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
 const CourseDetail = ({ route }) => {
-  const [courseDetail, errorMessage, isLoading] = useCourseDetail(
+  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
-  const [refreshing] = onRefresh([]);
 
 
   const skillActivityIndicator = () => {
@@ -53,9 +52,9 @@ const CourseDetail = ({ route }) => {
     return (
       <><Card>
         <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={refreshing} />
-          }>
+             refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+             }>
           <View style={styles.view}>
             <CourseDetailImage
               source={{
