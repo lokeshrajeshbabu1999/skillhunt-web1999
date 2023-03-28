@@ -7,7 +7,7 @@ const CourseFrequency = ({ course }) => {
   let frequencyName = null;
   switch (course.frequency) {
     case Global.Constant.CourseFrequency.Recurring:
-      frequencyName = 'recurring';
+      frequencyName = course.duration + ' Minutes' + '\\' + course.sessions;
       break;
     case Global.Constant.CourseFrequency.Multi:
       frequencyName = course.duration + ' Minutes' + '\\' + course.sessions;
