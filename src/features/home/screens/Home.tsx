@@ -25,19 +25,19 @@ import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import onRefresh from '../../../components/onRefresh';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
 
 const Home = ({ navigation }) => {
-  const [homeContent, errorMessage, isLoading] = useHome();
+  const [homeContent, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useHome();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState('');
   const [showResults, setShowResults] = useState(false);
   const theme = useTheme();
-  const [refreshing] = onRefresh([])
+
   const searchCourses = text => {
     // Check if searched text is not blank
     if (text && text.length > 3) {
@@ -119,20 +119,17 @@ const Home = ({ navigation }) => {
         {searchResults.map((course, i) => (
           <ListItem key={i} bottomDivider>
             <FlexWrap>
-
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate('CourseDetail', { id: course.course_id })
                 }>
                 <Card>
-
                   <CourseImage
                     source={{
                       uri: courseImage(course.image),
                     }}
                   />
                   <View>
-
                     <CourseTitle>{course.title}</CourseTitle>
                     <FlexView direction="row">
                       <FlexView direction="column">
@@ -178,7 +175,7 @@ const Home = ({ navigation }) => {
     return (
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={refreshing} />
+          <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
         }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
