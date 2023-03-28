@@ -7,13 +7,14 @@ const CourseFrequency = ({ course }) => {
   let frequencyName = null;
   switch (course.frequency) {
     case Global.Constant.CourseFrequency.Recurring:
-      frequencyName = course.duration + ' Minutes' + '\\' + course.sessions;
+      // FIXME - Understand how to display this
+      frequencyName = `${course.duration} Minutes \\ ${course.sessions} Sessions`;
       break;
     case Global.Constant.CourseFrequency.Multi:
-      frequencyName = course.duration + ' Minutes' + '\\' + course.sessions;
+      frequencyName = `${course.duration} Minutes \\ ${course.sessions} Sessions`;
       break;
     default:
-      frequencyName = course.duration + ' Minutes';
+      frequencyName = `${course.duration} Minutes`;
       break;
   }
 
