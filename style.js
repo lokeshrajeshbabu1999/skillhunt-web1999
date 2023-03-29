@@ -51,6 +51,7 @@ export const CourseAuthor = styled.Text`
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
+  margin-bottom:2px;
 `;
 
 export const CourseDesc = styled.Text`
@@ -73,16 +74,21 @@ export const CourseView = styled.View`
 `;
 
 export const CourseDetailModeView = styled.View`
-  margin-left: 300px;
-  margin-bottom: 40px;
+  margin-right: 100px;
+  margin-top: 20px;
   flex-direction: ${props => props.direction || 'row'};
   flex-grow: ${props => props.grow || 1};
 `;
 
 export const PriceView = styled.View`
-  margin-left: 8px;
-  margin-top: 4px;
+   margin-left: 110px;
+   margin-top: 5px;
 `;
+
+// export const CourseDetailPriceView = styled.View`
+//    margin-left: 110px;
+//    margin-top: 5px;
+// `;
 
 export const IconView = styled.View`
   margin-right: 20px;
