@@ -1,4 +1,4 @@
-import { Card, Text } from '@rneui/themed';
+import { Card } from '@rneui/themed';
 import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import {
@@ -6,16 +6,13 @@ import {
   CourseContainer,
   CourseDesc,
   CourseDetailImage,
-  CourseDetailModeView,
-  CourseTitle,
-  FlexView, FrequencyView
+  CourseDetailModeView, CourseTitle, FlexView, FrequencyView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
-import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
@@ -60,17 +57,18 @@ const CourseDetail = ({ route }) => {
                 source={{
                   uri: courseImage(courseDetail.image),
                 }} />
-              <Text>
+              {/* <Text>
                 {courseDetail.header} {courseDetail.Category}
-              </Text>
+              </Text> */}
               <CourseTitle>{courseDetail.title}</CourseTitle>
               <FlexView direction="row">
                 <FlexView direction="column">
                   <CourseDesc>{courseDetail.desc}</CourseDesc>
                   <CourseAuthor>{courseDetail.author}</CourseAuthor>
                   <FrequencyView>
-                    <CourseFrequency course={Course} />
+                    <CourseFrequency course={courseDetail} />
                   </FrequencyView>
+                  {/* <Text>{courseDetail.price}</Text> */}
                 </FlexView>
               </FlexView>
               <CourseDetailModeView>
