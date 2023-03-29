@@ -2,6 +2,7 @@
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import React, { useState } from 'react';
 import {
+  RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
@@ -29,7 +30,8 @@ import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
 
 const Home = ({ navigation }) => {
-  const [homeContent, errorMessage, isLoading] = useHome();
+  const [homeContent, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useHome();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState('');
@@ -172,6 +174,9 @@ const Home = ({ navigation }) => {
   const displayHomeContent = () => {
     return (
       <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+        }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {homeContent.map(courseSec => (

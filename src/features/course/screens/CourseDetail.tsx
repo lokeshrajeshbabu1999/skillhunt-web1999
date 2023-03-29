@@ -1,5 +1,6 @@
 import { Card, Text } from '@rneui/themed';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import {
   CourseAuthor,
   CourseContainer,
@@ -13,19 +14,27 @@ import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import onRefresh from '../../../components/onRefresh';
 import { courseImage } from '../../../utils/ImageUtil';
 import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
 const CourseDetail = ({ route }) => {
-  const [courseDetail, errorMessage, isLoading] = useCourseDetail(
+  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
+
 
   const skillActivityIndicator = () => {
     return <Loader />;
   };
+  // const onRefresh = React.useCallback(() => {
+  //   setRefreshing(true);
+  //   setTimeout(() => {
+  //     setRefreshing(false);
+  //   }, 2000);
+  // }, []);
 
   const skillMessage = () => {
     return (
@@ -42,7 +51,10 @@ const CourseDetail = ({ route }) => {
   const renderCourseCard = () => {
     return (
       <><Card>
-        <ScrollView>
+        <ScrollView
+             refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+             }>
           <View style={styles.view}>
             <CourseDetailImage
               source={{

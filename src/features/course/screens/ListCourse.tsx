@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import onRefresh from '../../../components/onRefresh';
 import Course from '../components/Course';
 import useCourse from '../hooks/useCourse';
 
 const ListCourse = ({ route, navigation }) => {
-  const [courses, errorMessage, isLoading] = useCourse(route.params.code);
-
+  const [courses, errorMessage, isLoading, refreshing, onDataRefresh] = useCourse(route.params.code);
   const renderCourseCard = ({ item }) => (
     <Course course={item} navigation={navigation} />
   );
@@ -38,12 +39,17 @@ const ListCourse = ({ route, navigation }) => {
 
   const renderCourseList = () => {
     return (
-      <FlatList
-        data={courses}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderCourseCard}
-        keyExtractor={item => item.course_id}
-      />
+      <ScrollView
+           refreshControl={
+                  <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+           }>
+        <FlatList
+          data={courses}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderCourseCard}
+          keyExtractor={item => item.course_id}
+        />
+      </ScrollView>
     );
   };
 
