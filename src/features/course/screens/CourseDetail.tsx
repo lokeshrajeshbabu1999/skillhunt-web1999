@@ -6,17 +6,18 @@ import {
   CourseContainer,
   CourseDesc,
   CourseDetailImage,
-  CourseDetailModeView, CourseTitle, FlexView, FrequencyView
+  CourseDetailModeView, CoursePriceView, CourseTitle, FlexView, FrequencyView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
+import CoursePrice from '../../../components/CoursePrice';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
-const CourseDetail = ({ route }) => {
+const CourseDetail = ({ route, course }) => {
   const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
@@ -68,6 +69,9 @@ const CourseDetail = ({ route }) => {
                   <FrequencyView>
                     <CourseFrequency course={courseDetail} />
                   </FrequencyView>
+                  <CoursePriceView>
+                    <CoursePrice course={courseDetail} />
+                  </CoursePriceView>
                 </FlexView>
                 {/* <Text>{courseDetail.price}</Text> */}
                 <CourseDetailModeView>

@@ -1,16 +1,18 @@
-import { View, TouchableOpacity } from 'react-native';
 import { Card } from '@rneui/themed';
+import { TouchableOpacity, View } from 'react-native';
 import {
   CourseAuthor,
   CourseFlex,
+  CoursePriceView,
   CourseTitle,
   CourseView,
   FlexView,
   FrequencyView,
-  ListCourseImage,
+  ListCourseImage
 } from '../../../../style';
-import CourseMode from '../../../components/CourseMode';
 import CourseFrequency from '../../../components/CourseFrequency';
+import CourseMode from '../../../components/CourseMode';
+import CoursePrice from '../../../components/CoursePrice';
 import { courseImage } from '../../../utils/ImageUtil';
 
 const Course = ({ course, navigation }) => (
@@ -33,7 +35,9 @@ const Course = ({ course, navigation }) => (
               <FrequencyView>
                 <CourseFrequency course={course} />
               </FrequencyView>
-
+              <CoursePriceView>
+                <CoursePrice course={course} />
+              </CoursePriceView>
               {/* <Text>{course.price}</Text> */}
             </FlexView>
             <CourseView>

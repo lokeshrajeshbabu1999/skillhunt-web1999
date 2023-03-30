@@ -72,6 +72,10 @@ export const FlexView = styled.View`
 export const CourseView = styled.View`
   display: flex;
 `;
+export const CoursePriceView = styled.View`
+  display: flex;
+  margin-left: 180px;
+`;
 
 export const CourseDetailModeView = styled.View`
   margin-right: 100px;
