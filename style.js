@@ -111,8 +111,8 @@ export const CourseContainer = styled.SafeAreaView`
 `;
 
 export const ListCourseImage = styled.Image`
-  align-items: center;
-  width: 100%;
+  align-self: center;
+  width: 300px;
   height: 150px;
 `;
 
