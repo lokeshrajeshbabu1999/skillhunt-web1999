@@ -74,14 +74,12 @@ export const CourseView = styled.View`
 `;
 export const CoursePriceView = styled.View`
   display: flex;
-  margin-left: 180px;
+  align-self: flex-end;
 `;
 
 export const CourseDetailModeView = styled.View`
-  margin-right: 100px;
-  margin-top: 20px;
-  flex-direction: ${props => props.direction || 'row'};
-  flex-grow: ${props => props.grow || 1};
+  display: flex;
+  align-self: flex-start;
 `;
 
 export const PriceView = styled.View`
