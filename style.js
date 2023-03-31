@@ -51,7 +51,7 @@ export const CourseAuthor = styled.Text`
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
-  margin-bottom:2px;
+  margin-bottom: 2px;
 `;
 
 export const CourseDesc = styled.Text`
@@ -83,8 +83,8 @@ export const CourseDetailModeView = styled.View`
 `;
 
 export const PriceView = styled.View`
-   margin-left: 110px;
-   margin-top: 5px;
+  margin-left: 110px;
+  margin-top: 5px;
 `;
 
 // export const CourseDetailPriceView = styled.View`
@@ -114,11 +114,11 @@ export const CourseContainer = styled.SafeAreaView`
 
 export const ListCourseImage = styled.Image`
   align-self: center;
-  width: 300px;
-  height: 150px;
+  width: 100%;
+  height: 120px;
 `;
 
 export const CourseFlex = styled.View`
-  width: 390px;
-  height: 280px;
+  width: 100%;
+  height: 250px;
 `;

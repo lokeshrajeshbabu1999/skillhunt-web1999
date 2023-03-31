@@ -9,7 +9,8 @@ import Course from '../components/Course';
 import useCourse from '../hooks/useCourse';
 
 const ListCourse = ({ route, navigation }) => {
-  const [courses, errorMessage, isLoading, refreshing, onDataRefresh] = useCourse(route.params.code);
+  const [courses, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useCourse(route.params.code);
   const renderCourseCard = ({ item }) => (
     <Course course={item} navigation={navigation} />
   );
