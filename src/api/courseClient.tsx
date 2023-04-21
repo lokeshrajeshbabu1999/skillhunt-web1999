@@ -10,8 +10,8 @@ const courseClient = axios.create({
 
 courseClient.interceptors.request.use(async request => {
   const currentSession = await Auth.currentSession();
-  // console.log('User JWT Token', currentSession.getAccessToken().getJwtToken());
-  request.headers.Authorization = currentSession.getAccessToken().getJwtToken();
+  console.log('User JWT Token', currentSession.getIdToken().getJwtToken());
+  request.headers.Authorization = currentSession.getIdToken().getJwtToken();
   shLogger.debug(
     'Request Base & Url : ',
     request.baseURL,
