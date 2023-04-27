@@ -1,9 +1,9 @@
 # Skill Hunt
 
-- Skill Hunt is built with  [React Native CLI](https://reactnative.dev/docs/environment-setup)
+- Skill Hunt is built with [React Native CLI](https://reactnative.dev/docs/environment-setup)
 - Currently it supports Android. But will be enhanced for ios
 
-## Development 
+## Development
 
 ### Setting up the project locally
 
@@ -22,12 +22,11 @@
 }
 ```
 
-
 ### Start Metro
 
 - To start Metro run 'npx react-native start' inside your project folder
 
-### Start you application 
+### Start you application
 
 Let Metro Bundler run in its own terminal. Open a new terminal inside your React Native project folder. Run the following:
 
@@ -45,15 +44,13 @@ npx react-native run-android --deviceId 'deviceid'
 
 - Run 'npm run lint:fix' to check and fix lint errors
 
-
 <!-- FIXME : Fill up with instruction for running the app on ios  -->
 
 ### Pair a device
 
 - Go to Wireless `debugging > Pair device with pairing code`
 - Run `adb pair 10.0.0.243:42095` to pair your device (Use your device ip and port)
-- Run `adb connect 10.0.0.243:42095` to connect your device 
-
+- Run `adb connect 10.0.0.243:42095` to connect your device
 
 ## Release setup and packging
 
@@ -73,7 +70,7 @@ npx react-native run-android --deviceId 'deviceid'
 
 ### Generating the release AAB
 
-- Update the versionCode and versionName in build.gradle file.  
+- Update the versionCode and versionName in build.gradle file.
 
 - Run the following in a terminal:
 
@@ -82,18 +79,20 @@ cd android
 ./gradlew bundleRelease
 ```
 
+- Locate the app bundle at /android/app/build/outputs/bundle
+
 - Ensure the App access provided for review is working
 
 ### Internal distribution validation
 
-Become a part of our internal testing [team](https://play.google.com/apps/internaltest/4701438721505499078)  
+Become a part of our internal testing [team](https://play.google.com/apps/internaltest/4701438721505499078)
 
-Install the app from [Play Store](https://play.google.com/store/apps/details?id=com.codrix.skill&hl=en-US&ah=0S_CC-tVBeRQh2KARpnLmSLljpg&pli=1)  
+Install the app from [Play Store](https://play.google.com/store/apps/details?id=com.codrix.skill&hl=en-US&ah=0S_CC-tVBeRQh2KARpnLmSLljpg&pli=1)
 
 ## Managing Git Branches
 
-Run ```git fetch -p``` to get your local branches in sync with repo
+Run `git fetch -p` to get your local branches in sync with repo
 
-Run ``` git branch --merged| egrep -v "(^\*|master|main|dev)" ``` to view already merged local branches
+Run `git branch --merged| egrep -v "(^\*|master|main|dev)"` to view already merged local branches
 
-Switch to main branch and Run ```git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d``` to delete all local branches that are already merged into the currently checked out branch
+Switch to main branch and Run `git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d` to delete all local branches that are already merged into the currently checked out branch
