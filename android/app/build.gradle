@@ -1,6 +1,10 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+ project.ext.envConfigFiles = [
+   prod: ".env.prod",
+   dev: ".env.dev"
+ ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
@@ -104,7 +108,21 @@ android {
         versionName "1.1"
         resValue "string", "build_config_package", "com.skillhunt"
     }
-
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'com.codrix.skill.dev'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.skillhunt"
+        }
+        prod {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId 'com.codrix.skill.prod'
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.skillhunt"
+        }
+    }
     splits {
         abi {
             reset()

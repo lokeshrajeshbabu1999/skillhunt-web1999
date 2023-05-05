@@ -1,11 +1,11 @@
-import { COURSE_API_URL } from '@env';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
+import Config from 'react-native-config';
 import shLogger from '../utils/Loggers';
 
-// console.log('Course API_URL', COURSE_API_URL);
+console.log("user", Config.COURSE_API_URL);
 const courseClient = axios.create({
-  baseURL: COURSE_API_URL.trim(),
+  baseURL: Config.COURSE_API_URL,
 });
 
 courseClient.interceptors.request.use(async request => {
