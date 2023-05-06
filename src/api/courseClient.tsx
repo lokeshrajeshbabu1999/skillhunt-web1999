@@ -3,7 +3,6 @@ import axios from 'axios';
 import Config from 'react-native-config';
 import shLogger from '../utils/Loggers';
 
-console.log("user", Config.COURSE_API_URL);
 const courseClient = axios.create({
   baseURL: Config.COURSE_API_URL,
 });
