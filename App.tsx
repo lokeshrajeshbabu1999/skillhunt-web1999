@@ -5,14 +5,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Amplify } from 'aws-amplify';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ThemeProvider } from 'styled-components';
-import awsExports from './src/aws-exports';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
 import UserSchedule from './src/features/schedule/screens/UserSchedule';
 import { lightTheme } from './src/theme';
 
-Amplify.configure(awsExports);
+Amplify.configure({
+  aws_project_region: 'ap-south-1',
+  aws_user_pools_id: 'ap-south-1_wKqDadI4m',
+  aws_user_pools_web_client_id: '74bjrlc7vh7bui3pqclhpqmb3h',
+  aws_cognito_identity_pool_id:
+    'ap-south-1:7e382918-a0ef-4a25-a800-797c542803de',
+});
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -42,7 +47,8 @@ function App(): JSX.Element {
                   tabBarIcon: ({ color }) => (
                     <Icon name="home" size={26} color={color} />
                   ),
-                }} />
+                }}
+              />
               <Tab.Screen
                 name="Course"
                 component={CourseNavigator}
@@ -51,7 +57,8 @@ function App(): JSX.Element {
                   tabBarIcon: ({ color }) => (
                     <Icon name="book-open" size={26} color={color} />
                   ),
-                }} />
+                }}
+              />
               <Tab.Screen
                 name="Schedule"
                 component={UserSchedule}
@@ -61,9 +68,11 @@ function App(): JSX.Element {
                     <Icon
                       name="calendar-month-outline"
                       size={26}
-                      color={color} />
+                      color={color}
+                    />
                   ),
-                }} />
+                }}
+              />
               <Tab.Screen
                 name="Profile"
                 component={UserProfile}
@@ -72,13 +81,13 @@ function App(): JSX.Element {
                   tabBarIcon: ({ color }) => (
                     <Icon name="account" size={26} color={color} />
                   ),
-                }} />
+                }}
+              />
             </Tab.Navigator>
           </NavigationContainer>
         </ThemeProvider>
       </Authenticator>
     </Authenticator.Provider>
-
   );
 }
 

@@ -36,19 +36,17 @@ npx react-native run-android
 
 To run the app on a specific device or emulator run the below command. Use `adb devices` to find your device id.
 
-````
-npx react-native run-android --deviceId 'deviceid'
+`npx react-native run-android --deviceId 'deviceid'`
 
 ### Start your environment
 
-react-native run-android --variant=devDebug --appIdSuffix=dev  -  for dev environment
+Run `npx react-native run-android --mode=devDebug --appIdSuffix=dev` for dev environment
 
-react-native run-android --variant=prodDebug --appIdSuffix=prod  - for prod environment
+Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod environment
 
 ### Lint Checking
 
 - Run 'npm run lint:fix' to check and fix lint errors
-
 
 <!-- FIXME : Fill up with instruction for running the app on ios  -->
 
@@ -57,7 +55,6 @@ react-native run-android --variant=prodDebug --appIdSuffix=prod  - for prod envi
 - Go to Wireless `debugging > Pair device with pairing code`
 - Run `adb pair 10.0.0.243:42095` to pair your device (Use your device ip and port)
 - Run `adb connect 10.0.0.243:42095` to connect your device
-
 
 ## Release setup and packging
 
@@ -71,7 +68,7 @@ react-native run-android --variant=prodDebug --appIdSuffix=prod  - for prod envi
   MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
   MYAPP_UPLOAD_STORE_PASSWORD=*****
   MYAPP_UPLOAD_KEY_PASSWORD=*****
-````
+```
 
 - Signing config was added to the `android/app/build.gradle` config file
 
