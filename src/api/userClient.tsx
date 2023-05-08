@@ -1,10 +1,11 @@
-import { USER_API_URL } from '@env';
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
+import Config from 'react-native-config';
 
-console.log('User API_URL', USER_API_URL);
+// console.log('User API_URL', USER_API_URL);
+
 const userClient = axios.create({
-  baseURL: USER_API_URL.trim(),
+  baseURL: Config.USER_API_URL,
 });
 
 userClient.interceptors.request.use(async request => {
