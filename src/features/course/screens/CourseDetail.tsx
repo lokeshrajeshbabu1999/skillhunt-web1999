@@ -8,18 +8,18 @@ import {
   CourseDetailImage,
   CourseDetailModeView,
   CourseTitle,
-  FlexView, FrequencyView
+  FlexView,
+  FrequencyView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
-import Course from '../components/Course';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
-const CourseDetail = ({ route }) => {
+const CourseDetail = ({ route, course }) => {
   const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
@@ -68,11 +68,12 @@ const CourseDetail = ({ route }) => {
                 <FlexView direction="column">
                   <CourseDesc>{courseDetail.desc}</CourseDesc>
                   <CourseAuthor>{courseDetail.author}</CourseAuthor>
-                  <FrequencyView>
-                    <CourseFrequency course={Course} />
-                  </FrequencyView>
+                  {/* <Text>{CourseDetail.price}</Text> */}
                 </FlexView>
               </FlexView>
+              <FrequencyView>
+                <CourseFrequency course={courseDetail} />
+              </FrequencyView>
               <CourseDetailModeView>
                 <CourseMode course={courseDetail} />
               </CourseDetailModeView>
