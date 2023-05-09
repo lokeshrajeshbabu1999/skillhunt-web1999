@@ -1,19 +1,23 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { Authenticator } from '@aws-amplify/ui-react-native';
-import { Amplify } from 'aws-amplify';
-import { ThemeProvider } from 'styled-components';
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { Amplify } from 'aws-amplify';
+import Config from 'react-native-config';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import awsExports from './src/aws-exports';
+import { ThemeProvider } from 'styled-components';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
 import UserSchedule from './src/features/schedule/screens/UserSchedule';
 import { lightTheme } from './src/theme';
 
-Amplify.configure(awsExports);
+Amplify.configure({
+  aws_project_region: 'ap-south-1',
+  aws_user_pools_id: Config.USER_POOL_ID,
+  aws_user_pools_web_client_id: Config.USER_POOL_WEB_CLIENT_ID,
+  aws_cognito_identity_pool_id: Config.IDENTITY_POOL_ID,
+});
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -27,7 +31,7 @@ function App(): JSX.Element {
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
-
+  // console.log(Config)
   return (
     <Authenticator.Provider>
       <Authenticator>
