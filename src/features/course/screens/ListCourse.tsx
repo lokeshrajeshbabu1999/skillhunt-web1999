@@ -5,12 +5,12 @@ import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import onRefresh from '../../../components/onRefresh';
 import Course from '../components/Course';
 import useCourse from '../hooks/useCourse';
 
 const ListCourse = ({ route, navigation }) => {
-  const [courses, errorMessage, isLoading, refreshing, onDataRefresh] = useCourse(route.params.code);
+  const [courses, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useCourse(route.params.code);
   const renderCourseCard = ({ item }) => (
     <Course course={item} navigation={navigation} />
   );
@@ -40,9 +40,9 @@ const ListCourse = ({ route, navigation }) => {
   const renderCourseList = () => {
     return (
       <ScrollView
-           refreshControl={
-                  <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
-           }>
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+        }>
         <FlatList
           data={courses}
           showsVerticalScrollIndicator={false}

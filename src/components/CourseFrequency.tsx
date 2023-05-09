@@ -1,6 +1,5 @@
-import { Badge } from '@rneui/themed';
 import { Text } from 'react-native';
-import { FlexView, PriceView } from '../../style';
+import { FlexView } from '../../style';
 import Global from '../utils/Global';
 
 const CourseFrequency = ({ course }) => {
@@ -18,26 +17,26 @@ const CourseFrequency = ({ course }) => {
       break;
   }
 
-  const getPrice = (courseInput: { price: string }) => {
-    let price = '';
-    if (courseInput.price) {
-      if (courseInput.price === 'Free') {
-        price = 'Free';
-      } else {
-        price = 'Rs ' + courseInput.price;
-      }
-    }
-    return price;
-  };
+  // const getPrice = (courseInput: { price: string }) => {
+  //   let price = '';
+  //   if (courseInput.price) {
+  //     if (courseInput.price === 'Free') {
+  //       price = 'Free';
+  //     } else {
+  //       price = 'Rs ' + courseInput.price;
+  //     }
+  //   }
+  //   return price;
+  // };
 
-  const displayPriceBadge = (courseInput: { price: any }) => {
-    return courseInput.price ? <Badge value={getPrice(courseInput)} /> : <></>;
-  };
+  // const displayPriceBadge = (courseInput: { price: any }) => {
+  //   return courseInput.price ? <Badge value={getPrice(courseInput)} /> : <></>;
+  // };
 
   return (
     <FlexView>
       <Text>{frequencyName}</Text>
-      <PriceView>{displayPriceBadge(course)}</PriceView>
+      {/* <PriceView>{displayPriceBadge(course)}</PriceView> */}
     </FlexView>
   );
 };
