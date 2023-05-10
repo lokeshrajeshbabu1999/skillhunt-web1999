@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
@@ -19,7 +19,7 @@ import {
   CourseView,
   FlexView,
   FlexWrap,
-  IconView
+  IconView,
 } from '../../../../style';
 import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
@@ -179,13 +179,16 @@ const Home = ({ navigation }) => {
         }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
-        {homeContent.map(courseSec => (
-          <CourseSection
-            content={courseSec}
-            key={courseSec.key}
-            navigation={navigation}
-          />
-        ))}
+        {homeContent.map(
+          courseSec =>
+            courseSec.courses.length > 0 && (
+              <CourseSection
+                content={courseSec}
+                key={courseSec.key}
+                navigation={navigation}
+              />
+            ),
+        )}
       </ScrollView>
     );
   };
