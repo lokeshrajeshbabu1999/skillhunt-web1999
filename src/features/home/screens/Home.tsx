@@ -28,7 +28,6 @@ import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
-
 const Home = ({ navigation }) => {
   const [homeContent, errorMessage, isLoading, refreshing, onDataRefresh] =
     useHome();
@@ -98,9 +97,9 @@ const Home = ({ navigation }) => {
           onChangeText={text => searchCourses(text)}
           onClear={() => searchCourses('')}
           value={search}
-          containerStyle={{ backgroundColor: theme.SECONDARY_COLOR }}
+          containerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
           inputStyle={{
-            color: theme.SECONDARY_COLOR,
+            color: theme.TITLE_COLOR,
             backgroundColor: theme.BACKGROUND_COLOR,
           }}
           inputContainerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
