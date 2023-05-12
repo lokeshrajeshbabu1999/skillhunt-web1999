@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
@@ -19,7 +19,7 @@ import {
   CourseView,
   FlexView,
   FlexWrap,
-  IconView
+  IconView,
 } from '../../../../style';
 import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
@@ -28,7 +28,6 @@ import Message from '../../../components/Message';
 import { courseImage } from '../../../utils/ImageUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
-
 const Home = ({ navigation }) => {
   const [homeContent, errorMessage, isLoading, refreshing, onDataRefresh] =
     useHome();
@@ -98,9 +97,9 @@ const Home = ({ navigation }) => {
           onChangeText={text => searchCourses(text)}
           onClear={() => searchCourses('')}
           value={search}
-          containerStyle={{ backgroundColor: theme.SECONDARY_COLOR }}
+          containerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
           inputStyle={{
-            color: theme.SECONDARY_COLOR,
+            color: theme.TITLE_COLOR,
             backgroundColor: theme.BACKGROUND_COLOR,
           }}
           inputContainerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
@@ -179,13 +178,16 @@ const Home = ({ navigation }) => {
         }
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
-        {homeContent.map(courseSec => (
-          <CourseSection
-            content={courseSec}
-            key={courseSec.key}
-            navigation={navigation}
-          />
-        ))}
+        {homeContent.map(
+          courseSec =>
+            courseSec.courses.length > 0 && (
+              <CourseSection
+                content={courseSec}
+                key={courseSec.key}
+                navigation={navigation}
+              />
+            ),
+        )}
       </ScrollView>
     );
   };

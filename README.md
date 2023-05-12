@@ -95,6 +95,8 @@ cd android
 ./gradlew bundleProdRelease
 ```
 
+- Locate the app bundle at /android/app/build/outputs/bundle
+
 - Ensure the App access provided for review is working
 
 ### Internal distribution validation

@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import {
   CourseAuthor,
   CourseImage,
+  CoursePriceView,
   CourseTitle,
   CourseView,
   FlexView,
@@ -11,6 +12,7 @@ import {
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
+import CoursePrice from '../../../components/CoursePrice';
 import { courseImage } from '../../../utils/ImageUtil';
 
 const FeaturedCourse = ({ course, navigation }) => (
@@ -38,6 +40,9 @@ const FeaturedCourse = ({ course, navigation }) => (
                 <FrequencyView>
                   <CourseFrequency course={course} />
                 </FrequencyView>
+                <CoursePriceView>
+                  <CoursePrice course={course} />
+                </CoursePriceView>
               </FlexView>
               <CourseView>
                 <CourseMode course={course} />
