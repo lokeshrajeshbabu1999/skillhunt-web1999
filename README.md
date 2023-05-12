@@ -55,6 +55,7 @@ Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod 
 - Go to Wireless `debugging > Pair device with pairing code`
 - Run `adb pair 10.0.0.243:42095` to pair your device (Use your device ip and port)
 - Run `adb connect 10.0.0.243:42095` to connect your device
+- Run `adb install app/build/outputs/apk/prod/release/app-prod-release.apk` to install an apk to the connected device
 
 ## Release setup and packging
 
@@ -72,6 +73,17 @@ Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod 
 
 - Signing config was added to the `android/app/build.gradle` config file
 
+### Generating the release apk for validation
+
+- Update the versionCode and versionName in build.gradle file.
+
+- Run the following in a terminal:
+
+```bash
+cd android
+./gradlew clean assembleProdRelease
+```
+
 ### Generating the release AAB
 
 - Update the versionCode and versionName in build.gradle file.
@@ -80,7 +92,7 @@ Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod 
 
 ```bash
 cd android
-./gradlew bundleRelease
+./gradlew bundleProdRelease
 ```
 
 - Ensure the App access provided for review is working
