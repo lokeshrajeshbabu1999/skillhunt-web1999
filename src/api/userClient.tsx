@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import axios from 'axios';
 import Config from 'react-native-config';
-
+import shLogger from '../utils/Loggers';
 // console.log('User API_URL', USER_API_URL);
 
 const userClient = axios.create({
@@ -10,9 +10,9 @@ const userClient = axios.create({
 
 userClient.interceptors.request.use(async request => {
   const currentSession = await Auth.currentSession();
-  // console.log('User JWT Token', currentSession.getAccessToken().getJwtToken());
-  request.headers.Authorization = currentSession.getAccessToken().getJwtToken();
-  console.log(
+  // console.log('User JWT Token', currentSession.getIdToken().getJwtToken());
+  request.headers.Authorization = currentSession.getIdToken().getJwtToken();
+  shLogger.debug(
     'Request Base & Url : ',
     request.baseURL,
     request.url,
