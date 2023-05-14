@@ -1,10 +1,12 @@
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
 import { Button, Card } from '@rneui/themed';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import userClient from '../../../api/userClient';
 import Divider from '../../../components/Divider';
 import { toDisplayDate } from '../../../utils/DateUtil';
+import Global from '../../../utils/Global';
 import useSchedule from '../../schedule/hooks/useSchedule';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 
@@ -26,7 +28,7 @@ const CourseAppSchedule = ({ course }) => {
     );
     userClient
       .post(
-        '/user-schedule',
+        '/user-api/user-schedule',
         JSON.stringify({
           user_id: user.attributes.email,
           course_id: course.course_id,
@@ -49,7 +51,7 @@ const CourseAppSchedule = ({ course }) => {
   };
 
   const isButtonDisabled = schedule => {
-    return schedule.status !== 'upcoming';
+    return schedule.status !== Global.Constant.Enroll.Status;
   };
 
   const isDisabled = () => {
