@@ -11,6 +11,9 @@ export default {
       Online: 'online',
       InPerson: 'inperson',
     },
+    Enroll: {
+      Status: 'upcoming',
+    },
   },
   Default: {
     courseImage: 'github.png',
