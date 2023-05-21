@@ -105,7 +105,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4
-        versionName "1.1.2"
+        versionName "0.0.1-beta"
         resValue "string", "build_config_package", "com.skillhunt"
     }
     flavorDimensions "default"
@@ -118,7 +118,7 @@ android {
         }
         prod {
             minSdkVersion rootProject.ext.minSdkVersion
-            applicationId 'com.codrix.skill.prod'
+            applicationId 'com.codrix.skill'
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.skillhunt"
         }
