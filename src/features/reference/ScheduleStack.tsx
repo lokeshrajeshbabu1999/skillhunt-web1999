@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from 'styled-components';
 import Global from '../../utils/Global';
-import NewScreen from './screens/NewScreen';
+import ListSchedule from './screens/ListSchedule';
 
 export const ScheduleStack = createStackNavigator();
 // export const SearchStack = createStackNavigator();
@@ -24,8 +24,8 @@ export const ScheduleNavigator = () => {
                 headerTintColor: theme.BACKGROUND_COLOR,
             }}>
             <ScheduleStack.Screen
-                name="NewScreen"
-                component={NewScreen}
+                name="ListSchedule"
+                component={ListSchedule}
                 options={{ title: Global.Constant.appName }}
             />
         </ScheduleStack.Navigator>

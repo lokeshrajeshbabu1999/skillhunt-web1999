@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import userClient from '../../../api/userClient';
 
-const MainSchedule = (userEmail: string) => {
+const userCourseAppSchedule = (userEmail: string) => {
     const [listSchedule, setUserSchedule] = useState([]);
     const [refreshing, setRefreshing] = useState(false)
     const readuserchedule = () => {
@@ -34,4 +34,4 @@ const MainSchedule = (userEmail: string) => {
 
     return [listSchedule, refreshing];
 };
-export default MainSchedule;
+export default userCourseAppSchedule;

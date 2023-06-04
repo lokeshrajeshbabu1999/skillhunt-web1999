@@ -2,14 +2,14 @@ import { useAuthenticator } from '@aws-amplify/ui-react-native';
 import React from 'react';
 import { FlatList } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
-import MainSchedule from '../../course/hooks/MainSchedule';
-import GetSchedule from '../../schedule/screens/GetSchedule';
+import userCourseAppSchedule from '../../course/hooks/userCourseAppSchedule';
+import ScheduleScreen from '../../schedule/screens/ScheduleScreen';
 
-const NewScreen = (navigation) => {
+const ListSchedule = (navigation) => {
   const { user } = useAuthenticator();
-  const [listSchedule] = MainSchedule(user.attributes?.email);
+  const [listSchedule] = userCourseAppSchedule(user.attributes?.email);
   const renderCourseCard = ({ item }) => (
-    <GetSchedule schedule={item} navigation={navigation} />
+    <ScheduleScreen schedule={item} navigation={navigation} />
   );
 
   return (
@@ -25,4 +25,4 @@ const NewScreen = (navigation) => {
   );
 };
 
-export default NewScreen;
+export default ListSchedule;

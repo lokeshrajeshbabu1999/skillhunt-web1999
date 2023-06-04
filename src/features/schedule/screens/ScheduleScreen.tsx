@@ -1,7 +1,7 @@
 import { Card } from "@rneui/themed";
 import { Text } from 'react-native';
 
-const GetSchedule = ({ schedule }) => {
+const ScheduleScreen = ({ schedule }) => {
     return (
         <Card>
             <Text>user</Text>
@@ -13,4 +13,4 @@ const GetSchedule = ({ schedule }) => {
         </Card>
     );
 };
-export default GetSchedule;
+export default ScheduleScreen;
