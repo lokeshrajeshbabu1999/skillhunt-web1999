@@ -4,7 +4,8 @@ import userClient from '../../../api/userClient';
 const userCourseAppSchedule = (userEmail: string) => {
     const [listSchedule, setUserSchedule] = useState([]);
     const [refreshing, setRefreshing] = useState(false)
-    const readuserchedule = () => {
+
+    const readUserSchedule = () => {
         console.log('Load schedule for user ', userEmail);
         const params = { user: userEmail };
         userClient
@@ -23,15 +24,15 @@ const userCourseAppSchedule = (userEmail: string) => {
                 setRefreshing(false);
             });
     };
-    // const onDataRefresh = () => {
-    //     setRefreshing(true);
-    //     readuserschedule();
-    // };
+    const onDataRefresh = () => {
+        setRefreshing(true);
+        readUserSchedule();
+    };
 
     useEffect(() => {
-        readuserchedule();
+        readUserSchedule();
     }, []);
 
-    return [listSchedule, refreshing];
+    return [listSchedule, refreshing, onDataRefresh];
 };
 export default userCourseAppSchedule;
