@@ -1,5 +1,5 @@
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
@@ -46,9 +46,9 @@ const ListUserSchedule = (navigation, route) => {
     );
   };
   return (
-    <CourseContainer>
+    <View>
       {isLoading ? skillActivityIndicator() : displayResult()}
-    </CourseContainer>
+    </View>
   );
 };
 export default ListUserSchedule;

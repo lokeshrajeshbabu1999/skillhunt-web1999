@@ -1,10 +1,10 @@
 import { Card } from '@rneui/themed';
 import { Text } from 'react-native';
 
-const UserSchedule = ({ schedule }) => {
+const UserSchedule = ({ schedule, course }) => {
   return (
     <Card>
-      {/* <View>{course.author}</View> */}
+      {/* <Text>{course.author}</Text> */}
       <Text>{schedule.course_id}</Text>
       <Text>{schedule.user_schedule_id}</Text>
       <Text>{schedule.user_id}</Text>
