@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import shLogger from '../../../utils/Loggers';
 
 const useCourseSchedule = (courseId: string) => {
   const [courseSchedule, setCourseSchedule] = useState([]);
@@ -11,13 +12,13 @@ const useCourseSchedule = (courseId: string) => {
     courseClient
       .get('/schedule', { params: { course_id: courseId } })
       .then(response => {
-        console.log('Schedule for course %s', courseId, response.data);
+        shLogger.debug('Schedule for course %s', courseId, response.data);
         setCourseSchedule(response.data);
         setIsLoading(false);
         setRefreshing(false);
       })
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
         setIsLoading(false);
         setRefreshing(false);
       });

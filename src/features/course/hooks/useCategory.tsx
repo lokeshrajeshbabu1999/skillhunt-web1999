@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import shLogger from '../../../utils/Loggers';
 
 const useCategory = () => {
   const [category, setCategory] = useState([]);
@@ -19,13 +20,13 @@ const useCategory = () => {
       .get('/category')
       .then(response => {
         setCategory(sortCategory(response.data));
-        console.log(response.data);
+        shLogger.debug(response.data);
         setErrorMessage('');
         setIsLoading(false);
       })
 
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
         setErrorMessage('Failed to collect courseDetail.');
         setIsLoading(false);
       });

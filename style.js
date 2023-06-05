@@ -119,6 +119,6 @@ export const ListCourseImage = styled.Image`
 `;
 
 export const CourseFlex = styled.View`
-  width: 100%;
+  width: 400px;
   height: 250px;
 `;
