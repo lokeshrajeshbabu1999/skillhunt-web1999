@@ -9,7 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
-import { ScheduleNavigator } from './src/features/reference/ScheduleStack';
+import { ScheduleNavigator } from './src/features/schedule/components/ScheduleStack';
 import { lightTheme } from './src/theme';
 
 Amplify.configure({

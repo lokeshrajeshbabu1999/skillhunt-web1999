@@ -1,25 +1,24 @@
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
-import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import userCourseAppSchedule from '../../course/hooks/userCourseAppSchedule';
-import ScheduleScreen from '../../schedule/screens/ScheduleScreen';
+import UserSchedule from '../components/UserSchedule';
+import useUserSchedule from '../hooks/useUserSchedule';
 
-const ListSchedule = (navigation, route) => {
+const ListUserSchedule = (navigation, route) => {
   const { user } = useAuthenticator();
-  const [listSchedule, errorMessage, isLoading, refreshing, onDataRefresh] = userCourseAppSchedule(user.attributes?.email);
-  const renderCourseCard = ({ item }) => (
-    <ScheduleScreen schedule={item} navigation={navigation} />
-  );
+  const [listSchedule, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useUserSchedule(user.attributes!!.email);
+  const renderUserSchedule = ({ item }) => <UserSchedule schedule={item} />;
   const skillActivityIndicator = () => {
     return <Loader />;
   };
 
   const skillMessage = () => {
     return (
+      //FIXME - Create a message container
       <CourseContainer>
         <Message type="error" text={errorMessage} />
       </CourseContainer>
@@ -39,7 +38,7 @@ const ListSchedule = (navigation, route) => {
         <FlatList
           horizontal={false}
           data={listSchedule}
-          renderItem={renderCourseCard}
+          renderItem={renderUserSchedule}
           // keyExtractor={item => item.code}
           showsHorizontalScrollIndicator={false}
         />
@@ -52,4 +51,4 @@ const ListSchedule = (navigation, route) => {
     </CourseContainer>
   );
 };
-export default ListSchedule;
+export default ListUserSchedule;

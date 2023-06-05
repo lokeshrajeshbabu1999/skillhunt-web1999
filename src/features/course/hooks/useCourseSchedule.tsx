@@ -23,9 +23,9 @@ const useCourseSchedule = (courseId: string) => {
       });
   };
   const onDataRefresh = () => {
-      setRefreshing(true);
-      loadSchedule();
-    };
+    setRefreshing(true);
+    loadSchedule();
+  };
 
   useEffect(() => {
     loadSchedule();

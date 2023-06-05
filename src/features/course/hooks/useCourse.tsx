@@ -33,9 +33,9 @@ const useCourse = category => {
       });
   };
   const onDataRefresh = () => {
-      setRefreshing(true);
-      loadCourses();
-    };
+    setRefreshing(true);
+    loadCourses();
+  };
 
   useEffect(() => {
     loadCourses();
