@@ -6,7 +6,7 @@ const CoursePrice = ({ course }) => {
     const getPrice = (courseInput: { price: string }) => {
         let price = '';
         if (courseInput.price) {
-            if (courseInput.price === 'Free') {
+            if (courseInput.price === '0') {
                 price = 'Free';
             } else {
                 price = 'Rs ' + courseInput.price;
