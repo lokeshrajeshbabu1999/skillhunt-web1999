@@ -17,5 +17,6 @@ export default {
   },
   Default: {
     courseImage: 'github.png',
+    courseVideo: 'sample.mp4'
   },
 };
