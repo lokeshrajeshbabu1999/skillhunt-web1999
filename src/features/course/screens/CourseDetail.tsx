@@ -1,6 +1,6 @@
 import { Card } from '@rneui/themed';
-import React from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import Video from "react-native-video";
 import {
   CourseAuthor,
@@ -13,6 +13,7 @@ import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import shLogger from '../../../utils/Loggers';
 import { courseVideo } from '../../../utils/Video';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
@@ -21,7 +22,7 @@ const CourseDetail = ({ route, course }) => {
   const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
-  // const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   // const [isMuted, setIsMuted] = React.useState(false);
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -44,30 +45,53 @@ const CourseDetail = ({ route, course }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
+  // const isVideoDisabled = courseDetail => {
+  //   return courseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
+  // };
+  const onLoadStart = () => {
+    shLogger.debug('onLoadStart:', onLoadStart)
+  }
+  const onProgress = () => {
+    shLogger.debug('onProgress:', onProgress)
+  }
+  const onError = () => {
+    shLogger.debug('onError:', onError)
+  }
+  const onBuffer = () => {
+    shLogger.debug('onBuffer:', onBuffer)
+  }
+  const onLoadEnd = () => {
+    shLogger.debug('onLoadEnd:', onLoadEnd)
+  }
 
   const renderCourseCard = () => {
     return (
       <ScrollView>
         <Card>
-          <Video source={{ uri: courseVideo(courseDetail.video) }}
-            controls
-            repeat={true}
-            rotateToFullScreen={true}
-            playInBackground={true}
-            playWhenInactive={true}
-            // muted={isMuted}
-            // paused={!isPlaying}
-            style={styles.backgroundVideo}
-          />
-
-          {/* <Button
+          <Button
             onPress={() => setIsPlaying(p => !p)}
             title={isPlaying ? 'Stop' : 'Play'}
           />
-          <Button
+          {/* <Button
             onPress={() => setIsMuted(m => !m)}
-            title={isMuted ? 'Unmute' : 'Mute'}
+            name={isMuted ? 'Unmute' : 'Mute'}
           /> */}
+          <Video autoplay="true" source={{ uri: courseVideo(courseDetail.video) }}
+            controls
+            // display={isVideoDisabled(courseDetail)}
+            rotateToFullScreen={true}
+            // muted={!ismuted}
+            resizeMode="cover"
+            repeat={true}
+            onLoad={onLoadEnd}
+            onLoadStart={onLoadStart}
+            onBuffer={onBuffer}
+            onError={onError}
+            onProgress={onProgress}
+            tapAnywhereToPause
+            paused={!isPlaying}
+            style={styles.backgroundVideo}
+          />
           <View>
             <ScrollView
               refreshControl={
