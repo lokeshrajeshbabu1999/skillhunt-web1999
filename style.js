@@ -119,6 +119,11 @@ export const ListCourseImage = styled.Image`
 `;
 
 export const CourseFlex = styled.View`
-  width: 100%;
+  width: 380px;
   height: 250px;
+`;
+export const VideoStyle = styled.View`
+  background-color: ${props => props.theme.BACKGROUND_COLOR};
+  width:350px;
+  height:150px;
 `;

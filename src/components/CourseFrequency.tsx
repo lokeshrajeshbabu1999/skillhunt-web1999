@@ -1,4 +1,4 @@
-import { Text } from '@rneui/themed';
+import { Text } from 'react-native';
 import { FlexView } from '../../style';
 import Global from '../utils/Global';
 
