@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { Text } from '@rneui/themed';
 import { FlexView } from '../../style';
 import Global from '../utils/Global';
 
@@ -16,21 +16,14 @@ const CourseFrequency = ({ course }) => {
       frequencyName = `${course.duration} Minutes`;
       break;
   }
-  // const displayFrequency = () => {
-  //   if (course.frequency === undefined) {
-  //     frequencyName = 'null'
-  //   } else {
-  //     frequencyName = 'CourseFrequency'
-  //   }
-  // };
   return (
-    <FlexView>
-      {/* <Text>{displayFrequency(course)}</Text> */}
-      <Text>{frequencyName}</Text>
-    </FlexView>
+    <>
+      {course.duration !== undefined && (
+        <FlexView>
+          <Text>{frequencyName}</Text>
+        </FlexView>
+      )}
+    </>
   );
 };
-
-
-
 export default CourseFrequency;
