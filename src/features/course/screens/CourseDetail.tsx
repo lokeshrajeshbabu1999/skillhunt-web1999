@@ -1,7 +1,8 @@
 import { Card } from '@rneui/themed';
-import React, { useState } from 'react';
-import { Button, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import Video from "react-native-video";
+import React, { useRef, useState } from 'react';
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
+import Video from 'react-native-video';
 import {
   CourseAuthor,
   CourseContainer,
@@ -13,26 +14,24 @@ import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import shLogger from '../../../utils/Loggers';
+import Global from '../../../utils/Global';
 import { courseVideo } from '../../../utils/Video';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-
 const CourseDetail = ({ route, course }) => {
   const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
     route.params.id,
   );
-  const [isPlaying, setIsPlaying] = useState(false);
-  // const [isMuted, setIsMuted] = React.useState(false);
+  const videoPlayer = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isVideoLoading, setIsLoading] = useState(true);
+  const [paused, setPaused] = useState(false);
+  const [playerState, setPlayerState] = useState(PLAYER_STATES.PLAYING);
+
   const skillActivityIndicator = () => {
     return <Loader />;
   };
-  // const onRefresh = React.useCallback(() => {
-  //   setRefreshing(true);
-  //   setTimeout(() => {
-  //     setRefreshing(false);
-  //   }, 2000);
-  // }, []);
 
   const skillMessage = () => {
     return (
@@ -41,57 +40,74 @@ const CourseDetail = ({ route, course }) => {
       </CourseContainer>
     );
   };
+  const onSeek = (seek) => {
+    videoPlayer.current.seek(seek);
+  };
+  const onPaused = (playerState) => {
+    setPaused(!paused);
+    setPlayerState(playerState);
+  };
+  const onReplay = () => {
+    setPlayerState(PLAYER_STATES.PLAYING);
+    videoPlayer.current.seek(0);
+  };
+
+  const onProgress = (data) => {
+    if (!isVideoLoading && playerState !== PLAYER_STATES.PLAYING) {
+      setCurrentTime(data.currentTime);
+    }
+  };
+
+  const onLoad = (data) => {
+    setDuration(data.duration);
+    setIsLoading(false);
+  };
+  const onLoadStart = () => setIsLoading(true);
+
+  const onEnd = () => setPlayerState(PLAYER_STATES.ENDED);
+
+  const onSeeking = (currentTime) => setCurrentTime(currentTime);
 
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
-  // const isVideoDisabled = courseDetail => {
-  //   return courseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
-  // };
-  const onLoadStart = () => {
-    shLogger.debug('onLoadStart:', onLoadStart)
-  }
-  const onProgress = () => {
-    shLogger.debug('onProgress:', onProgress)
-  }
-  const onError = () => {
-    shLogger.debug('onError:', onError)
-  }
-  const onBuffer = () => {
-    shLogger.debug('onBuffer:', onBuffer)
-  }
-  const onLoadEnd = () => {
-    shLogger.debug('onLoadEnd:', onLoadEnd)
-  }
+  const isVideoDisabled = (courseDetail) => {
+    return courseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
+  };
 
   const renderCourseCard = () => {
     return (
       <ScrollView>
         <Card>
-          <Button
-            onPress={() => setIsPlaying(p => !p)}
-            title={isPlaying ? 'Stop' : 'Play'}
-          />
-          {/* <Button
-            onPress={() => setIsMuted(m => !m)}
-            name={isMuted ? 'Unmute' : 'Mute'}
-          /> */}
-          <Video autoplay="true" source={{ uri: courseVideo(courseDetail.video) }}
-            controls
-            // display={isVideoDisabled(courseDetail)}
-            rotateToFullScreen={true}
-            // muted={!ismuted}
-            resizeMode="cover"
-            repeat={true}
-            onLoad={onLoadEnd}
-            onLoadStart={onLoadStart}
-            onBuffer={onBuffer}
-            onError={onError}
-            onProgress={onProgress}
-            tapAnywhereToPause
-            paused={!isPlaying}
-            style={styles.backgroundVideo}
-          />
+          <View>
+            <Video
+              source={{
+                uri: courseVideo(courseDetail.video)
+              }}
+              onEnd={onEnd}
+              onLoad={onLoad}
+              onLoadStart={onLoadStart}
+              onProgress={onProgress}
+              paused={paused}
+              ref={videoPlayer}
+              volume={10}
+              rotateToFullScreen={true}
+              tapAnywhereToPause
+              style={styles.mediaplayer} />
+
+            <MediaControls
+              duration={duration}
+              isLoading={isVideoLoading}
+              onPaused={onPaused}
+              onReplay={onReplay}
+              onSeek={onSeek}
+              onSeeking={onSeeking}
+              playerState={playerState}
+              progress={currentTime}
+              // toolbar={renderToolbar()}
+              mainColor="#333"
+            />
+          </View>
           <View>
             <ScrollView
               refreshControl={
@@ -144,13 +160,15 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     display: 'flex',
   },
-  backgroundVideo: {
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // bottom: 0,
-    // right: 0,
-    width: 340,
+  mediaplayer: {
+    width: 350,
     height: 150,
+    backgroundColor: 'white',
+  },
+  toolbar: {
+    marginTop: 30,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 5,
   },
 });
