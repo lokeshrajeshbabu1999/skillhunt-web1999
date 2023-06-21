@@ -7,6 +7,6 @@ export function courseVideo(video: string, image: string) {
   // FIXME - If the image is empty or null display a default image
   const videoUrl = video
     ? VIDEO_URL + '/' + video
-    : IMAGE_URL + '/' + Global.Default.courseImage;
+    : VIDEO_URL + '/' + Global.Default.courseVideo;
   return videoUrl;
 }
