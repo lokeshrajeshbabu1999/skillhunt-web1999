@@ -14,6 +14,7 @@ import CourseVideo from '../../../components/CourseVideo';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import Global from '../../../utils/Global';
+import shLogger from '../../../utils/Loggers';
 import { courseVideo } from '../../../utils/Video';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
@@ -36,16 +37,18 @@ const CourseDetail = ({ route, course }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
-  const isVideoDisabled = (courseDetail) => {
-    return courseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
+  const isVideoDisabled = CourseDetail => {
+    return CourseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
   };
 
   const renderCourseCard = () => {
+    shLogger.debug(isVideoDisabled)
     return (
       <ScrollView>
         <Card>
           <View>
-            <CourseVideo course={courseVideo} />
+            {isVideoDisabled(CourseDetail) && <CourseVideo course={courseVideo} />}
+
           </View>
           <View>
             <ScrollView
@@ -54,8 +57,9 @@ const CourseDetail = ({ route, course }) => {
               }>
               {/* <CourseDetailImage
                 source={{
-                  uri: courseImage(courseDetail.image), 
-            /> */}
+                  uri: courseImage(courseDetail.image)
+                }}
+              /> */}
               <CourseTitle>{courseDetail.title}</CourseTitle>
               <FlexView direction="row">
                 <FlexView direction="column">
