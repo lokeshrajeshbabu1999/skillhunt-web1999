@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import shLogger from '../../../utils/Loggers';
 
 const useCourse = category => {
   const [courses, setCourses] = useState([]);
@@ -20,22 +21,22 @@ const useCourse = category => {
       .get('/course', { params: { ctgry: category } })
       .then(response => {
         setCourses(sortCourses(response.data));
-        console.log(response.data);
+        shLogger.debug(response.data);
         setErrorMessage('');
         setIsLoading(false);
         setRefreshing(false);
       })
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
         setErrorMessage('Failed to collect course list.');
         setIsLoading(false);
         setRefreshing(false);
       });
   };
   const onDataRefresh = () => {
-      setRefreshing(true);
-      loadCourses();
-    };
+    setRefreshing(true);
+    loadCourses();
+  };
 
   useEffect(() => {
     loadCourses();

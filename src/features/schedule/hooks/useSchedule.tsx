@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import userClient from '../../../api/userClient';
+import shLogger from '../../../utils/Loggers';
 
 const useSchedule = (userEmail: string, courseId: string) => {
   const [userSchedule, setUserSchedule] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const loadUserSchedule = () => {
-    console.log('Load schedule for user ', userEmail);
+    shLogger.debug('Load schedule for user ', userEmail);
     const params = { user: userEmail, course_id: courseId };
 
     userClient
       .get('/user-schedule', { params })
       .then(response => {
-        console.log(
+        shLogger.debug(
           'Course User %s schedule for %s',
           userEmail,
           courseId,
@@ -22,7 +23,7 @@ const useSchedule = (userEmail: string, courseId: string) => {
         setRefreshing(false);
       })
       .catch(error => {
-        console.log('Error:', error);
+        shLogger.error('Error:', error);
         setRefreshing(false);
       });
   };
