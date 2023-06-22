@@ -25,7 +25,7 @@ import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import { courseImage } from '../../../utils/ImageUtil';
+import { courseImage } from '../../../utils/MediaUtil';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
 const Home = ({ navigation }) => {

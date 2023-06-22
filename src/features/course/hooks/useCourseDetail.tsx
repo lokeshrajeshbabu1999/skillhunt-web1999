@@ -25,9 +25,9 @@ const useCourseDetail = (courseId: number) => {
       });
   };
   const onDataRefresh = () => {
-      setRefreshing(true);
-      loadCourse();
-    };
+    setRefreshing(true);
+    loadCourse();
+  };
 
   useEffect(() => {
     loadCourse();

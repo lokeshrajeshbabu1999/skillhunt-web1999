@@ -1,11 +1,14 @@
 import { Card } from '@rneui/themed';
-import React from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import {
   CourseAuthor,
   CourseContainer,
   CourseDesc,
-  CourseDetailModeView, CoursePriceView, CourseTitle, FlexView, FrequencyView
+  CourseDetailModeView,
+  CoursePriceView,
+  CourseTitle,
+  FlexView,
+  FrequencyView,
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -15,13 +18,11 @@ import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import Global from '../../../utils/Global';
 import shLogger from '../../../utils/Loggers';
-import { courseVideo } from '../../../utils/Video';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 const CourseDetail = ({ route, course }) => {
-  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
-    route.params.id,
-  );
+  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] =
+    useCourseDetail(route.params.id);
   const skillActivityIndicator = () => {
     return <Loader />;
   };
@@ -37,23 +38,31 @@ const CourseDetail = ({ route, course }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
-  const isVideoDisabled = CourseDetail => {
-    return CourseDetail.Recorded !== Global.Constant.CourseMode.Recorded;
+  const isRecordedCourse = courseMode => {
+    shLogger.debug(
+      'isRecordedCourse : ',
+      courseMode,
+      Global.Constant.CourseMode.Recorded,
+    );
+    return courseMode === Global.Constant.CourseMode.Recorded;
   };
 
   const renderCourseCard = () => {
-    shLogger.debug(isVideoDisabled)
     return (
       <ScrollView>
         <Card>
           <View>
-            {isVideoDisabled(CourseDetail) && <CourseVideo course={courseVideo} />}
-
+            {isRecordedCourse(courseDetail.mode) && (
+              <CourseVideo courseVideo={courseDetail.video} />
+            )}
           </View>
           <View>
             <ScrollView
               refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onDataRefresh}
+                />
               }>
               {/* <CourseDetailImage
                 source={{
@@ -84,16 +93,11 @@ const CourseDetail = ({ route, course }) => {
         <Card>
           <CourseAppSchedule course={courseDetail} />
         </Card>
-      </ScrollView >
+      </ScrollView>
     );
   };
 
-  return (
-    <View>
-      {isLoading ? skillActivityIndicator() : displayResult()}
-    </View>
-  );
+  return <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>;
 };
 
 export default CourseDetail;
-

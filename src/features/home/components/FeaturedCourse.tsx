@@ -13,7 +13,7 @@ import {
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
-import { courseImage } from '../../../utils/ImageUtil';
+import { courseImage } from '../../../utils/MediaUtil';
 
 const FeaturedCourse = ({ course, navigation }) => (
   <View>
