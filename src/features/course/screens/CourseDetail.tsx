@@ -20,7 +20,8 @@ import Global from '../../../utils/Global';
 import shLogger from '../../../utils/Loggers';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-const CourseDetail = ({ route, course }) => {
+
+const CourseDetail = ({ route }) => {
   const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] =
     useCourseDetail(route.params.id);
   const skillActivityIndicator = () => {
@@ -38,7 +39,7 @@ const CourseDetail = ({ route, course }) => {
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
   };
-  const isRecordedCourse = courseMode => {
+  const isRecordedCourse = (courseMode: string) => {
     shLogger.debug(
       'isRecordedCourse : ',
       courseMode,
@@ -52,15 +53,15 @@ const CourseDetail = ({ route, course }) => {
       <ScrollView>
         <Card>
           <View>
-            {isRecordedCourse(courseDetail.mode) && (
-              <CourseVideo courseVideo={courseDetail.video} />
+            {isRecordedCourse(courseDetail.mode : string) && (
+            <CourseVideo courseVideo={courseDetail.video} />
             )}
           </View>
           <View>
             <ScrollView
               refreshControl={
                 <RefreshControl
-                  refreshing={refreshing}
+                  refreshing={Boolean(refreshing)}
                   onRefresh={onDataRefresh}
                 />
               }>

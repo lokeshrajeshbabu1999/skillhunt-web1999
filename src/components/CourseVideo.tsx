@@ -4,7 +4,7 @@ import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
 import Video from 'react-native-video';
 import { videoUrl } from '../utils/MediaUtil';
 
-const CourseVideo = ({ courseVideo }) => {
+const CourseVideo = ({ courseVideo }: { courseVideo: string }) => {
   const videoPlayer = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
