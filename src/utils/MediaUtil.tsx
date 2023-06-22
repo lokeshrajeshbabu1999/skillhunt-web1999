@@ -1,8 +1,9 @@
 // import { IMAGE_URL } from '@env';
+import Config from 'react-native-config';
 import Global from './Global';
 
-const VIDEO_URL = 'https://skill-hunt.s3.ap-south-1.amazonaws.com';
-const IMAGE_URL = 'https://skill-hunt.s3.ap-south-1.amazonaws.com';
+const VIDEO_URL = Config.IMAGE_URL;
+const IMAGE_URL = Config.IMAGE_URL;
 export function courseImage(image: string) {
   // FIXME - If the image is empty or null display a default image
   const imageUrl = image
