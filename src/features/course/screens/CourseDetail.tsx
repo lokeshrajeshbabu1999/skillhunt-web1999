@@ -24,8 +24,14 @@ import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
 const CourseDetail = ({ route }) => {
-  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] =
-    useCourseDetail(route.params.id);
+  const [
+    activeCourseDetail,
+    errorMessage,
+    isLoading,
+    refreshing,
+    onDataRefresh,
+  ] = useCourseDetail(route.params.id);
+
   const skillActivityIndicator = () => {
     return <Loader />;
   };
@@ -37,37 +43,32 @@ const CourseDetail = ({ route }) => {
       </CourseContainer>
     );
   };
-  const VideoCourse = () => {
+
+  const displayVideo = course => {
     return (
       <View>
-        {isRecordedCourse(courseDetail.mode) && (
-          <CourseVideo courseVideo={courseDetail.video} />
-        )}
+        <CourseVideo courseVideo={course.video} />
       </View>
-    )
+    );
   };
-  const ImageCourse = () => {
+
+  const displayImage = course => {
+    shLogger.debug('Course : ', course);
     return (
       <CourseDetailImage
         source={{
-          uri: courseImage(courseDetail.image)
+          uri: courseImage(course.image),
         }}
       />
-    )
-  }
-  const displayResult = () => {
-    return errorMessage === '' ? renderCourseCard() : skillMessage();
-  };
-  const DisplayMedia = () => {
-    return (
-      <View>
-        {isRecordedCourse && <VideoCourse />}
-        {!isRecordedCourse && <ImageCourse />}
-      </View>
     );
-    {/* <VideoCourse />
-        <ImageCourse /> */}
   };
+  const displayResult = () => {
+    console.log('Display Result : ', activeCourseDetail);
+    return errorMessage === '' && activeCourseDetail != null
+      ? renderCourseCard()
+      : skillMessage();
+  };
+
   const isRecordedCourse = (courseMode: string) => {
     shLogger.debug(
       'isRecordedCourse : ',
@@ -82,17 +83,6 @@ const CourseDetail = ({ route }) => {
       <ScrollView>
         <Card>
           <View>
-            <DisplayMedia />
-          </View>
-
-          {/* <VideoCourse /> */}
-          {/* <View>
-            {isRecordedCourse(courseDetail.mode) && (
-              <CourseVideo courseVideo={courseDetail.video} />
-            )}
-          </View> */}
-
-          <View>
             <ScrollView
               refreshControl={
                 <RefreshControl
@@ -100,27 +90,31 @@ const CourseDetail = ({ route }) => {
                   onRefresh={onDataRefresh}
                 />
               }>
+              {isRecordedCourse(activeCourseDetail.mode)
+                ? displayVideo(activeCourseDetail)
+                : displayImage(activeCourseDetail)}
+              {/* <CourseMedia course={activeCourseDetail} /> */}
               {/* <ImageCourse /> */}
               {/* <CourseDetailImage
                 source={{
                   uri: courseImage(courseDetail.image)
                 }}
               /> */}
-              <CourseTitle>{courseDetail.title}</CourseTitle>
+              <CourseTitle>{activeCourseDetail.title}</CourseTitle>
               <FlexView direction="row">
                 <FlexView direction="column">
-                  <CourseDesc>{courseDetail.desc}</CourseDesc>
-                  <CourseAuthor>{courseDetail.author}</CourseAuthor>
+                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
+                  <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
                   <FrequencyView>
-                    <CourseFrequency course={courseDetail} />
+                    <CourseFrequency course={activeCourseDetail} />
                   </FrequencyView>
                   <CoursePriceView>
-                    <CoursePrice course={courseDetail} />
+                    <CoursePrice course={activeCourseDetail} />
                   </CoursePriceView>
                 </FlexView>
                 {/* <Text>{courseDetail.price}</Text> */}
                 <CourseDetailModeView>
-                  <CourseMode course={courseDetail} />
+                  <CourseMode course={activeCourseDetail} />
                 </CourseDetailModeView>
               </FlexView>
             </ScrollView>
@@ -128,7 +122,7 @@ const CourseDetail = ({ route }) => {
         </Card>
 
         <Card>
-          <CourseAppSchedule course={courseDetail} />
+          <CourseAppSchedule course={activeCourseDetail} />
         </Card>
       </ScrollView>
     );

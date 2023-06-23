@@ -32,10 +32,11 @@ const useCourse = category => {
         setRefreshing(false);
       });
   };
+
   const onDataRefresh = () => {
-      setRefreshing(true);
-      loadCourses();
-    };
+    setRefreshing(true);
+    loadCourses();
+  };
 
   useEffect(() => {
     loadCourses();
