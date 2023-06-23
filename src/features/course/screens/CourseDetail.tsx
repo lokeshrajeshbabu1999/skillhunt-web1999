@@ -4,6 +4,7 @@ import {
   CourseAuthor,
   CourseContainer,
   CourseDesc,
+  CourseDetailImage,
   CourseDetailModeView,
   CoursePriceView,
   CourseTitle,
@@ -18,6 +19,7 @@ import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import Global from '../../../utils/Global';
 import shLogger from '../../../utils/Loggers';
+import { courseImage } from '../../../utils/MediaUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
@@ -35,9 +37,36 @@ const CourseDetail = ({ route }) => {
       </CourseContainer>
     );
   };
-
+  const VideoCourse = () => {
+    return (
+      <View>
+        {isRecordedCourse(courseDetail.mode) && (
+          <CourseVideo courseVideo={courseDetail.video} />
+        )}
+      </View>
+    )
+  };
+  const ImageCourse = () => {
+    return (
+      <CourseDetailImage
+        source={{
+          uri: courseImage(courseDetail.image)
+        }}
+      />
+    )
+  }
   const displayResult = () => {
     return errorMessage === '' ? renderCourseCard() : skillMessage();
+  };
+  const DisplayMedia = () => {
+    return (
+      <View>
+        {isRecordedCourse && <VideoCourse />}
+        {!isRecordedCourse && <ImageCourse />}
+      </View>
+    );
+    {/* <VideoCourse />
+        <ImageCourse /> */}
   };
   const isRecordedCourse = (courseMode: string) => {
     shLogger.debug(
@@ -53,10 +82,16 @@ const CourseDetail = ({ route }) => {
       <ScrollView>
         <Card>
           <View>
-            {isRecordedCourse(courseDetail.mode : string) && (
-            <CourseVideo courseVideo={courseDetail.video} />
-            )}
+            <DisplayMedia />
           </View>
+
+          {/* <VideoCourse /> */}
+          {/* <View>
+            {isRecordedCourse(courseDetail.mode) && (
+              <CourseVideo courseVideo={courseDetail.video} />
+            )}
+          </View> */}
+
           <View>
             <ScrollView
               refreshControl={
@@ -65,6 +100,7 @@ const CourseDetail = ({ route }) => {
                   onRefresh={onDataRefresh}
                 />
               }>
+              {/* <ImageCourse /> */}
               {/* <CourseDetailImage
                 source={{
                   uri: courseImage(courseDetail.image)
