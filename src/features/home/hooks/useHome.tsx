@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import shLogger from '../../../utils/Loggers';
 
 const useHome = () => {
   const [homeContent, setHomeContent] = useState([]);
@@ -13,19 +14,18 @@ const useHome = () => {
     });
   };
 
-  const fetchApi = () => {
+  const loadHomeContent = () => {
     setIsLoading(true);
     courseClient
       .get('/home')
       .then(response => {
-        console.log(response.data);
         setHomeContent(sortSection(response.data));
         setErrorMessage('');
         setIsLoading(false);
         setRefreshing(false);
       })
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
         setErrorMessage('Failed to collect courseDetail.');
         setIsLoading(false);
         setRefreshing(false);
@@ -34,11 +34,11 @@ const useHome = () => {
 
   const onDataRefresh = () => {
     setRefreshing(true);
-    fetchApi();
+    loadHomeContent();
   };
 
   useEffect(() => {
-    fetchApi();
+    loadHomeContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

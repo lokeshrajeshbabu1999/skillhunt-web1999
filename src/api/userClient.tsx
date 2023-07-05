@@ -28,7 +28,7 @@ userClient.interceptors.response.use(
     return response;
   },
   error => {
-    console.log('Error:', error);
+    shLogger.error('Error:', error);
   },
 );
 export default userClient;

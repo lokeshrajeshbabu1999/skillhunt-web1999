@@ -7,18 +7,19 @@ import userClient from '../../../api/userClient';
 import Divider from '../../../components/Divider';
 import { toDisplayDate } from '../../../utils/DateUtil';
 import Global from '../../../utils/Global';
+import shLogger from '../../../utils/Loggers';
 import useSchedule from '../../schedule/hooks/useSchedule';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 
 const CourseAppSchedule = ({ course }) => {
-  console.log('CourseAppSchedule :: Course in props ', course);
+  shLogger.debug('CourseAppSchedule :: Course in props ', course);
   const { user } = useAuthenticator();
   const [courseSchedule] = useCourseSchedule(course.course_id);
   const [userSchedule] = useSchedule(user.attributes?.email, course.course_id);
 
   const enrollSchedule = schedule => {
-    console.log('enrollSchedule ', schedule);
-    console.log(
+    shLogger.debug('enrollSchedule ', schedule);
+    shLogger.debug(
       'CourseAppSchedule : enrollSchedule',
       JSON.stringify({
         user_id: user.attributes.email,
@@ -36,10 +37,10 @@ const CourseAppSchedule = ({ course }) => {
         }),
       )
       .then(response => {
-        console.log(response.data);
+        shLogger.debug(response.data);
       })
       .catch(error => {
-        console.log('Error:', error);
+        shLogger.error('Error:', error);
       });
   };
   const displayNoSchedule = () => {
@@ -56,13 +57,13 @@ const CourseAppSchedule = ({ course }) => {
 
   const isDisabled = () => {
     if (course.course_id === userSchedule.course_id) {
-      console.log(course.course_id);
+      shLogger.debug(course.course_id);
       return 'enrolled';
     }
   };
 
   const enrollButton = (schedule, item) => {
-    console.log('enrollButton : ', schedule);
+    shLogger.debug('enrollButton : ', schedule);
     return userSchedule ? isDisabled(item) : enrollSchedule(schedule);
   };
 
@@ -91,7 +92,7 @@ const CourseAppSchedule = ({ course }) => {
                       disabled={isButtonDisabled(schedule)}
                       title="Enroll"
                       onPress={() => (
-                        console.log('Schedule Param :', schedule),
+                        shLogger.debug('Schedule Param :', schedule),
                         enrollSchedule(schedule)
                       )}
                     />

@@ -119,7 +119,7 @@ export const ListCourseImage = styled.Image`
 `;
 
 export const CourseFlex = styled.View`
-  width: 380px;
+  width: 400px;
   height: 250px;
 `;
 export const VideoStyle = styled.View`

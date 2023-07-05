@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import shLogger from '../../../utils/Loggers';
 
 const useCourseDetail = (courseId: number) => {
   const [activeCourseDetail, setActiveCourseDetail] = useState();
@@ -20,7 +21,7 @@ const useCourseDetail = (courseId: number) => {
         setRefreshing(false);
       })
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
         setErrorMessage('Failed to collect courseDetail.');
         setIsLoading(false);
         setRefreshing(false);

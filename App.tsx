@@ -9,7 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
-import NewScreen from './src/features/reference/screens/NewScreen';
+import { ScheduleNavigator } from './src/features/schedule/components/ScheduleStack';
 import { lightTheme } from './src/theme';
 
 Amplify.configure({
@@ -61,7 +61,7 @@ function App(): JSX.Element {
               />
               <Tab.Screen
                 name="Schedule"
-                component={NewScreen}
+                component={ScheduleNavigator}
                 options={{
                   tabBarLabel: 'Schedule',
                   tabBarIcon: ({ color }) => (

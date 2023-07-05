@@ -25,7 +25,8 @@ import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import { courseImage } from '../../../utils/MediaUtil';
+import { courseImage } from '../../../utils/ImageUtil';
+import shLogger from '../../../utils/Loggers';
 import CourseSection from '../components/CourseSection';
 import useHome from '../hooks/useHome';
 const Home = ({ navigation }) => {
@@ -53,12 +54,12 @@ const Home = ({ navigation }) => {
     courseClient
       .post('/search', { term: searchTerm })
       .then(response => {
-        console.log(response.data);
+        shLogger.debug(response.data);
         setSearchResults(response.data);
         setShowResults(true);
       })
       .catch(error => {
-        console.log('Error :', error);
+        shLogger.error('Error :', error);
       });
   };
 
