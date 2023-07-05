@@ -1,37 +1,40 @@
 import { Card } from '@rneui/themed';
-import React from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import {
   CourseAuthor,
   CourseContainer,
   CourseDesc,
   CourseDetailImage,
-  CourseDetailModeView, CoursePriceView, CourseTitle, FlexView, FrequencyView
+  CourseDetailModeView,
+  CoursePriceView,
+  CourseTitle,
+  FlexView,
+  FrequencyView,
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
+import CourseVideo from '../../../components/CourseVideo';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import { courseImage } from '../../../utils/ImageUtil';
+import Global from '../../../utils/Global';
+import shLogger from '../../../utils/Loggers';
+import { courseImage } from '../../../utils/MediaUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
 
-const CourseDetail = ({ route, course }) => {
-  const [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh] = useCourseDetail(
-    route.params.id,
-  );
-
+const CourseDetail = ({ route }) => {
+  const [
+    activeCourseDetail,
+    errorMessage,
+    isLoading,
+    refreshing,
+    onDataRefresh,
+  ] = useCourseDetail(route.params.id);
 
   const skillActivityIndicator = () => {
     return <Loader />;
   };
-  // const onRefresh = React.useCallback(() => {
-  //   setRefreshing(true);
-  //   setTimeout(() => {
-  //     setRefreshing(false);
-  //   }, 2000);
-  // }, []);
 
   const skillMessage = () => {
     return (
@@ -41,68 +44,91 @@ const CourseDetail = ({ route, course }) => {
     );
   };
 
+  const displayVideo = course => {
+    return (
+      <View>
+        <CourseVideo courseVideo={course.video} />
+      </View>
+    );
+  };
+
+  const displayImage = course => {
+    shLogger.debug('Course : ', course);
+    return (
+      <CourseDetailImage
+        source={{
+          uri: courseImage(course.image),
+        }}
+      />
+    );
+  };
   const displayResult = () => {
-    return errorMessage === '' ? renderCourseCard() : skillMessage();
+    console.log('Display Result : ', activeCourseDetail);
+    return errorMessage === '' && activeCourseDetail != null
+      ? renderCourseCard()
+      : skillMessage();
+  };
+
+  const isRecordedCourse = (courseMode: string) => {
+    shLogger.debug(
+      'isRecordedCourse : ',
+      courseMode,
+      Global.Constant.CourseMode.Recorded,
+    );
+    return courseMode === Global.Constant.CourseMode.Recorded;
   };
 
   const renderCourseCard = () => {
     return (
       <ScrollView>
-        <><Card>
-          <ScrollView
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
-            }>
-            <View style={styles.view}>
-              <CourseDetailImage
+        <Card>
+          <View>
+            <ScrollView
+              refreshControl={
+                <RefreshControl
+                  refreshing={Boolean(refreshing)}
+                  onRefresh={onDataRefresh}
+                />
+              }>
+              {isRecordedCourse(activeCourseDetail.mode)
+                ? displayVideo(activeCourseDetail)
+                : displayImage(activeCourseDetail)}
+              {/* <CourseMedia course={activeCourseDetail} /> */}
+              {/* <ImageCourse /> */}
+              {/* <CourseDetailImage
                 source={{
-                  uri: courseImage(courseDetail.image),
-                }} />
-              {/* <Text>
-                {courseDetail.header} {courseDetail.Category}
-              </Text> */}
-              <CourseTitle>{courseDetail.title}</CourseTitle>
+                  uri: courseImage(courseDetail.image)
+                }}
+              /> */}
+              <CourseTitle>{activeCourseDetail.title}</CourseTitle>
               <FlexView direction="row">
                 <FlexView direction="column">
-                  <CourseDesc>{courseDetail.desc}</CourseDesc>
-                  <CourseAuthor>{courseDetail.author}</CourseAuthor>
+                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
+                  <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
                   <FrequencyView>
-                    <CourseFrequency course={courseDetail} />
+                    <CourseFrequency course={activeCourseDetail} />
                   </FrequencyView>
                   <CoursePriceView>
-                    <CoursePrice course={courseDetail} />
+                    <CoursePrice course={activeCourseDetail} />
                   </CoursePriceView>
                 </FlexView>
                 {/* <Text>{courseDetail.price}</Text> */}
                 <CourseDetailModeView>
-                  <CourseMode course={courseDetail} />
+                  <CourseMode course={activeCourseDetail} />
                 </CourseDetailModeView>
               </FlexView>
-
-
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </View>
         </Card>
-          <Card>
-            <CourseAppSchedule course={courseDetail} />
-          </Card></>
+
+        <Card>
+          <CourseAppSchedule course={activeCourseDetail} />
+        </Card>
       </ScrollView>
     );
   };
 
-  return (
-    <View>
-      {isLoading ? skillActivityIndicator() : displayResult()}
-    </View>
-  );
+  return <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>;
 };
 
 export default CourseDetail;
-
-
-const styles = StyleSheet.create({
-  view: {
-    paddingLeft: 15,
-    display: 'flex',
-  },
-});

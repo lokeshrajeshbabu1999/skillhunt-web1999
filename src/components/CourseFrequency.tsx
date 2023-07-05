@@ -3,7 +3,7 @@ import { FlexView } from '../../style';
 import Global from '../utils/Global';
 
 const CourseFrequency = ({ course }) => {
-  let frequencyName = null;
+  let frequencyName = 'null';
   switch (course.frequency) {
     case Global.Constant.CourseFrequency.Recurring:
       // FIXME - Understand how to display this
@@ -16,34 +16,14 @@ const CourseFrequency = ({ course }) => {
       frequencyName = `${course.duration} Minutes`;
       break;
   }
-
-  // const getPrice = (courseInput: { price: string }) => {
-  //   let price = '';
-  //   if (courseInput.price) {
-  //     if (courseInput.price === 'Free') {
-  //       price = 'Free';
-  //     } else {
-  //       price = 'Rs ' + courseInput.price;
-  //     }
-  //   }
-  //   return price;
-  // };
-
-  // const displayPriceBadge = (courseInput: { price: any }) => {
-  //   return courseInput.price ? <Badge value={getPrice(courseInput)} /> : <></>;
-  // };
-
   return (
-    <FlexView>
-      <Text>{frequencyName}</Text>
-      {/* <PriceView>{displayPriceBadge(course)}</PriceView> */}
-    </FlexView>
+    <>
+      {course.duration !== undefined && (
+        <FlexView>
+          <Text>{frequencyName}</Text>
+        </FlexView>
+      )}
+    </>
   );
 };
-
-// export const ErrorMessageView = styled.Badge`
-//   align-items: center;
-//   flex: 1;
-// `;
-
 export default CourseFrequency;

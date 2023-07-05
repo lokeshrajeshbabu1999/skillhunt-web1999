@@ -4,16 +4,18 @@ import courseClient from '../../../api/courseClient';
 import shLogger from '../../../utils/Loggers';
 
 const useCourseDetail = (courseId: number) => {
-  const [courseDetail, setCourseDetail] = useState([]);
+  const [activeCourseDetail, setActiveCourseDetail] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [refreshing, setRefreshing] = useState(false);
+
   const loadCourse = () => {
     setIsLoading(true);
     courseClient
       .get('/course', { params: { course_id: courseId } })
       .then(response => {
-        setCourseDetail(response.data);
+        console.log('Response data : ', response.data);
+        setActiveCourseDetail(response.data);
         setErrorMessage('');
         setIsLoading(false);
         setRefreshing(false);
@@ -25,6 +27,7 @@ const useCourseDetail = (courseId: number) => {
         setRefreshing(false);
       });
   };
+
   const onDataRefresh = () => {
     setRefreshing(true);
     loadCourse();
@@ -34,7 +37,13 @@ const useCourseDetail = (courseId: number) => {
     loadCourse();
   }, []);
 
-  return [courseDetail, errorMessage, isLoading, refreshing, onDataRefresh];
+  return [
+    activeCourseDetail,
+    errorMessage,
+    isLoading,
+    refreshing,
+    onDataRefresh,
+  ];
 };
 
 export default useCourseDetail;

@@ -33,6 +33,7 @@ const useCourse = category => {
         setRefreshing(false);
       });
   };
+
   const onDataRefresh = () => {
     setRefreshing(true);
     loadCourses();
