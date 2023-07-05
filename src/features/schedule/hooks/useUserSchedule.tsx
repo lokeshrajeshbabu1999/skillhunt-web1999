@@ -10,7 +10,7 @@ const useUserSchedule = (userEmail: string) => {
 
   const readUserSchedule = () => {
     shLogger.debug('Load schedule for user ', userEmail);
-    const params = { user: userEmail };
+    const params = { user: userEmail, expand: true };
     setIsLoading(true);
     userClient
       .get('/user-schedule', { params })

@@ -45,10 +45,6 @@ const ListUserSchedule = (navigation, route) => {
       </ScrollView>
     );
   };
-  return (
-    <View>
-      {isLoading ? skillActivityIndicator() : displayResult()}
-    </View>
-  );
+  return <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>;
 };
 export default ListUserSchedule;

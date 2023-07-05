@@ -1,14 +1,14 @@
 import { Card } from '@rneui/themed';
 import { StyleSheet, Text, View } from 'react-native';
-import { useTheme } from 'styled-components';
+import shLogger from '../../../utils/Loggers';
 
-const UserSchedule = ({ schedule, course }) => {
-  const theme = useTheme();
+const UserSchedule = ({ schedule }) => {
+  shLogger.debug('Schedule when in UserSchedule component ', schedule);
 
   return (
     <View style={styles.card_template}>
       <Card>
-        {/* <Text>{course.author}</Text> */}
+        <Text>{schedule.course.author}</Text>
         <Text>{schedule.course_id}</Text>
         <Text>{schedule.user_schedule_id}</Text>
         <Text>{schedule.user_id}</Text>
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     aspectRatio: 2.2,
     width: 270,
     height: 180,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     padding: 16,
     borderRadius: 30,
-    backgroundColor: "orange",
+    backgroundColor: 'orange',
   },
-})
+});
