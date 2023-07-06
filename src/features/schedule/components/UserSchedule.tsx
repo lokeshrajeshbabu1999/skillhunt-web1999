@@ -8,7 +8,6 @@ const UserSchedule = ({ schedule }) => {
 
   const { course } = schedule
   return (
-    // <View style={styles.card_template}>
     <Card>
       <CourseTitle>{course.title}</CourseTitle>
       <CourseAuthor>{course.author}</CourseAuthor>
@@ -18,19 +17,7 @@ const UserSchedule = ({ schedule }) => {
       <Text>{schedule.schedule_id}</Text>
       <Text>{schedule.created_ts}</Text>
     </Card>
-    // </View>
   );
 };
 export default UserSchedule;
 
-// const styles = StyleSheet.create({
-//   card_template: {
-//     aspectRatio: 2.2,
-//     width: 270,
-//     height: 180,
-//     justifyContent: 'flex-start',
-//     padding: 16,
-//     borderRadius: 30,
-//     backgroundColor: 'orange',
-//   },
-// });
