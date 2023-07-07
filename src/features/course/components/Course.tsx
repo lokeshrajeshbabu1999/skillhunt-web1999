@@ -1,14 +1,15 @@
 import { Card } from '@rneui/themed';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import {
+  CardView,
   CourseAuthor,
   CourseFlex,
   CoursePriceView,
   CourseTitle,
-  CourseView,
   FlexView,
   FrequencyView,
-  ListCourseImage
+  ListCourseImage,
+  ListCourseModeView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -21,31 +22,35 @@ const Course = ({ course, navigation }) => (
       onPress={() =>
         navigation.navigate('CourseDetail', { id: course.course_id })
       }>
-      <Card>
-        <ListCourseImage
-          source={{
-            uri: courseImage(course.image),
-          }}
-        />
-        <View>
-          <CourseTitle>{course.title}</CourseTitle>
-          <FlexView direction="row">
-            <FlexView direction="column">
-              <CourseAuthor>{course.author}</CourseAuthor>
-              <FrequencyView>
-                <CourseFrequency course={course} />
-              </FrequencyView>
-              <CoursePriceView>
-                <CoursePrice course={course} />
-              </CoursePriceView>
-              {/* <Text>{course.price}</Text> */}
-            </FlexView>
-            <CourseView>
-              <CourseMode course={course} />
-            </CourseView>
-          </FlexView>
-        </View>
-      </Card>
+      <CardView>
+        <ScrollView>
+          <Card>
+            <ListCourseImage
+              source={{
+                uri: courseImage(course.image),
+              }}
+            />
+            <View>
+              <CourseTitle>{course.title}</CourseTitle>
+              <FlexView direction="row">
+                <FlexView direction="column">
+                  <CourseAuthor>{course.author}</CourseAuthor>
+                  <FrequencyView>
+                    <CourseFrequency course={course} />
+                  </FrequencyView>
+                </FlexView>
+                <CoursePriceView>
+                  <CoursePrice course={course} />
+                </CoursePriceView>
+                {/* <Text>{course.price}</Text> */}
+                <ListCourseModeView>
+                  <CourseMode course={course} />
+                </ListCourseModeView>
+              </FlexView>
+            </View>
+          </Card>
+        </ScrollView>
+      </CardView>
     </TouchableOpacity>
   </CourseFlex>
 );

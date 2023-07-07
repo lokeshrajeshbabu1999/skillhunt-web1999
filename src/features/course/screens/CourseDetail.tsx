@@ -103,8 +103,8 @@ const CourseDetail = ({ route }) => {
               <CourseTitle>{activeCourseDetail.title}</CourseTitle>
               <FlexView direction="row">
                 <FlexView direction="column">
-                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
                   <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
+                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
                   <FrequencyView>
                     <CourseFrequency course={activeCourseDetail} />
                   </FrequencyView>
@@ -112,7 +112,6 @@ const CourseDetail = ({ route }) => {
                     <CoursePrice course={activeCourseDetail} />
                   </CoursePriceView>
                 </FlexView>
-                {/* <Text>{courseDetail.price}</Text> */}
                 <CourseDetailModeView>
                   <CourseMode course={activeCourseDetail} />
                 </CourseDetailModeView>
@@ -120,7 +119,6 @@ const CourseDetail = ({ route }) => {
             </ScrollView>
           </View>
         </Card>
-
         <Card>
           <CourseAppSchedule course={activeCourseDetail} />
         </Card>

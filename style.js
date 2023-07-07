@@ -17,6 +17,9 @@ export const AvatarContainer = styled.View`
   align-self: center;
   background-color: ${props => props.theme.PRIMARY_COLOR};
 `;
+export const CardView = styled.View`
+  background-color: #7fffd4;
+`;
 
 export const CategoryTitle = styled.Text`
   text-align: center;
@@ -48,9 +51,11 @@ export const CourseTitle = styled.Text`
 
 export const CourseAuthor = styled.Text`
   font-size: 18px;
+  color: ${props => props.theme.TITLE_COLOR};
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
+  color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
 
@@ -69,22 +74,17 @@ export const FlexView = styled.View`
   flex-grow: ${props => props.grow || 1};
 `;
 
-export const CourseView = styled.View`
+export const ListCourseModeView = styled.View`
   display: flex;
 `;
 export const CoursePriceView = styled.View`
   display: flex;
-  align-self: flex-end;
+  align-self: flex-start;
 `;
 
 export const CourseDetailModeView = styled.View`
   display: flex;
   align-self: flex-start;
-`;
-
-export const PriceView = styled.View`
-  margin-left: 110px;
-  margin-top: 5px;
 `;
 
 // export const CourseDetailPriceView = styled.View`
@@ -115,12 +115,12 @@ export const CourseContainer = styled.SafeAreaView`
 export const ListCourseImage = styled.Image`
   align-self: center;
   width: 100%;
-  height: 120px;
+  height: 130px;
 `;
 
 export const CourseFlex = styled.View`
   width: 400px;
-  height: 250px;
+  height: 240px;
 `;
 export const VideoStyle = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};

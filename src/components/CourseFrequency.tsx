@@ -1,5 +1,4 @@
-import { Text } from 'react-native';
-import { FlexView } from '../../style';
+import { Text, View } from 'react-native';
 import Global from '../utils/Global';
 
 const CourseFrequency = ({ course }) => {
@@ -19,9 +18,9 @@ const CourseFrequency = ({ course }) => {
   return (
     <>
       {course.duration !== undefined && (
-        <FlexView>
+        <View>
           <Text>{frequencyName}</Text>
-        </FlexView>
+        </View>
       )}
     </>
   );
