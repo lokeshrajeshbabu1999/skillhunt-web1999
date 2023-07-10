@@ -45,7 +45,7 @@ export const CourseDetailImage = styled.Image`
 
 export const CourseTitle = styled.Text`
   color: ${props => props.theme.TITLE_COLOR};
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
 `;
 
