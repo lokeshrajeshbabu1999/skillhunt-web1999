@@ -1,15 +1,15 @@
 import { Card } from '@rneui/themed';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import {
   CardView,
   CourseAuthor,
   CourseFlex,
-  CoursePriceView,
   CourseTitle,
   FlexView,
   FrequencyView,
   ListCourseImage,
-  ListCourseModeView
+  ListCourseModeView,
+  PriceBadge
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -30,24 +30,23 @@ const Course = ({ course, navigation }) => (
                 uri: courseImage(course.image),
               }}
             />
-            <View>
-              <CourseTitle>{course.title}</CourseTitle>
-              <FlexView direction="row">
+            <FlexView >
+              <ListCourseModeView>
+                <CourseMode course={course} />
+              </ListCourseModeView>
+              <FlexView direction="row" >
                 <FlexView direction="column">
+                  <CourseTitle>{course.title}</CourseTitle>
                   <CourseAuthor>{course.author}</CourseAuthor>
                   <FrequencyView>
                     <CourseFrequency course={course} />
                   </FrequencyView>
                 </FlexView>
-                <CoursePriceView>
-                  <CoursePrice course={course} />
-                </CoursePriceView>
-                {/* <Text>{course.price}</Text> */}
-                <ListCourseModeView>
-                  <CourseMode course={course} />
-                </ListCourseModeView>
               </FlexView>
-            </View>
+              <PriceBadge>
+                <CoursePrice course={course} />
+              </PriceBadge>
+            </FlexView>
           </Card>
         </ScrollView>
       </CardView>

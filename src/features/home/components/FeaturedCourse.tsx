@@ -32,7 +32,6 @@ const FeaturedCourse = ({ course, navigation }) => (
             <CourseTitle>
               <Text>{course.title}</Text>
             </CourseTitle>
-
             <FlexView direction="row">
               <FlexView direction="column">
                 <CourseAuthor>{course.author}</CourseAuthor>

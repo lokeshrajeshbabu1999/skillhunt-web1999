@@ -34,11 +34,11 @@ export const CourseSectionView = styled.View`
 
 export const CourseImage = styled.Image`
   align-items: center;
-  width: 240px;
-  height: 150px;
+  width: 100%;
+  height: 20%;
 `;
 export const CourseDetailImage = styled.Image`
-  width: 300px;
+  width: 350px;
   height: 150px;
   align-self: center;
 `;
@@ -47,25 +47,37 @@ export const CourseTitle = styled.Text`
   color: ${props => props.theme.TITLE_COLOR};
   font-size: 25px;
   font-weight: bold;
+  margin-top:8px;
+  margin-left: 8px;
 `;
 
 export const CourseAuthor = styled.Text`
   font-size: 18px;
+  margin-left: 8px;
+
   color: ${props => props.theme.TITLE_COLOR};
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
+  margin-left: 8px;
+
   color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
 
 export const CourseDesc = styled.Text`
-  font-size: 14px;
+  font-size: 15px;
+  height: 65px;
+  width: 340px;
+  margin-top:8px;
 `;
 
 export const FlexWrap = styled.View`
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 320px;
+`;
+export const ShareView = styled.View`
+  margin-right:20px;
 `;
 
 export const FlexView = styled.View`
@@ -76,6 +88,9 @@ export const FlexView = styled.View`
 
 export const ListCourseModeView = styled.View`
   display: flex;
+  margin-top: 10px;
+  margin-left:0px;
+
 `;
 export const CoursePriceView = styled.View`
   display: flex;
@@ -83,8 +98,8 @@ export const CoursePriceView = styled.View`
 `;
 
 export const CourseDetailModeView = styled.View`
-  display: flex;
-  align-self: flex-start;
+  margin-top: 10px;
+  margin-left:0px;
 `;
 
 // export const CourseDetailPriceView = styled.View`
@@ -101,9 +116,10 @@ export const IconView = styled.View`
 //   margin-horizontal: 20px;
 //   `;
 
-// export const PriceBadge = styled.Badge`
-//   padding: 8px;
-// `;
+export const PriceBadge = styled.View`
+  margin-top: 50px;
+  display: flex;
+`;
 
 export const CourseContainer = styled.SafeAreaView`
   display: flex;
@@ -119,8 +135,8 @@ export const ListCourseImage = styled.Image`
 `;
 
 export const CourseFlex = styled.View`
-  width: 400px;
-  height: 240px;
+  width: 380px;
+  height: 280px;
 `;
 export const VideoStyle = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};

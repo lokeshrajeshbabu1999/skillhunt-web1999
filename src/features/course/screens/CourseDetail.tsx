@@ -1,15 +1,19 @@
 import { Card } from '@rneui/themed';
-import { RefreshControl, ScrollView, View } from 'react-native';
+import React from 'react';
+import { RefreshControl, ScrollView, TouchableOpacity, View, } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTheme } from 'styled-components';
 import {
   CourseAuthor,
   CourseContainer,
   CourseDesc,
   CourseDetailImage,
   CourseDetailModeView,
-  CoursePriceView,
   CourseTitle,
   FlexView,
   FrequencyView,
+  PriceBadge,
+  ShareView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -22,8 +26,7 @@ import shLogger from '../../../utils/Loggers';
 import { courseImage } from '../../../utils/MediaUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-
-const CourseDetail = ({ route }) => {
+const CourseDetail = ({ route, navigation }) => {
   const [
     activeCourseDetail,
     errorMessage,
@@ -31,7 +34,7 @@ const CourseDetail = ({ route }) => {
     refreshing,
     onDataRefresh,
   ] = useCourseDetail(route.params.id);
-
+  const theme = useTheme;
   const skillActivityIndicator = () => {
     return <Loader />;
   };
@@ -100,21 +103,51 @@ const CourseDetail = ({ route }) => {
                   uri: courseImage(courseDetail.image)
                 }}
               /> */}
-              <CourseTitle>{activeCourseDetail.title}</CourseTitle>
-              <FlexView direction="row">
-                <FlexView direction="column">
-                  <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
-                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
-                  <FrequencyView>
-                    <CourseFrequency course={activeCourseDetail} />
-                  </FrequencyView>
-                  <CoursePriceView>
-                    <CoursePrice course={activeCourseDetail} />
-                  </CoursePriceView>
-                </FlexView>
+              {/* <View style={{
+                  flexDirection: "row",
+                  margin: 5,
+                }}>
+                  <View style={{
+                    alignItems: 'flex-start',
+                  }}>
+                    <CourseMode course={activeCourseDetail} />
+                  </View>
+                  <View style={{
+                    marginLeft: 10,
+                    flexDirection: 'row',
+                  }}>
+                    <View>
+                      <CourseTitle>{activeCourseDetail.title}</CourseTitle>
+                      <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
+                      <CourseFrequency course={activeCourseDetail} />
+                      <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
+                    </View>
+                  </View>
+                </View>
+                <View style={{
+                  flexWrap: 'wrap-reverse',
+                }}>
+                  <CoursePrice course={activeCourseDetail} />
+                </View> */}
+              <FlexView >
                 <CourseDetailModeView>
                   <CourseMode course={activeCourseDetail} />
                 </CourseDetailModeView>
+                <FlexView direction="row" >
+                  <FlexView direction="column">
+                    <CourseTitle>{activeCourseDetail.title}</CourseTitle>
+                    <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
+                    <FrequencyView>
+                      <CourseFrequency course={activeCourseDetail} />
+                    </FrequencyView>
+                  </FlexView>
+                </FlexView>
+                <PriceBadge>
+                  <CoursePrice course={activeCourseDetail} />
+                </PriceBadge>
+              </FlexView>
+              <FlexView direction="column">
+                <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
               </FlexView>
             </ScrollView>
           </View>
@@ -122,11 +155,30 @@ const CourseDetail = ({ route }) => {
         <Card>
           <CourseAppSchedule course={activeCourseDetail} />
         </Card>
-      </ScrollView>
+      </ScrollView >
     );
   };
 
-  return <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>;
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <ShareView>
+          <TouchableOpacity>
+            <Icon
+              name="share-variant"
+              size={35}
+              color='white'
+              onPress={() => renderCourseCard()}
+            />
+          </TouchableOpacity>
+        </ShareView>
+      ),
+    });
+  }, [navigation]);
+  return <View>
+    {isLoading ? skillActivityIndicator() : displayResult()}
+  </View>;
 };
 
 export default CourseDetail;
+
