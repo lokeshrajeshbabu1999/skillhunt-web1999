@@ -1,15 +1,20 @@
+import { useNavigation } from '@react-navigation/native';
 import { Card } from '@rneui/themed';
-import { RefreshControl, ScrollView, View } from 'react-native';
+import React from 'react';
+import { Linking, RefreshControl, ScrollView, Share, TouchableOpacity, View, } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useTheme } from 'styled-components';
 import {
   CourseAuthor,
   CourseContainer,
   CourseDesc,
   CourseDetailImage,
   CourseDetailModeView,
-  CoursePriceView,
   CourseTitle,
   FlexView,
   FrequencyView,
+  PriceBadge,
+  ShareView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -22,8 +27,8 @@ import shLogger from '../../../utils/Loggers';
 import { courseImage } from '../../../utils/MediaUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-
 const CourseDetail = ({ route }) => {
+  const navigation = useNavigation();
   const [
     activeCourseDetail,
     errorMessage,
@@ -31,11 +36,27 @@ const CourseDetail = ({ route }) => {
     refreshing,
     onDataRefresh,
   ] = useCourseDetail(route.params.id);
-
+  const theme = useTheme;
   const skillActivityIndicator = () => {
     return <Loader />;
   };
+  const shareCourseDetails = () => {
+    const courseUrl = generateCourseUrl(activeCourseDetail.id);
+    console.log('Generated deep link URL:', courseUrl);
+    const message = `Check out this course: ${courseUrl}`;
 
+    Linking.openURL(courseUrl).catch(error => {
+      console.error('Error opening deep link:', error);
+    });
+    Share.share({
+      message,
+    });
+  };
+  const generateCourseUrl = courseId => {
+    // Replace 'yourapp' with the deep link scheme or hostname of your app
+    const deepLink = `skillhunt://course/${courseId}`;
+    return deepLink;
+  };
   const skillMessage = () => {
     return (
       <CourseContainer>
@@ -93,42 +114,55 @@ const CourseDetail = ({ route }) => {
               {isRecordedCourse(activeCourseDetail.mode)
                 ? displayVideo(activeCourseDetail)
                 : displayImage(activeCourseDetail)}
-              {/* <CourseMedia course={activeCourseDetail} /> */}
-              {/* <ImageCourse /> */}
-              {/* <CourseDetailImage
-                source={{
-                  uri: courseImage(courseDetail.image)
-                }}
-              /> */}
-              <CourseTitle>{activeCourseDetail.title}</CourseTitle>
-              <FlexView direction="row">
-                <FlexView direction="column">
-                  <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
-                  <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
-                  <FrequencyView>
-                    <CourseFrequency course={activeCourseDetail} />
-                  </FrequencyView>
-                  <CoursePriceView>
-                    <CoursePrice course={activeCourseDetail} />
-                  </CoursePriceView>
-                </FlexView>
-                {/* <Text>{courseDetail.price}</Text> */}
+              <FlexView >
                 <CourseDetailModeView>
                   <CourseMode course={activeCourseDetail} />
                 </CourseDetailModeView>
+                <FlexView direction="row" >
+                  <FlexView direction="column">
+                    <CourseTitle>{activeCourseDetail.title}</CourseTitle>
+                    <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
+                    <FrequencyView>
+                      <CourseFrequency course={activeCourseDetail} />
+                    </FrequencyView>
+                  </FlexView>
+                </FlexView>
+                <PriceBadge>
+                  <CoursePrice course={activeCourseDetail} />
+                </PriceBadge>
+              </FlexView>
+              <FlexView direction="column">
+                <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
               </FlexView>
             </ScrollView>
           </View>
         </Card>
-
         <Card>
           <CourseAppSchedule course={activeCourseDetail} />
         </Card>
-      </ScrollView>
+      </ScrollView >
     );
   };
 
-  return <View>{isLoading ? skillActivityIndicator() : displayResult()}</View>;
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <ShareView>
+          <TouchableOpacity onPress={shareCourseDetails}>
+            <Icon
+              name="share-variant"
+              size={35}
+              color='white'
+            />
+          </TouchableOpacity>
+        </ShareView>
+      ),
+    });
+  }, [navigation]);
+  return <View>
+    {isLoading ? skillActivityIndicator() : displayResult()}
+  </View>;
 };
 
 export default CourseDetail;
+

@@ -5,9 +5,8 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
@@ -16,13 +15,13 @@ import {
   CourseContainer,
   CourseImage,
   CourseTitle,
-  CourseView,
   FlexView,
   FlexWrap,
-  IconView,
+  IconView
 } from '../../../../style';
 import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
+import CoursePrice from '../../../components/CoursePrice';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import shLogger from '../../../utils/Loggers';
@@ -134,11 +133,9 @@ const Home = ({ navigation }) => {
                     <FlexView direction="row">
                       <FlexView direction="column">
                         <CourseAuthor>{course.author}</CourseAuthor>
-                        <Text>{course.price}</Text>
+                        <CoursePrice course={course} />
                       </FlexView>
-                      <CourseView>
-                        <CourseMode course={course} />
-                      </CourseView>
+                      <CourseMode course={course} />
                     </FlexView>
                   </View>
                 </Card>
