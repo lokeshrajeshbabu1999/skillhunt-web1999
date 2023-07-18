@@ -1,6 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import { Card } from '@rneui/themed';
 import React from 'react';
-import { RefreshControl, ScrollView, TouchableOpacity, View, } from 'react-native';
+import { Linking, RefreshControl, ScrollView, Share, TouchableOpacity, View, } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
 import {
@@ -26,7 +27,8 @@ import shLogger from '../../../utils/Loggers';
 import { courseImage } from '../../../utils/MediaUtil';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import useCourseDetail from '../hooks/useCourseDetail';
-const CourseDetail = ({ route, navigation }) => {
+const CourseDetail = ({ route }) => {
+  const navigation = useNavigation();
   const [
     activeCourseDetail,
     errorMessage,
@@ -38,7 +40,23 @@ const CourseDetail = ({ route, navigation }) => {
   const skillActivityIndicator = () => {
     return <Loader />;
   };
+  const shareCourseDetails = () => {
+    const courseUrl = generateCourseUrl(activeCourseDetail.id);
+    console.log('Generated deep link URL:', courseUrl);
+    const message = `Check out this course: ${courseUrl}`;
 
+    Linking.openURL(courseUrl).catch(error => {
+      console.error('Error opening deep link:', error);
+    });
+    Share.share({
+      message,
+    });
+  };
+  const generateCourseUrl = courseId => {
+    // Replace 'yourapp' with the deep link scheme or hostname of your app
+    const deepLink = `skillhunt://course/${courseId}`;
+    return deepLink;
+  };
   const skillMessage = () => {
     return (
       <CourseContainer>
@@ -96,39 +114,6 @@ const CourseDetail = ({ route, navigation }) => {
               {isRecordedCourse(activeCourseDetail.mode)
                 ? displayVideo(activeCourseDetail)
                 : displayImage(activeCourseDetail)}
-              {/* <CourseMedia course={activeCourseDetail} /> */}
-              {/* <ImageCourse /> */}
-              {/* <CourseDetailImage
-                source={{
-                  uri: courseImage(courseDetail.image)
-                }}
-              /> */}
-              {/* <View style={{
-                  flexDirection: "row",
-                  margin: 5,
-                }}>
-                  <View style={{
-                    alignItems: 'flex-start',
-                  }}>
-                    <CourseMode course={activeCourseDetail} />
-                  </View>
-                  <View style={{
-                    marginLeft: 10,
-                    flexDirection: 'row',
-                  }}>
-                    <View>
-                      <CourseTitle>{activeCourseDetail.title}</CourseTitle>
-                      <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
-                      <CourseFrequency course={activeCourseDetail} />
-                      <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
-                    </View>
-                  </View>
-                </View>
-                <View style={{
-                  flexWrap: 'wrap-reverse',
-                }}>
-                  <CoursePrice course={activeCourseDetail} />
-                </View> */}
               <FlexView >
                 <CourseDetailModeView>
                   <CourseMode course={activeCourseDetail} />
@@ -163,12 +148,11 @@ const CourseDetail = ({ route, navigation }) => {
     navigation.setOptions({
       headerRight: () => (
         <ShareView>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={shareCourseDetails}>
             <Icon
               name="share-variant"
               size={35}
               color='white'
-              onPress={() => renderCourseCard()}
             />
           </TouchableOpacity>
         </ShareView>
