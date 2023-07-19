@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
-import shLogger from '../../../utils/Loggers';
 
 const useCourseDetail = (courseId: number) => {
   const [activeCourseDetail, setActiveCourseDetail] = useState();
@@ -14,14 +13,14 @@ const useCourseDetail = (courseId: number) => {
     courseClient
       .get('/course', { params: { course_id: courseId } })
       .then(response => {
-        console.log('Response data : ', response.data);
+        console.log('API Response Data:', response.data);
         setActiveCourseDetail(response.data);
         setErrorMessage('');
         setIsLoading(false);
         setRefreshing(false);
       })
       .catch(error => {
-        shLogger.error('Error :', error);
+        console.error('API Error:', error);
         setErrorMessage('Failed to collect courseDetail.');
         setIsLoading(false);
         setRefreshing(false);
@@ -35,7 +34,7 @@ const useCourseDetail = (courseId: number) => {
 
   useEffect(() => {
     loadCourse();
-  }, []);
+  }, [courseId]);
 
   return [
     activeCourseDetail,

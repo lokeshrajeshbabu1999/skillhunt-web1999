@@ -41,7 +41,7 @@ const CourseDetail = ({ route }) => {
     return <Loader />;
   };
   const shareCourseDetails = () => {
-    const courseUrl = generateCourseUrl(activeCourseDetail.id);
+    const courseUrl = generateCourseUrl(activeCourseDetail.course_id);
     console.log('Generated deep link URL:', courseUrl);
     const message = `Check out this course: ${courseUrl}`;
 
@@ -54,7 +54,7 @@ const CourseDetail = ({ route }) => {
   };
   const generateCourseUrl = courseId => {
     // Replace 'yourapp' with the deep link scheme or hostname of your app
-    const deepLink = `skillhunt://course/${courseId}`;
+    const deepLink = `skillhunt://course/${encodeURIComponent(courseId)}`;
     return deepLink;
   };
   const skillMessage = () => {
@@ -145,6 +145,7 @@ const CourseDetail = ({ route }) => {
   };
 
   React.useEffect(() => {
+    console.log('CourseId received by the CourseDetail component:', route.params.id);
     navigation.setOptions({
       headerRight: () => (
         <ShareView>
@@ -158,7 +159,7 @@ const CourseDetail = ({ route }) => {
         </ShareView>
       ),
     });
-  }, [navigation]);
+  }, [navigation, route.params.id]);
   return <View>
     {isLoading ? skillActivityIndicator() : displayResult()}
   </View>;
