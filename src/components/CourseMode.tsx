@@ -18,7 +18,7 @@ const CourseMode = ({ course }) => {
       iconFamily = 'material-community';
       break;
   }
-  return <Icon name={iconName} type={iconFamily} />;
+  return <Icon name={iconName} type={iconFamily} size={34} />;
 };
 
 export default CourseMode;

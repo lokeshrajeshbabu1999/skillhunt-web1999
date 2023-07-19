@@ -5,10 +5,10 @@ import {
   CourseImage,
   CoursePriceView,
   CourseTitle,
-  CourseView,
   FlexView,
   FlexWrap,
-  FrequencyView
+  FrequencyView,
+  ListCourseModeView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
@@ -32,11 +32,9 @@ const FeaturedCourse = ({ course, navigation }) => (
             <CourseTitle>
               <Text>{course.title}</Text>
             </CourseTitle>
-
             <FlexView direction="row">
               <FlexView direction="column">
                 <CourseAuthor>{course.author}</CourseAuthor>
-                {/* <Text>{course.price}</Text> */}
                 <FrequencyView>
                   <CourseFrequency course={course} />
                 </FrequencyView>
@@ -44,9 +42,9 @@ const FeaturedCourse = ({ course, navigation }) => (
                   <CoursePrice course={course} />
                 </CoursePriceView>
               </FlexView>
-              <CourseView>
+              <ListCourseModeView>
                 <CourseMode course={course} />
-              </CourseView>
+              </ListCourseModeView>
             </FlexView>
           </View>
         </Card>

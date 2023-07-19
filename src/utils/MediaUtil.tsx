@@ -1,8 +1,7 @@
-// import { IMAGE_URL } from '@env';
 import Config from 'react-native-config';
 import Global from './Global';
 
-const VIDEO_URL = Config.IMAGE_URL;
+const VIDEO_URL = Config.VIDEO_URL;
 const IMAGE_URL = Config.IMAGE_URL;
 export function courseImage(image: string) {
   // FIXME - If the image is empty or null display a default image
@@ -14,5 +13,6 @@ export function courseImage(image: string) {
 
 export function videoUrl(video: string) {
   const mediaUrl = VIDEO_URL + '/' + video;
+  console.log('Video URL:', mediaUrl);
   return mediaUrl;
 }
