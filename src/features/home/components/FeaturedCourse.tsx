@@ -1,13 +1,13 @@
 import { Card } from '@rneui/themed';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {
-  CourseAuthor,
   CourseImage,
-  CoursePriceView,
-  CourseTitle,
   FlexView,
   FlexWrap,
   FrequencyView,
+  HomeAuthor,
+  HomePriceBadge,
+  HomeTitle,
   ListCourseModeView
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
@@ -16,41 +16,39 @@ import CoursePrice from '../../../components/CoursePrice';
 import { courseImage } from '../../../utils/MediaUtil';
 
 const FeaturedCourse = ({ course, navigation }) => (
-  <View>
-    <FlexWrap>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('CourseDetail', { id: course.course_id })
-        }>
-        <Card>
-          <CourseImage
-            source={{
-              uri: courseImage(course.image),
-            }}
-          />
-          <View>
-            <CourseTitle>
-              <Text>{course.title}</Text>
-            </CourseTitle>
-            <FlexView direction="row">
-              <FlexView direction="column">
-                <CourseAuthor>{course.author}</CourseAuthor>
-                <FrequencyView>
-                  <CourseFrequency course={course} />
-                </FrequencyView>
-                <CoursePriceView>
-                  <CoursePrice course={course} />
-                </CoursePriceView>
-              </FlexView>
-              <ListCourseModeView>
-                <CourseMode course={course} />
-              </ListCourseModeView>
+  <FlexWrap>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('CourseDetail', { id: course.course_id })
+      }>
+      <Card>
+        <CourseImage
+          source={{
+            uri: courseImage(course.image),
+          }}
+        />
+
+        <FlexView >
+          <ListCourseModeView>
+            <CourseMode course={course} />
+          </ListCourseModeView>
+          <FlexView direction="row" >
+            <FlexView direction="column">
+              <HomeTitle>{course.title}</HomeTitle>
+              <HomeAuthor>{course.author}</HomeAuthor>
+              <FrequencyView>
+                <CourseFrequency course={course} />
+              </FrequencyView>
             </FlexView>
-          </View>
-        </Card>
-      </TouchableOpacity>
-    </FlexWrap>
-  </View>
+          </FlexView>
+          <HomePriceBadge>
+            <CoursePrice course={course} />
+          </HomePriceBadge>
+        </FlexView>
+      </Card>
+    </TouchableOpacity>
+  </FlexWrap>
+
 );
 
 export default FeaturedCourse;
