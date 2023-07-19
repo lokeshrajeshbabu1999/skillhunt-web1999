@@ -35,7 +35,7 @@ export const CourseSectionView = styled.View`
 export const CourseImage = styled.Image`
   align-items: center;
   width: 100%;
-  height: 20%;
+  height: 70%;
 `;
 export const CourseDetailImage = styled.Image`
   width: 350px;
@@ -49,6 +49,18 @@ export const CourseTitle = styled.Text`
   font-weight: bold;
   margin-top:8px;
   margin-left: 8px;
+`;
+export const HomeTitle = styled.Text`
+  color: ${props => props.theme.TITLE_COLOR};
+  font-size: 18px;
+  font-weight: bold;
+  margin-top:8px;
+  margin-left: 8px;
+`;
+export const HomeAuthor = styled.Text`
+  font-size: 14px;
+  margin-left: 8px;
+  color: ${props => props.theme.TITLE_COLOR};
 `;
 
 export const CourseAuthor = styled.Text`
@@ -117,7 +129,11 @@ export const IconView = styled.View`
 //   `;
 
 export const PriceBadge = styled.View`
-  margin-top: 50px;
+  margin-top: 70px;
+  display: flex;
+`;
+export const HomePriceBadge = styled.View`
+  margin-top: 30px;
   display: flex;
 `;
 
