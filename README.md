@@ -61,7 +61,7 @@ Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod 
 
 ### Release setup
 
-- An upload key was genrated using [keytool](https://reactnative.dev/docs/signed-apk-android)
+- An upload key was generated using [keytool](https://reactnative.dev/docs/signed-apk-android)
 - The below properties were set in the `~/.gradle/gradle.properties` file
 
 ```text
