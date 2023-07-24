@@ -1,8 +1,12 @@
-import { Badge } from '@rneui/themed';
+import React from 'react';
 import { View } from 'react-native';
-import { FlexView } from '../../style';
+import { PriceBadge } from '../../style';
 
-const CoursePrice = ({ course }) => {
+type CoursePriceType = {
+  course: Course
+};
+
+const CoursePrice = ({ course }: CoursePriceType) => {
   const getPrice = (courseInput: { price: string }) => {
     let price = '';
     if (courseInput.price) {
@@ -15,13 +19,11 @@ const CoursePrice = ({ course }) => {
     return price;
   };
 
-  const displayPriceBadge = (courseInput: { price: any }) => {
-    return courseInput.price ? <Badge value={getPrice(courseInput)} /> : <></>;
+  const displayPriceBadge = (courseInput: Course) => {
+    return courseInput.price ? <PriceBadge status='primary' value={getPrice(courseInput)} /> : <></>;
   };
   return (
-    <FlexView>
-      <View>{displayPriceBadge(course)}</View>
-    </FlexView>
+    <View>{displayPriceBadge(course)}</View>
   );
 };
 

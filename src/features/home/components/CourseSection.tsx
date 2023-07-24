@@ -1,8 +1,8 @@
-import { FlatList } from 'react-native';
 import { Text } from '@rneui/themed';
+import { FlatList } from 'react-native';
 // import { CourseSectionView } from '../../../../style';
-import FeaturedCourse from './FeaturedCourse';
 import styled from 'styled-components/native';
+import FeaturedCourse from './FeaturedCourse';
 
 const CourseSection = ({ content, navigation }) => {
   const renderCourseCard = ({ item }) => (

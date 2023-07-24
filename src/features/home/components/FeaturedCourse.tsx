@@ -2,11 +2,11 @@ import { Card } from '@rneui/themed';
 import { TouchableOpacity } from 'react-native';
 import {
   CourseImage,
+  CoursePriceView,
   FlexView,
   FlexWrap,
   FrequencyView,
   HomeAuthor,
-  HomePriceBadge,
   HomeTitle,
   ListCourseModeView
 } from '../../../../style';
@@ -15,7 +15,12 @@ import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
 import { courseImage } from '../../../utils/MediaUtil';
 
-const FeaturedCourse = ({ course, navigation }) => (
+type FeaturedCourseProps = {
+  course: Course,
+  navigation: any,
+};
+
+const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
   <FlexWrap>
     <TouchableOpacity
       onPress={() =>
@@ -28,22 +33,24 @@ const FeaturedCourse = ({ course, navigation }) => (
           }}
         />
 
-        <FlexView >
-          <ListCourseModeView>
-            <CourseMode course={course} />
-          </ListCourseModeView>
-          <FlexView direction="row" >
-            <FlexView direction="column">
-              <HomeTitle>{course.title}</HomeTitle>
-              <HomeAuthor>{course.author}</HomeAuthor>
-              <FrequencyView>
-                <CourseFrequency course={course} />
-              </FrequencyView>
+        <FlexView flexDirection="column">
+          <HomeTitle>{course.title}</HomeTitle>
+          <FlexView>
+            <ListCourseModeView>
+              <CourseMode course={course} />
+            </ListCourseModeView>
+            <FlexView flexDirection="row" flexGrow="1" >
+              <FlexView flexDirection="column">
+                <HomeAuthor>{course.author}</HomeAuthor>
+                <FrequencyView>
+                  <CourseFrequency course={course} />
+                </FrequencyView>
+              </FlexView>
             </FlexView>
+            <CoursePriceView>
+              <CoursePrice course={course} />
+            </CoursePriceView>
           </FlexView>
-          <HomePriceBadge>
-            <CoursePrice course={course} />
-          </HomePriceBadge>
         </FlexView>
       </Card>
     </TouchableOpacity>
