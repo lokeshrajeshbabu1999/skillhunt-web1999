@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { Authenticator } from '@aws-amplify/ui-react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';

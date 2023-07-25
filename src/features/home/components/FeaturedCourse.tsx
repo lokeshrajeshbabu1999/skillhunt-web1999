@@ -13,6 +13,7 @@ import {
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
+import { Course } from '../../../types/course';
 import { courseImage } from '../../../utils/MediaUtil';
 
 type FeaturedCourseProps = {

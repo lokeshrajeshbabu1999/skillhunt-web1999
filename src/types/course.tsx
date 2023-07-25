@@ -1,4 +1,4 @@
-type Course = {
+export type Course = {
   course_id: string;
   image: string;
   title: string;

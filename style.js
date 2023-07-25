@@ -90,6 +90,7 @@ export const FlexWrap = styled.View`
   width: 350px;
   height: 320px;
 `;
+
 export const ShareView = styled.View`
   margin-right: 20px;
 `;
@@ -98,7 +99,6 @@ export const FlexView = styled(View)`
   display: flex;
   flex-direction: ${props => props.flexDirection || 'row'};
   flex-grow: ${props => props.flexGrow || 1};
-  border: solid 1px grey;
 `;
 
 export const ListCourseModeView = styled.View`
