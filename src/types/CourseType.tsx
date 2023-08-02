@@ -4,4 +4,7 @@ export type CourseType = {
   title: string;
   author: string;
   price: string;
+  frequency: string;
+  duration: number;
+  sessions: number;
 };

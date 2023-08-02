@@ -1,7 +1,12 @@
 import { Text, View } from 'react-native';
+import { CourseType } from '../types/CourseType';
 import Global from '../utils/Global';
 
-const CourseFrequency = ({ course }) => {
+type CourseFrequencyProps = {
+  course: CourseType;
+};
+
+const CourseFrequency = ({ course }: CourseFrequencyProps) => {
   let frequencyName = 'null';
   switch (course.frequency) {
     case Global.Constant.CourseFrequency.Recurring:
