@@ -9,7 +9,7 @@ import { CourseNavigator } from './src/features/course/components/CourseStack';
 import { HomeNavigator } from './src/features/home/components/HomeStack';
 import UserProfile from './src/features/profile/screens/UserProfile';
 import { ScheduleNavigator } from './src/features/schedule/components/ScheduleStack';
-import { lightTheme } from './src/theme';
+import { appTheme } from './src/theme';
 
 Amplify.configure({
   aws_project_region: 'ap-south-1',
@@ -20,24 +20,21 @@ Amplify.configure({
 
 const Tab = createMaterialBottomTabNavigator();
 
-// type SectionProps = PropsWithChildren<{
-//   title: string;
-// }>;
-
 function App(): JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
 
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
-  // console.log(Config)
   return (
     <Authenticator.Provider>
       <Authenticator>
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={appTheme}>
           <NavigationContainer>
             <Tab.Navigator
-              barStyle={{ backgroundColor: lightTheme.PRIMARY_COLOR }}>
+              activeColor="#222"
+              inactiveColor="#fff"
+              barStyle={{ backgroundColor: appTheme.colors.primary }}>
               <Tab.Screen
                 name="HomeStack"
                 component={HomeNavigator}

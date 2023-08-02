@@ -1,11 +1,21 @@
-import { TouchableOpacity, View, Text } from 'react-native';
 import { Avatar } from '@rneui/themed';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from 'styled-components';
 import {
-  CategoryTitle,
-  CategoryContainer,
   AvatarContainer,
+  CategoryContainer,
+  CategoryTitle,
 } from '../../../../style';
-const Category = ({ content, navigation }) => {
+import { CategoryType } from '../../../types/CategoryType';
+
+type CategoryProps = {
+  content: CategoryType;
+  navigation: any;
+};
+
+const Category = ({ navigation, content }: CategoryProps) => {
+  const appTheme = useTheme();
+
   return (
     <CategoryContainer>
       <TouchableOpacity
@@ -21,10 +31,14 @@ const Category = ({ content, navigation }) => {
             <Avatar
               size="large"
               rounded
-              icon={{ name: content.icon_name, type: content.icon_family }}
+              icon={{
+                name: content.icon_name,
+                type: content.icon_family,
+                color: appTheme.colors.primary,
+              }}
             />
           </AvatarContainer>
-          <CategoryTitle h1>{content.title}</CategoryTitle>
+          <CategoryTitle>{content.title}</CategoryTitle>
           <Text>{content.mode}</Text>
         </View>
       </TouchableOpacity>

@@ -1,5 +1,5 @@
 import { Badge } from '@rneui/themed';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
@@ -20,10 +20,6 @@ export const AvatarContainer = styled.View`
   background-color: ${props => props.theme.PRIMARY_COLOR};
 `;
 
-export const CardView = styled.View`
-  background-color: #7fffd4;
-`;
-
 export const CategoryTitle = styled.Text`
   text-align: center;
   font-size: 20px;
@@ -37,7 +33,7 @@ export const CourseSectionView = styled.View`
 
 export const CourseImage = styled.Image`
   align-items: center;
-  min-height: 150px;
+  min-height: 80px;
 `;
 
 export const CourseDetailImage = styled.Image`
@@ -53,12 +49,14 @@ export const CourseTitle = styled.Text`
   margin-top: 8px;
   margin-left: 8px;
 `;
+
 export const HomeTitle = styled.Text`
   color: ${props => props.theme.TITLE_COLOR};
   font-size: 16px;
   font-weight: bold;
   margin: 4px;
 `;
+
 export const HomeAuthor = styled.Text`
   font-size: 14px;
   margin-left: 8px;
@@ -87,9 +85,13 @@ export const CourseDesc = styled.Text`
 `;
 
 export const FlexWrap = styled.View`
-  width: 350px;
-  height: 320px;
+  width: 100%;
 `;
+
+// export const CourseFlex = styled.View`
+//   width: 380px;
+//   height: 280px;
+// `;
 
 export const ShareView = styled.View`
   margin-right: 20px;
@@ -144,16 +146,6 @@ export const CourseContainer = styled.SafeAreaView`
   height: 100%;
 `;
 
-export const ListCourseImage = styled.Image`
-  align-self: center;
-  width: 100%;
-  height: 130px;
-`;
-
-export const CourseFlex = styled.View`
-  width: 380px;
-  height: 280px;
-`;
 export const VideoStyle = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};
   width: 350px;
@@ -163,4 +155,9 @@ export const VideoStyle = styled.View`
 export const PriceBadge = styled(Badge)`
   padding: 8px;
   background-color: red;
+`;
+
+export const SpacedFlatList = styled(FlatList)`
+  margin-top: 8px;
+  margin-bottom: 16px;
 `;

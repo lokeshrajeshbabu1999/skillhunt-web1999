@@ -5,18 +5,24 @@ import CourseDetail from '../screens/CourseDetail';
 import ListCategory from '../screens/ListCategory';
 import ListCourse from '../screens/ListCourse';
 
-export const CourseStack = createStackNavigator();
+export type CourseStackParamList = {
+  ListCategory: undefined;
+  ListCourse: { code: string; title: string };
+  CourseDetail: undefined;
+};
+
+export const CourseStack = createStackNavigator<CourseStackParamList>();
 
 export const CourseNavigator = () => {
-  const theme = useTheme();
+  const appTheme = useTheme();
   return (
     <CourseStack.Navigator
       screenOptions={{
         headerShown: true,
         headerStyle: {
-          backgroundColor: theme.PRIMARY_COLOR,
+          backgroundColor: appTheme.colors.primary,
         },
-        headerTintColor: theme.BACKGROUND_COLOR,
+        headerTintColor: appTheme.colors.primaryText,
       }}>
       <CourseStack.Screen
         name="ListCategory"
@@ -26,10 +32,11 @@ export const CourseNavigator = () => {
         }}
       />
       <CourseStack.Screen name="ListCourse" component={ListCourse} />
-      <CourseStack.Screen name="CourseDetail" component={CourseDetail}
+      <CourseStack.Screen
+        name="CourseDetail"
+        component={CourseDetail}
         options={{ title: Global.Constant.appName }}
       />
-
     </CourseStack.Navigator>
   );
 };

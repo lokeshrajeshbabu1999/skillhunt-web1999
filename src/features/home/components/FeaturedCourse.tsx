@@ -8,17 +8,17 @@ import {
   FrequencyView,
   HomeAuthor,
   HomeTitle,
-  ListCourseModeView
+  ListCourseModeView,
 } from '../../../../style';
 import CourseFrequency from '../../../components/CourseFrequency';
 import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
-import { Course } from '../../../types/course';
+import { CourseType } from '../../../types/CourseType';
 import { courseImage } from '../../../utils/MediaUtil';
 
 type FeaturedCourseProps = {
-  course: Course,
-  navigation: any,
+  course: CourseType;
+  navigation: any;
 };
 
 const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
@@ -40,7 +40,7 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
             <ListCourseModeView>
               <CourseMode course={course} />
             </ListCourseModeView>
-            <FlexView flexDirection="row" flexGrow="1" >
+            <FlexView flexDirection="row" flexGrow="1">
               <FlexView flexDirection="column">
                 <HomeAuthor>{course.author}</HomeAuthor>
                 <FrequencyView>
@@ -56,7 +56,6 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
       </Card>
     </TouchableOpacity>
   </FlexWrap>
-
 );
 
 export default FeaturedCourse;

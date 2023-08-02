@@ -20,4 +20,4 @@ const lightTheme = {
   LINE_COLOR: '#778899',
 };
 
-export { lightTheme, darkTheme };
+export { darkTheme, lightTheme };

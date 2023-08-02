@@ -1,16 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import courseClient from '../../../api/courseClient';
+import { Category } from '../../../types/CategoryType';
 import shLogger from '../../../utils/Loggers';
 
 const useCategory = () => {
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const sortCategory = categories => {
+  const sortCategory = (categories: Category[]) => {
     return categories.sort((a, b) => {
-      return a.order > b.order;
+      return a.order - b.order;
     });
   };
 
