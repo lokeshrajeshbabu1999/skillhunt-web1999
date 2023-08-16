@@ -4,7 +4,6 @@ import {
   CourseImage,
   CoursePriceView,
   FlexView,
-  FlexWrap,
   FrequencyView,
   HomeAuthor,
   HomeTitle,
@@ -22,7 +21,7 @@ type FeaturedCourseProps = {
 };
 
 const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
-  <FlexWrap>
+  <>
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('CourseDetail', { id: course.course_id })
@@ -34,7 +33,7 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
           }}
         />
 
-        <FlexView flexDirection="column">
+        <FlexView flexDirection="column" flexGrow="1">
           <HomeTitle>{course.title}</HomeTitle>
           <FlexView>
             <ListCourseModeView>
@@ -55,7 +54,7 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
         </FlexView>
       </Card>
     </TouchableOpacity>
-  </FlexWrap>
+  </>
 );
 
 export default FeaturedCourse;

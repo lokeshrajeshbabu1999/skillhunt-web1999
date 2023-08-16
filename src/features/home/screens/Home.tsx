@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import {
   RefreshControl,
   ScrollView,
-  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
 
+import styled from 'styled-components/native';
 import {
   CourseAuthor,
   CourseContainer,
@@ -77,7 +77,6 @@ const Home = ({ navigation }: HomeProps) => {
 
   React.useEffect(() => {
     navigation.setOptions({
-      // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => (
         <TouchableOpacity>
           <IconView>
@@ -117,9 +116,7 @@ const Home = ({ navigation }: HomeProps) => {
 
   const displaySearchResults = () => {
     return (
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}>
+      <Scroll showsVerticalScrollIndicator={false}>
         {searchResults.map((course, i) => (
           <ListItem key={i} bottomDivider>
             <FlexWrap>
@@ -148,7 +145,7 @@ const Home = ({ navigation }: HomeProps) => {
             </FlexWrap>
           </ListItem>
         ))}
-      </ScrollView>
+      </Scroll>
     );
   };
   const skillActivityIndicator = () => {
@@ -175,11 +172,10 @@ const Home = ({ navigation }: HomeProps) => {
 
   const displayHomeContent = () => {
     return (
-      <ScrollView
+      <Scroll
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
         }
-        style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {homeContent.map(
           courseSec =>
@@ -191,7 +187,7 @@ const Home = ({ navigation }: HomeProps) => {
               />
             ),
         )}
-      </ScrollView>
+      </Scroll>
     );
   };
 
@@ -202,12 +198,8 @@ const Home = ({ navigation }: HomeProps) => {
     </View>
   );
 };
-
 export default Home;
 
-const styles = StyleSheet.create({
-  scrollView: {
-    marginBottom: 25,
-    marginHorizontal: 20,
-  },
-});
+const Scroll = styled(ScrollView)`
+  margin-horizontal: 8px;
+`;

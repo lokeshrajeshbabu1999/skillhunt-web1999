@@ -11,6 +11,7 @@ const appTheme: DefaultTheme = {
     secondary: 'magenta',
     background: 'rgba(102, 200, 255, 1)',
     backgroundText: '#000',
+    text: '#000',
   },
 };
 

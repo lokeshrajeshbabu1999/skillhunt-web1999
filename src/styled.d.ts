@@ -7,6 +7,7 @@ declare module 'styled-components/native' {
     colors: {
       primary: string;
       primaryText: string;
+      text: string;
       main: string;
       secondary: string;
       background: string;

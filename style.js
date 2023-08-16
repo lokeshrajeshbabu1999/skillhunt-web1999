@@ -43,7 +43,7 @@ export const CourseDetailImage = styled.Image`
 `;
 
 export const CourseTitle = styled.Text`
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
   font-size: 25px;
   font-weight: bold;
   margin-top: 8px;
@@ -51,7 +51,7 @@ export const CourseTitle = styled.Text`
 `;
 
 export const HomeTitle = styled.Text`
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
   font-size: 16px;
   font-weight: bold;
   margin: 4px;
@@ -60,19 +60,18 @@ export const HomeTitle = styled.Text`
 export const HomeAuthor = styled.Text`
   font-size: 14px;
   margin-left: 8px;
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
 `;
 
 export const CourseAuthor = styled.Text`
   font-size: 18px;
   margin-left: 8px;
 
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
   margin-left: 8px;
-
   color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
