@@ -1,15 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { StackScreenProps } from '@react-navigation/stack';
 import { Card, ListItem, SearchBar } from '@rneui/themed';
 import React, { useState } from 'react';
 import {
   RefreshControl,
   ScrollView,
-  StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'styled-components';
+
+import styled from 'styled-components/native';
 import {
   CourseAuthor,
   CourseContainer,
@@ -17,30 +18,34 @@ import {
   CourseTitle,
   FlexView,
   FlexWrap,
-  IconView
+  IconView,
 } from '../../../../style';
 import courseClient from '../../../api/courseClient';
 import CourseMode from '../../../components/CourseMode';
 import CoursePrice from '../../../components/CoursePrice';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
+import { CourseType } from '../../../types/CourseType';
 import shLogger from '../../../utils/Loggers';
 import { courseImage } from '../../../utils/MediaUtil';
 import CourseSection from '../components/CourseSection';
+import { HomeStackParamList } from '../components/HomeStack';
 import useHome from '../hooks/useHome';
-const Home = ({ navigation }) => {
+
+type HomeProps = StackScreenProps<HomeStackParamList, 'Home'>;
+
+const Home = ({ navigation }: HomeProps) => {
   const [homeContent, errorMessage, isLoading, refreshing, onDataRefresh] =
     useHome();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [search, setSearch] = useState('');
-  const [searchResults, setSearchResults] = useState('');
+  const [searchResults, setSearchResults] = useState<CourseType[]>([]);
   const [showResults, setShowResults] = useState(false);
-  const theme = useTheme();
+  const appTheme = useTheme();
 
-  const searchCourses = text => {
+  const searchCourses = (text: string) => {
     // Check if searched text is not blank
     if (text && text.length > 3) {
-      // FIXME - Move this to its own hook or utility method
       collectCoursesBySearchTerm(text);
       setSearch(text);
     } else {
@@ -49,7 +54,7 @@ const Home = ({ navigation }) => {
     }
   };
 
-  const collectCoursesBySearchTerm = (searchTerm: any) => {
+  const collectCoursesBySearchTerm = (searchTerm: string) => {
     courseClient
       .post('/search', { term: searchTerm })
       .then(response => {
@@ -72,14 +77,13 @@ const Home = ({ navigation }) => {
 
   React.useEffect(() => {
     navigation.setOptions({
-      // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => (
         <TouchableOpacity>
           <IconView>
             <Icon
               name="layers-search"
               size={26}
-              color={theme.BACKGROUND_COLOR}
+              color={appTheme.colors.primaryText}
               onPress={() => swapSearchBarDisplay()}
             />
           </IconView>
@@ -97,12 +101,12 @@ const Home = ({ navigation }) => {
           onChangeText={text => searchCourses(text)}
           onClear={() => searchCourses('')}
           value={search}
-          containerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
+          containerStyle={{ backgroundColor: appTheme.colors.background }}
           inputStyle={{
-            color: theme.TITLE_COLOR,
-            backgroundColor: theme.BACKGROUND_COLOR,
+            color: appTheme.colors.backgroundText,
+            backgroundColor: appTheme.colors.background,
           }}
-          inputContainerStyle={{ backgroundColor: theme.BACKGROUND_COLOR }}
+          inputContainerStyle={{ backgroundColor: appTheme.colors.background }}
         />
       );
     } else {
@@ -112,9 +116,7 @@ const Home = ({ navigation }) => {
 
   const displaySearchResults = () => {
     return (
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}>
+      <Scroll showsVerticalScrollIndicator={false}>
         {searchResults.map((course, i) => (
           <ListItem key={i} bottomDivider>
             <FlexWrap>
@@ -143,7 +145,7 @@ const Home = ({ navigation }) => {
             </FlexWrap>
           </ListItem>
         ))}
-      </ScrollView>
+      </Scroll>
     );
   };
   const skillActivityIndicator = () => {
@@ -170,11 +172,10 @@ const Home = ({ navigation }) => {
 
   const displayHomeContent = () => {
     return (
-      <ScrollView
+      <Scroll
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
         }
-        style={styles.scrollView}
         showsVerticalScrollIndicator={false}>
         {homeContent.map(
           courseSec =>
@@ -186,7 +187,7 @@ const Home = ({ navigation }) => {
               />
             ),
         )}
-      </ScrollView>
+      </Scroll>
     );
   };
 
@@ -197,12 +198,8 @@ const Home = ({ navigation }) => {
     </View>
   );
 };
-
 export default Home;
 
-const styles = StyleSheet.create({
-  scrollView: {
-    marginHorizontal: 20,
-    marginBottom: 25,
-  },
-});
+const Scroll = styled(ScrollView)`
+  margin-horizontal: 8px;
+`;

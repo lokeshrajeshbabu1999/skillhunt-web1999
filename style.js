@@ -1,3 +1,5 @@
+import { Badge } from '@rneui/themed';
+import { FlatList, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
@@ -17,9 +19,6 @@ export const AvatarContainer = styled.View`
   align-self: center;
   background-color: ${props => props.theme.PRIMARY_COLOR};
 `;
-export const CardView = styled.View`
-  background-color: #7fffd4;
-`;
 
 export const CategoryTitle = styled.Text`
   text-align: center;
@@ -34,9 +33,9 @@ export const CourseSectionView = styled.View`
 
 export const CourseImage = styled.Image`
   align-items: center;
-  width: 100%;
-  height: 70%;
+  min-height: 80px;
 `;
+
 export const CourseDetailImage = styled.Image`
   width: 350px;
   height: 150px;
@@ -44,35 +43,35 @@ export const CourseDetailImage = styled.Image`
 `;
 
 export const CourseTitle = styled.Text`
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
   font-size: 25px;
   font-weight: bold;
-  margin-top:8px;
+  margin-top: 8px;
   margin-left: 8px;
 `;
+
 export const HomeTitle = styled.Text`
-  color: ${props => props.theme.TITLE_COLOR};
-  font-size: 18px;
+  color: ${props => props.theme.colors.text};
+  font-size: 16px;
   font-weight: bold;
-  margin-top:8px;
-  margin-left: 8px;
+  margin: 4px;
 `;
+
 export const HomeAuthor = styled.Text`
   font-size: 14px;
   margin-left: 8px;
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
 `;
 
 export const CourseAuthor = styled.Text`
   font-size: 18px;
   margin-left: 8px;
 
-  color: ${props => props.theme.TITLE_COLOR};
+  color: ${props => props.theme.colors.text};
 `;
 export const FrequencyView = styled.View`
   font-size: 12px;
   margin-left: 8px;
-
   color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
@@ -81,37 +80,43 @@ export const CourseDesc = styled.Text`
   font-size: 15px;
   height: 65px;
   width: 340px;
-  margin-top:8px;
+  margin-top: 8px;
 `;
 
 export const FlexWrap = styled.View`
-  width: 350px;
-  height: 320px;
-`;
-export const ShareView = styled.View`
-  margin-right:20px;
+  width: 100%;
 `;
 
-export const FlexView = styled.View`
+// export const CourseFlex = styled.View`
+//   width: 380px;
+//   height: 280px;
+// `;
+
+export const ShareView = styled.View`
+  margin-right: 20px;
+`;
+
+export const FlexView = styled(View)`
   display: flex;
-  flex-direction: ${props => props.direction || 'row'};
-  flex-grow: ${props => props.grow || 1};
+  flex-direction: ${props => props.flexDirection || 'row'};
+  flex-grow: ${props => props.flexGrow || 1};
 `;
 
 export const ListCourseModeView = styled.View`
   display: flex;
-  margin-top: 10px;
-  margin-left:0px;
-
+  margin: 4px;
+  justify-content: center;
 `;
+
 export const CoursePriceView = styled.View`
   display: flex;
-  align-self: flex-start;
+  justify-content: center;
+  margin: 4px;
 `;
 
 export const CourseDetailModeView = styled.View`
   margin-top: 10px;
-  margin-left:0px;
+  margin-left: 0px;
 `;
 
 // export const CourseDetailPriceView = styled.View`
@@ -128,10 +133,6 @@ export const IconView = styled.View`
 //   margin-horizontal: 20px;
 //   `;
 
-export const PriceBadge = styled.View`
-  margin-top: 70px;
-  display: flex;
-`;
 export const HomePriceBadge = styled.View`
   margin-top: 30px;
   display: flex;
@@ -144,18 +145,18 @@ export const CourseContainer = styled.SafeAreaView`
   height: 100%;
 `;
 
-export const ListCourseImage = styled.Image`
-  align-self: center;
-  width: 100%;
-  height: 130px;
-`;
-
-export const CourseFlex = styled.View`
-  width: 380px;
-  height: 280px;
-`;
 export const VideoStyle = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};
-  width:350px;
-  height:150px;
+  width: 350px;
+  height: 150px;
+`;
+
+export const PriceBadge = styled(Badge)`
+  padding: 8px;
+  background-color: red;
+`;
+
+export const SpacedFlatList = styled(FlatList)`
+  margin-top: 8px;
+  margin-bottom: 16px;
 `;

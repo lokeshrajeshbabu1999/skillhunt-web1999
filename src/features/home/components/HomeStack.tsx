@@ -4,25 +4,23 @@ import Global from '../../../utils/Global';
 import CourseDetail from '../../course/screens/CourseDetail';
 import Home from '../screens/Home';
 
-export const HomeStack = createStackNavigator();
-// export const SearchStack = createStackNavigator();
+export type HomeStackParamList = {
+  Home: undefined;
+  CourseDetail: { id: string };
+};
 
-// type SkillHuntTheme = {
-//   PRIMARY_COLOR: string;
-//   BACKGROUND_COLOR: string;
-// };
+export const HomeStack = createStackNavigator<HomeStackParamList>();
 
-export const HomeNavigator = ({}) => {
-  const theme = useTheme();
-
+export const HomeNavigator = () => {
+  const appTheme = useTheme();
   return (
     <HomeStack.Navigator
       screenOptions={{
         headerShown: true,
         headerStyle: {
-          backgroundColor: theme.PRIMARY_COLOR,
+          backgroundColor: appTheme.colors.primary,
         },
-        headerTintColor: theme.BACKGROUND_COLOR,
+        headerTintColor: appTheme.colors.primaryText,
       }}>
       <HomeStack.Screen
         name="Home"

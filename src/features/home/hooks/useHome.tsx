@@ -6,7 +6,7 @@ const useHome = () => {
   const [homeContent, setHomeContent] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const sortSection = (sections: any) => {
     return sections.sort((a: { order: number }, b: { order: number }) => {
@@ -39,7 +39,6 @@ const useHome = () => {
 
   useEffect(() => {
     loadHomeContent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [homeContent, errorMessage, isLoading, refreshing, onDataRefresh];

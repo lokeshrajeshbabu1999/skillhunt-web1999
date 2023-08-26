@@ -1,14 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
+import React, { useEffect } from 'react';
+import { RefreshControl } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
-import { CourseContainer } from '../../../../style';
+import { CourseContainer, SpacedFlatList } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import Course from '../components/Course';
+import { CourseStackParamList } from '../components/CourseStack';
 import useCourse from '../hooks/useCourse';
 
-const ListCourse = ({ route, navigation }) => {
+type ListCourseProps = StackScreenProps<CourseStackParamList, 'ListCourse'>;
+
+const ListCourse = ({ route, navigation }: ListCourseProps) => {
   const [courses, errorMessage, isLoading, refreshing, onDataRefresh] =
     useCourse(route.params.code);
   const renderCourseCard = ({ item }) => (
@@ -43,7 +46,7 @@ const ListCourse = ({ route, navigation }) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onDataRefresh} />
         }>
-        <FlatList
+        <SpacedFlatList
           data={courses}
           showsVerticalScrollIndicator={false}
           renderItem={renderCourseCard}

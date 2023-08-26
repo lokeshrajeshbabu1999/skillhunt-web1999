@@ -1,10 +1,15 @@
-import { FlatList } from 'react-native';
 import { Text } from '@rneui/themed';
-// import { CourseSectionView } from '../../../../style';
-import FeaturedCourse from './FeaturedCourse';
+import { FlatList, View } from 'react-native';
 import styled from 'styled-components/native';
+import { CourseSectionType } from '../../../types/CourseSectionType';
+import FeaturedCourse from './FeaturedCourse';
 
-const CourseSection = ({ content, navigation }) => {
+type CourseSectionProps = {
+  content: CourseSectionType;
+  navigation: any;
+};
+
+const CourseSection = ({ content, navigation }: CourseSectionProps) => {
   const renderCourseCard = ({ item }) => (
     <FeaturedCourse course={item} navigation={navigation} />
   );
@@ -22,8 +27,11 @@ const CourseSection = ({ content, navigation }) => {
   );
 };
 
-export const CourseSectionView = styled.View`
-  margin-top: 20px;
+const CourseSectionView = styled(View)`
+  margin-top: 16px;
+  margin-bottom: 12px;
+  background-color: #cec;
+  border: 2px solid red;
 `;
 
 export default CourseSection;

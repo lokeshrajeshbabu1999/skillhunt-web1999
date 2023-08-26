@@ -1,12 +1,16 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import { FlatList } from 'react-native';
 import { Container, CourseContainer } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import Category from '../components/Category';
+import { CourseStackParamList } from '../components/CourseStack';
 import useCategory from '../hooks/useCategory';
 
-const ListCategory = ({ navigation }) => {
-  const [category, errorMessage, isLoading] = useCategory([]);
+type ListCategoryProps = StackScreenProps<CourseStackParamList, 'ListCategory'>;
+
+const ListCategory = ({ navigation }: ListCategoryProps) => {
+  const [category, errorMessage, isLoading] = useCategory();
 
   const numColumns = 2;
 

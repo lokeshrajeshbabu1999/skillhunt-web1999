@@ -113,6 +113,7 @@ android {
         dev {
             minSdkVersion rootProject.ext.minSdkVersion
             applicationId 'com.codrix.skill.dev'
+            applicationIdSuffix '.dev'
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.skillhunt"
         }

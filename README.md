@@ -40,9 +40,9 @@ To run the app on a specific device or emulator run the below command. Use `adb 
 
 ### Start your environment
 
-Run `npx react-native run-android --mode=devDebug --appIdSuffix=dev` for dev environment
+Run `npm run android-dev` for dev environment
 
-Run `npx react-native run-android --mode=prodDebug --appIdSuffix=prod` for prod environment
+Run `npm run android` for prod environment
 
 ### Lint Checking
 
