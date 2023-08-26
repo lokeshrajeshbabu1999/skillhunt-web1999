@@ -1,5 +1,6 @@
 import { Card } from '@rneui/themed';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import styled from 'styled-components/native';
 import {
   CourseImage,
   CoursePriceView,
@@ -21,7 +22,7 @@ type FeaturedCourseProps = {
 };
 
 const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
-  <>
+  <FeaturedCourseView>
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('CourseDetail', { id: course.course_id })
@@ -54,7 +55,13 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
         </FlexView>
       </Card>
     </TouchableOpacity>
-  </>
+  </FeaturedCourseView>
 );
+
+const FeaturedCourseView = styled(View)`
+  margin: 0px;
+  background-color: #cce;
+  border: 2px solid brown;
+`;
 
 export default FeaturedCourse;
