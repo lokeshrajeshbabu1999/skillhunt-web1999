@@ -77,10 +77,7 @@ export const FrequencyView = styled.View`
 `;
 
 export const CourseDesc = styled.Text`
-  font-size: 15px;
-  height: 65px;
-  width: 340px;
-  margin-top: 8px;
+  font-size: 12px;
 `;
 
 export const FlexWrap = styled.View`

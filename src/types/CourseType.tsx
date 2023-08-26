@@ -7,4 +7,5 @@ export type CourseType = {
   frequency: string;
   duration: number;
   sessions: number;
+  desc: string;
 };
