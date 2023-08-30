@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import userClient from '../../../api/userClient';
 import shLogger from '../../../utils/Loggers';
 
-const useSchedule = (userEmail: string, courseId: string) => {
+const useSchedule = (courseId: string, userEmail?: string) => {
   const [userSchedule, setUserSchedule] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -14,7 +14,7 @@ const useSchedule = (userEmail: string, courseId: string) => {
       .get('/user-schedule', { params })
       .then(response => {
         shLogger.debug(
-          'Course User %s schedule for %s',
+          'Collecting User %s schedule for %s',
           userEmail,
           courseId,
           response.data,
@@ -23,7 +23,7 @@ const useSchedule = (userEmail: string, courseId: string) => {
         setRefreshing(false);
       })
       .catch(error => {
-        shLogger.error('Error:', error);
+        shLogger.error('Failed to collect user schedule:', error);
         setRefreshing(false);
       });
   };

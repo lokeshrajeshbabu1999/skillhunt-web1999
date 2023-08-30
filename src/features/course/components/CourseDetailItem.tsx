@@ -19,10 +19,10 @@ import { courseImage } from '../../../utils/MediaUtil';
 
 type CourseDetailItemProps = {
   course: CourseType;
-  navigation: any;
+  navigation: unknown;
 };
 
-const CourseDetailItem = ({ course, navigation }: CourseDetailItemProps) => (
+const CourseDetailItem = ({ course }: CourseDetailItemProps) => (
   <CourseItemView>
     <CourseCard>
       <CardImage
@@ -90,13 +90,14 @@ const CourseDetailItem = ({ course, navigation }: CourseDetailItemProps) => (
 );
 
 const CourseItemView = styled(View)`
-  margin: 0px;
-  // background-color: #ccc;
+  margin: 4px;
   // border: 2px solid #a99;
+  // background-color: #cc3;
 `;
 
 const CourseCard = styled(Card)`
-  margin 0px;
+  // margin: 0px ! important;
+  // border: 8px solid #9a9;
 `;
 
 export default CourseDetailItem;

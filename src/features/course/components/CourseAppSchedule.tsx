@@ -1,111 +1,133 @@
 import { useAuthenticator } from '@aws-amplify/ui-react-native';
-import { Button, Card } from '@rneui/themed';
+import { Card, Icon, ListItem } from '@rneui/themed';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components/native';
-import userClient from '../../../api/userClient';
-import Divider from '../../../components/Divider';
-import { toDisplayDate } from '../../../utils/DateUtil';
-import Global from '../../../utils/Global';
-import shLogger from '../../../utils/Loggers';
-import useSchedule from '../../schedule/hooks/useSchedule';
+import { FlexView, ScheduleTitle } from '../../../../style';
+import { CourseType } from '../../../types/CourseType';
+import { ScheduleType } from '../../../types/ScheduleType';
+import { dbToUIDate, toDay } from '../../../utils/DateUtil';
 import useCourseSchedule from '../hooks/useCourseSchedule';
 
-const CourseAppSchedule = ({ course }) => {
-  shLogger.debug('CourseAppSchedule :: Course in props ', course);
+type CourseAppScheduleProps = {
+  course: CourseType;
+};
+
+const CourseAppSchedule = ({ course }: CourseAppScheduleProps) => {
   const { user } = useAuthenticator();
   const [courseSchedule] = useCourseSchedule(course.course_id);
-  const [userSchedule] = useSchedule(user.attributes?.email, course.course_id);
+  // const [userSchedule] = useSchedule(course.course_id, user.attributes?.email);
 
-  const enrollSchedule = schedule => {
-    shLogger.debug('enrollSchedule ', schedule);
-    shLogger.debug(
-      'CourseAppSchedule : enrollSchedule',
-      JSON.stringify({
-        user_id: user.attributes.email,
-        course_id: course.course_id,
-        schedule_id: schedule.schedule_id,
-      }),
-    );
-    userClient
-      .post(
-        '/user-api/user-schedule',
-        JSON.stringify({
-          user_id: user.attributes.email,
-          course_id: course.course_id,
-          schedule_id: schedule.schedule_id,
-        }),
-      )
-      .then(response => {
-        shLogger.debug(response.data);
-      })
-      .catch(error => {
-        shLogger.error('Error:', error);
-      });
-  };
+  // FIXME - Move this to an UserHook (Work with Karthick)
+  // const enrollSchedule = schedule => {
+  //   shLogger.debug('enrollSchedule ', schedule);
+  //   shLogger.debug(
+  //     'CourseAppSchedule : enrollSchedule',
+  //     JSON.stringify({
+  //       user_id: user.attributes?.email,
+  //       course_id: course.course_id,
+  //       schedule_id: schedule.schedule_id,
+  //     }),
+  //   );
+  //   userClient
+  //     .post(
+  //       '/user-api/user-schedule',
+  //       JSON.stringify({
+  //         user_id: user.attributes?.email,
+  //         course_id: course.course_id,
+  //         schedule_id: schedule.schedule_id,
+  //       }),
+  //     )
+  //     .then(response => {
+  //       shLogger.debug(response.data);
+  //     })
+  //     .catch(error => {
+  //       shLogger.error('Error:', error);
+  //     });
+  // };
+
   const displayNoSchedule = () => {
     return (
-      <View>
-        <Text>Allow user to show interest</Text>
-      </View>
+      <FlexView flexDirection="row">
+        <Text>
+          Sorry we don&apos;t have any open schedule for this course. Let us
+          know if you would be interested in taking this course.
+        </Text>
+      </FlexView>
     );
   };
 
-  const isButtonDisabled = schedule => {
-    return schedule.status !== Global.Constant.Enroll.Status;
-  };
+  // const isButtonDisabled = schedule => {
+  //   return schedule.status !== Global.Constant.Enroll.Status;
+  // };
 
-  const isDisabled = () => {
-    if (course.course_id === userSchedule.course_id) {
-      shLogger.debug(course.course_id);
-      return 'enrolled';
-    }
-  };
+  // const isDisabled = () => {
+  //   if (course.course_id === userSchedule.course_id) {
+  //     shLogger.debug(course.course_id);
+  //     return 'enrolled';
+  //   }
+  // };
 
-  const enrollButton = (schedule, item) => {
-    shLogger.debug('enrollButton : ', schedule);
-    return userSchedule ? isDisabled(item) : enrollSchedule(schedule);
-  };
+  // const enrollButton = (schedule, item) => {
+  //   shLogger.debug('enrollButton : ', schedule);
+  //   return userSchedule ? isDisabled(item) : enrollSchedule(schedule);
+  // };
 
   const displaySchedule = () => {
     return (
-      <ScrollView>
-        <Card>
-          {courseSchedule.map((schedule, i) => {
-            return (
-              <View key={i}>
-                <ScheduleView>
-                  <View>
-                    <Text style={styles.text}>
-                      {toDisplayDate(schedule.start_date)}-{' '}
-                      {toDisplayDate(schedule.end_date)}
-                    </Text>
+      <ListView>
+        <Card containerStyle={styles.schedule}>
+          {courseSchedule &&
+            courseSchedule.map((schedule: ScheduleType, index: number) => (
+              <ListItem
+                key={index}
+                bottomDivider
+                containerStyle={styles.listitem}>
+                <ListItem.Content>
+                  <ListItem.Title>
+                    <ScheduleTitle>
+                      {dbToUIDate(schedule.start_date)}
+                      {dbToUIDate(schedule.end_date)}
+                    </ScheduleTitle>
+                  </ListItem.Title>
+                  <ListItem.Subtitle>
                     <Text>
-                      {schedule.day}-({schedule.reps} Sessions)
+                      {toDay(schedule.day)} ({schedule.start_time} -{' '}
+                      {schedule.end_time})
                     </Text>
-                    <Text>
-                      {schedule.start_time} to {schedule.end_time} IST
-                    </Text>
-                  </View>
-                  <ButtonView>
-                    <Button
-                      disabled={isButtonDisabled(schedule)}
-                      title="Enroll"
-                      onPress={() => (
-                        shLogger.debug('Schedule Param :', schedule),
-                        enrollSchedule(schedule)
-                      )}
-                    />
-                  </ButtonView>
-                </ScheduleView>
-                <View>
-                  <Divider />
-                </View>
-              </View>
-            );
-          })}
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+                <Icon
+                  name="form-select"
+                  type="material-community"
+                  color="grey"
+                />
+              </ListItem>
+            ))}
         </Card>
-      </ScrollView>
+      </ListView>
+      // <ScrollView>
+      //   <Card>
+      //     {courseSchedule.map((schedule, i) => {
+      //       return (
+      //         <View key={i}>
+      //           <ScheduleView>
+      //             <ButtonView>
+      //               <Button
+      //                 disabled={isButtonDisabled(schedule)}
+      //                 title="Enroll"
+      //                 onPress={() => (
+      //                   shLogger.debug('Schedule Param :', schedule),
+      //                   enrollSchedule(schedule)
+      //                 )}
+      //               />
+      //             </ButtonView>
+      //           </ScheduleView>
+      //         </View>
+      //       );
+      //     })}
+      //   </Card>
+      // </ScrollView>
     );
   };
 
@@ -116,18 +138,16 @@ const CourseAppSchedule = ({ course }) => {
 
 export default CourseAppSchedule;
 
-export const ScheduleView = styled.View`
-  flex-direction: ${props => props.direction || 'row'};
-  justify-content: space-between;
-  flex-grow: ${props => props.grow || 1};
-`;
-
-export const ButtonView = styled.View`
-  margin-top: 20px;
+export const ListView = styled(View)`
+  margin: 4px;
+  // border: 2px solid #a99;
 `;
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 18,
+  listitem: {
+    padding: 8,
+  },
+  schedule: {
+    padding: 0,
   },
 });

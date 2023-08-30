@@ -21,7 +21,7 @@ const useUserSchedule = (userEmail: string) => {
       })
       .catch(error => {
         shLogger.error('Error:', error);
-        updateMessageFlags('Failed to collect courseDetail', false, false);
+        updateMessageFlags('Failed to collect user details', false, false);
       });
   };
 
@@ -42,7 +42,6 @@ const useUserSchedule = (userEmail: string) => {
 
   useEffect(() => {
     readUserSchedule();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [listSchedule, errorMessage, isLoading, refreshing, onDataRefresh];

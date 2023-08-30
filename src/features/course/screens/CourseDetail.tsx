@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Card } from '@rneui/themed';
 import React from 'react';
 import {
   Linking,
@@ -10,19 +9,11 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styled from 'styled-components/native';
-import {
-  CourseContainer,
-  CourseDetailImage,
-  ShareView,
-} from '../../../../style';
-import CourseVideo from '../../../components/CourseVideo';
+import { CourseContainer, FlexView, ShareView } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
 import { CourseType } from '../../../types/CourseType';
-import Global from '../../../utils/Global';
 import shLogger from '../../../utils/Loggers';
-import { courseImage } from '../../../utils/MediaUtil';
 import { HomeStackParamList } from '../../home/components/HomeStack';
 import CourseAppSchedule from '../components/CourseAppSchedule';
 import CourseDetailItem from '../components/CourseDetailItem';
@@ -32,13 +23,9 @@ type CourseDetailProps = StackScreenProps<HomeStackParamList, 'CourseDetail'>;
 
 const CourseDetail = ({ route }: CourseDetailProps) => {
   const navigation = useNavigation();
-  const [
-    activeCourseDetail,
-    errorMessage,
-    isLoading,
-    refreshing,
-    onDataRefresh,
-  ] = useCourseDetail(route.params.id);
+  const [activeCourseDetail, errorMessage, isLoading] = useCourseDetail(
+    route.params.id,
+  );
 
   const skillActivityIndicator = () => {
     return <Loader />;
@@ -71,51 +58,55 @@ const CourseDetail = ({ route }: CourseDetailProps) => {
     );
   };
 
-  const displayVideo = course => {
-    return (
-      <View>
-        <CourseVideo courseVideo={course.video} />
-      </View>
-    );
-  };
+  // FIXME - Analyze and introduce
+  // const displayVideo = course => {
+  //   return (
+  //     <View>
+  //       <CourseVideo courseVideo={course.video} />
+  //     </View>
+  //   );
+  // };
 
-  const displayImage = course => {
-    shLogger.debug('Course : ', course);
-    return (
-      <CourseDetailImage
-        source={{
-          uri: courseImage(course.image),
-        }}
-      />
-    );
-  };
+  // FIXME - Analyze impact and remove it
+  // const displayImage = course => {
+  //   shLogger.debug('Course : ', course);
+  //   return (
+  //     <CourseDetailImage
+  //       source={{
+  //         uri: courseImage(course.image),
+  //       }}
+  //     />
+  //   );
+  // };
+
   const displayCourseDetail = () => {
-    shLogger.debug('Display Result : ', activeCourseDetail);
+    shLogger.debug('Displaying course details for : ', activeCourseDetail);
     return errorMessage === '' && activeCourseDetail != null
       ? renderCourseCard(activeCourseDetail as unknown as CourseType)
       : skillMessage();
   };
 
-  const isRecordedCourse = (courseMode: string) => {
-    shLogger.debug(
-      'isRecordedCourse : ',
-      courseMode,
-      Global.Constant.CourseMode.Recorded,
-    );
-    return courseMode === Global.Constant.CourseMode.Recorded;
-  };
+  //FIXME- Analyze impact and remove it
+  // const isRecordedCourse = (courseMode: string) => {
+  //   shLogger.debug(
+  //     'isRecordedCourse : ',
+  //     courseMode,
+  //     Global.Constant.CourseMode.Recorded,
+  //   );
+  //   return courseMode === Global.Constant.CourseMode.Recorded;
+  // };
 
   const renderCourseCard = (course: CourseType) => {
     return (
       <ScrollView>
-        <CourseView>
+        <FlexView flexDirection="column" flexGrow="1">
           <CourseDetailItem
             course={course}
             navigation={navigation}></CourseDetailItem>
-        </CourseView>
-        <Card>
-          <CourseAppSchedule course={activeCourseDetail} />
-        </Card>
+        </FlexView>
+        <FlexView flexDirection="column" flexGrow="1">
+          <CourseAppSchedule course={course} />
+        </FlexView>
       </ScrollView>
     );
   };
@@ -130,7 +121,7 @@ const CourseDetail = ({ route }: CourseDetailProps) => {
       headerRight: () => (
         <ShareView>
           <TouchableOpacity onPress={shareCourseDetails}>
-            <Icon name="share-variant" size={35} color="white" />
+            <Icon name="share-variant" size={24} color="white" />
           </TouchableOpacity>
         </ShareView>
       ),
@@ -140,11 +131,5 @@ const CourseDetail = ({ route }: CourseDetailProps) => {
     <View>{isLoading ? skillActivityIndicator() : displayCourseDetail()}</View>
   );
 };
-
-const CourseView = styled(View)`
-  margin: 0px;
-  // background-color: #cce;
-  // border: 2px solid brown;
-`;
 
 export default CourseDetail;
