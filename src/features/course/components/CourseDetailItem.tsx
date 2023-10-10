@@ -6,7 +6,6 @@ import {
   CourseDesc,
   CoursePriceView,
   FlexView,
-  FrequencyView,
   HomeAuthor,
   HomeTitle,
   ListCourseModeView,
@@ -39,9 +38,9 @@ const CourseDetailItem = ({ course }: CourseDetailItemProps) => (
           <FlexView flexDirection="row" flexGrow="1">
             <FlexView flexDirection="column">
               <HomeAuthor>{course.author}</HomeAuthor>
-              <FrequencyView>
+              <FlexView>
                 <CourseFrequency course={course} />
-              </FrequencyView>
+              </FlexView>
             </FlexView>
           </FlexView>
           <CoursePriceView>
