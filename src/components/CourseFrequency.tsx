@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { FrequencyText } from '../../style';
 import { CourseType } from '../types/CourseType';
 import Global from '../utils/Global';
 
@@ -23,9 +23,9 @@ const CourseFrequency = ({ course }: CourseFrequencyProps) => {
   return (
     <>
       {course.duration !== undefined && (
-        <View>
-          <Text>{frequencyName}</Text>
-        </View>
+        <>
+          <FrequencyText>{frequencyName}</FrequencyText>
+        </>
       )}
     </>
   );

@@ -69,10 +69,10 @@ export const CourseAuthor = styled.Text`
   color: ${props => props.theme.colors.text};
 `;
 
-export const FrequencyView = styled.View`
+export const FrequencyText = styled.Text`
+  color: ${props => props.theme.colors.text};
   font-size: 12px;
   margin-left: 8px;
-  color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
 

@@ -5,7 +5,6 @@ import {
   CourseImage,
   CoursePriceView,
   FlexView,
-  FrequencyView,
   HomeAuthor,
   HomeTitle,
   ListCourseModeView,
@@ -43,9 +42,9 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
             <FlexView flexDirection="row" flexGrow="1">
               <FlexView flexDirection="column">
                 <HomeAuthor>{course.author}</HomeAuthor>
-                <FrequencyView>
+                <FlexView>
                   <CourseFrequency course={course} />
-                </FrequencyView>
+                </FlexView>
               </FlexView>
             </FlexView>
             <CoursePriceView>
@@ -60,8 +59,8 @@ const FeaturedCourse = ({ course, navigation }: FeaturedCourseProps) => (
 
 const FeaturedCourseView = styled(View)`
   margin: 0px;
-  background-color: #cce;
-  border: 2px solid brown;
+  // background-color: #cce;
+  // border: 2px solid brown;
 `;
 
 export default FeaturedCourse;
