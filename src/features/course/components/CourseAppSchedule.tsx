@@ -1,5 +1,5 @@
-import { useAuthenticator } from '@aws-amplify/ui-react-native';
-import { Card, Icon, ListItem } from '@rneui/themed';
+/* eslint-disable react-native/no-raw-text */
+import { Button, Card, ListItem } from '@rneui/themed';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components/native';
@@ -7,44 +7,27 @@ import { FlexView, ScheduleTitle } from '../../../../style';
 import { CourseType } from '../../../types/CourseType';
 import { ScheduleType } from '../../../types/ScheduleType';
 import { dbToUIDate, toDay } from '../../../utils/DateUtil';
+import shLogger from '../../../utils/Loggers';
 import useCourseSchedule from '../hooks/useCourseSchedule';
+import useUserPost from '../hooks/useUserPost';
 
 type CourseAppScheduleProps = {
   course: CourseType;
 };
 
 const CourseAppSchedule = ({ course }: CourseAppScheduleProps) => {
-  const { user } = useAuthenticator();
+  // const { user } = useAuthenticator();
   const [courseSchedule] = useCourseSchedule(course.course_id);
   // const [userSchedule] = useSchedule(course.course_id, user.attributes?.email);
 
   // FIXME - Move this to an UserHook (Work with Karthick)
-  // const enrollSchedule = schedule => {
-  //   shLogger.debug('enrollSchedule ', schedule);
-  //   shLogger.debug(
-  //     'CourseAppSchedule : enrollSchedule',
-  //     JSON.stringify({
-  //       user_id: user.attributes?.email,
-  //       course_id: course.course_id,
-  //       schedule_id: schedule.schedule_id,
-  //     }),
-  //   );
-  //   userClient
-  //     .post(
-  //       '/user-api/user-schedule',
-  //       JSON.stringify({
-  //         user_id: user.attributes?.email,
-  //         course_id: course.course_id,
-  //         schedule_id: schedule.schedule_id,
-  //       }),
-  //     )
-  //     .then(response => {
-  //       shLogger.debug(response.data);
-  //     })
-  //     .catch(error => {
-  //       shLogger.error('Error:', error);
-  //     });
-  // };
+  const enrollSchedule = (schedule: ScheduleType) => {
+    shLogger.debug('enrollSchedule ', schedule);
+
+    useUserPost('/user-api/user-schedule', schedule).then(({ data }) => {
+      shLogger.debug('Post response : ' + data);
+    });
+  };
 
   const displayNoSchedule = () => {
     return (
@@ -87,6 +70,7 @@ const CourseAppSchedule = ({ course }: CourseAppScheduleProps) => {
                   <ListItem.Title>
                     <ScheduleTitle>
                       {dbToUIDate(schedule.start_date)}
+                      {' - '}
                       {dbToUIDate(schedule.end_date)}
                     </ScheduleTitle>
                   </ListItem.Title>
@@ -97,10 +81,11 @@ const CourseAppSchedule = ({ course }: CourseAppScheduleProps) => {
                     </Text>
                   </ListItem.Subtitle>
                 </ListItem.Content>
-                <Icon
-                  name="form-select"
-                  type="material-community"
-                  color="grey"
+                <Button
+                  title="Enroll"
+                  size="sm"
+                  radius={'sm'}
+                  onPress={() => enrollSchedule(schedule)}
                 />
               </ListItem>
             ))}
@@ -116,10 +101,6 @@ const CourseAppSchedule = ({ course }: CourseAppScheduleProps) => {
       //               <Button
       //                 disabled={isButtonDisabled(schedule)}
       //                 title="Enroll"
-      //                 onPress={() => (
-      //                   shLogger.debug('Schedule Param :', schedule),
-      //                   enrollSchedule(schedule)
-      //                 )}
       //               />
       //             </ButtonView>
       //           </ScheduleView>
