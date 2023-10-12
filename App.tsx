@@ -1,5 +1,7 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { Amplify } from 'aws-amplify';
+import Config from 'react-native-config';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ThemeProvider } from 'styled-components';
 import { CourseNavigator } from './src/features/course/components/CourseStack';
@@ -8,12 +10,12 @@ import UserProfile from './src/features/profile/screens/UserProfile';
 import { ScheduleNavigator } from './src/features/schedule/components/ScheduleStack';
 import { appTheme } from './src/theme';
 
-// Amplify.configure({
-//   aws_project_region: 'ap-south-1',
-//   aws_user_pools_id: Config.USER_POOL_ID,
-//   aws_user_pools_web_client_id: Config.USER_POOL_WEB_CLIENT_ID,
-//   aws_cognito_identity_pool_id: Config.IDENTITY_POOL_ID,
-// });
+Amplify.configure({
+  aws_project_region: 'ap-south-1',
+  aws_user_pools_id: Config.USER_POOL_ID,
+  aws_user_pools_web_client_id: Config.USER_POOL_WEB_CLIENT_ID,
+  aws_cognito_identity_pool_id: Config.IDENTITY_POOL_ID,
+});
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,8 +26,6 @@ function App(): JSX.Element {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   return (
-    // <Authenticator.Provider>
-    //   <Authenticator>
     <ThemeProvider theme={appTheme}>
       <NavigationContainer>
         <Tab.Navigator
@@ -58,11 +58,7 @@ function App(): JSX.Element {
             options={{
               tabBarLabel: 'Schedule',
               tabBarIcon: ({ color }) => (
-                <Icon
-                  name="calendar-month-outline"
-                  size={26}
-                  color={color}
-                />
+                <Icon name="calendar-month-outline" size={26} color={color} />
               ),
             }}
           />
@@ -79,8 +75,6 @@ function App(): JSX.Element {
         </Tab.Navigator>
       </NavigationContainer>
     </ThemeProvider>
-      {/* </Authenticator>
-    </Authenticator.Provider> */}
   );
 }
 
