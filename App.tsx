@@ -1,4 +1,3 @@
-import { Authenticator } from '@aws-amplify/ui-react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Amplify } from 'aws-amplify';
@@ -27,63 +26,55 @@ function App(): JSX.Element {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   return (
-    <Authenticator.Provider>
-      <Authenticator>
-        <ThemeProvider theme={appTheme}>
-          <NavigationContainer>
-            <Tab.Navigator
-              activeColor="#222"
-              inactiveColor="#fff"
-              barStyle={{ backgroundColor: appTheme.colors.primary }}>
-              <Tab.Screen
-                name="HomeStack"
-                component={HomeNavigator}
-                options={{
-                  tabBarLabel: 'Home',
-                  tabBarIcon: ({ color }) => (
-                    <Icon name="home" size={26} color={color} />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Course"
-                component={CourseNavigator}
-                options={{
-                  tabBarLabel: 'Courses',
-                  tabBarIcon: ({ color }) => (
-                    <Icon name="book-open" size={26} color={color} />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Schedule"
-                component={ScheduleNavigator}
-                options={{
-                  tabBarLabel: 'Schedule',
-                  tabBarIcon: ({ color }) => (
-                    <Icon
-                      name="calendar-month-outline"
-                      size={26}
-                      color={color}
-                    />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Profile"
-                component={UserProfile}
-                options={{
-                  tabBarLabel: 'Account',
-                  tabBarIcon: ({ color }) => (
-                    <Icon name="account" size={26} color={color} />
-                  ),
-                }}
-              />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </ThemeProvider>
-      </Authenticator>
-    </Authenticator.Provider>
+    <ThemeProvider theme={appTheme}>
+      <NavigationContainer>
+        <Tab.Navigator
+          activeColor="#222"
+          inactiveColor="#fff"
+          barStyle={{ backgroundColor: appTheme.colors.primary }}>
+          <Tab.Screen
+            name="HomeStack"
+            component={HomeNavigator}
+            options={{
+              tabBarLabel: 'Home',
+              tabBarIcon: ({ color }) => (
+                <Icon name="home" size={26} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Course"
+            component={CourseNavigator}
+            options={{
+              tabBarLabel: 'Courses',
+              tabBarIcon: ({ color }) => (
+                <Icon name="book-open" size={26} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Schedule"
+            component={ScheduleNavigator}
+            options={{
+              tabBarLabel: 'Schedule',
+              tabBarIcon: ({ color }) => (
+                <Icon name="calendar-month-outline" size={26} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={UserProfile}
+            options={{
+              tabBarLabel: 'Account',
+              tabBarIcon: ({ color }) => (
+                <Icon name="account" size={26} color={color} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

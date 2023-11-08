@@ -9,20 +9,17 @@ const shLogger = logger.createLogger({
     error: 4,
     devNotice: 5,
   },
+  severity: 'info',
   transportOptions: {
     colors: {
       custom: 'white',
       devNotice: 'blue',
       info: 'blueBright',
-      warn: 'redBright',
-      error: 'greenBright',
-      debug: 'yellow',
+      warn: 'yellowBright',
+      error: 'redBright',
+      debug: 'white',
     },
   },
 });
-// log.debug('We are testing in App.js');
-// log.error('this is a error');
-// log.warn('this is a warning');
-// log.info('this is a info');
 
 export default shLogger;

@@ -1,4 +1,3 @@
-import { useAuthenticator } from '@aws-amplify/ui-react-native';
 import { FlatList, RefreshControl, View } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import { CourseContainer } from '../../../../style';
@@ -8,7 +7,7 @@ import UserSchedule from '../components/UserSchedule';
 import useUserSchedule from '../hooks/useUserSchedule';
 
 const ListUserSchedule = (navigation, route) => {
-  const { user } = useAuthenticator();
+  // const { user } = useAuthenticator();
   const [listSchedule, errorMessage, isLoading, refreshing, onDataRefresh] =
     useUserSchedule(user.attributes!!.email);
   const renderUserSchedule = ({ item }) => <UserSchedule schedule={item} />;

@@ -1,5 +1,5 @@
 import { Badge } from '@rneui/themed';
-import { FlatList, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
@@ -66,21 +66,18 @@ export const HomeAuthor = styled.Text`
 export const CourseAuthor = styled.Text`
   font-size: 18px;
   margin-left: 8px;
-
   color: ${props => props.theme.colors.text};
 `;
-export const FrequencyView = styled.View`
+
+export const FrequencyText = styled.Text`
+  color: ${props => props.theme.colors.text};
   font-size: 12px;
   margin-left: 8px;
-  color: ${props => props.theme.PRIMARY_COLOR};
   margin-bottom: 2px;
 `;
 
 export const CourseDesc = styled.Text`
-  font-size: 15px;
-  height: 65px;
-  width: 340px;
-  margin-top: 8px;
+  font-size: 12px;
 `;
 
 export const FlexWrap = styled.View`
@@ -159,4 +156,11 @@ export const PriceBadge = styled(Badge)`
 export const SpacedFlatList = styled(FlatList)`
   margin-top: 8px;
   margin-bottom: 16px;
+`;
+
+export const ScheduleTitle = styled(Text)`
+  color: ${props => props.theme.colors.text};
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px;
 `;

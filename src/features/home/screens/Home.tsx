@@ -63,7 +63,7 @@ const Home = ({ navigation }: HomeProps) => {
         setShowResults(true);
       })
       .catch(error => {
-        shLogger.error('Error :', error);
+        shLogger.error('Error in collectCoursesBySearchTerm:', error);
       });
   };
 

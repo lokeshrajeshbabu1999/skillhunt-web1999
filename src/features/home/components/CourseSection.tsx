@@ -30,8 +30,8 @@ const CourseSection = ({ content, navigation }: CourseSectionProps) => {
 const CourseSectionView = styled(View)`
   margin-top: 16px;
   margin-bottom: 12px;
-  background-color: #cec;
-  border: 2px solid red;
+  // background-color: #cec;
+  // border: 2px solid red;
 `;
 
 export default CourseSection;

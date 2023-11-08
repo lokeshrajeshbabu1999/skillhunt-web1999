@@ -1,45 +1,37 @@
 import { useNavigation } from '@react-navigation/native';
-import { Card } from '@rneui/themed';
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import { Linking, RefreshControl, ScrollView, Share, TouchableOpacity, View, } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTheme } from 'styled-components';
 import {
-  CourseAuthor,
-  CourseContainer,
-  CourseDesc,
-  CourseDetailImage,
-  CourseDetailModeView,
-  CourseTitle,
-  FlexView,
-  FrequencyView,
-  PriceBadge,
-  ShareView
-} from '../../../../style';
-import CourseFrequency from '../../../components/CourseFrequency';
-import CourseMode from '../../../components/CourseMode';
-import CoursePrice from '../../../components/CoursePrice';
-import CourseVideo from '../../../components/CourseVideo';
+  Linking,
+  ScrollView,
+  Share,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { CourseContainer, FlexView, ShareView } from '../../../../style';
 import Loader from '../../../components/Loader';
 import Message from '../../../components/Message';
-import Global from '../../../utils/Global';
+import { CourseType } from '../../../types/CourseType';
 import shLogger from '../../../utils/Loggers';
-import { courseImage } from '../../../utils/MediaUtil';
+import { HomeStackParamList } from '../../home/components/HomeStack';
 import CourseAppSchedule from '../components/CourseAppSchedule';
+import CourseDetailItem from '../components/CourseDetailItem';
 import useCourseDetail from '../hooks/useCourseDetail';
-const CourseDetail = ({ route }) => {
+
+type CourseDetailProps = StackScreenProps<HomeStackParamList, 'CourseDetail'>;
+
+const CourseDetail = ({ route }: CourseDetailProps) => {
   const navigation = useNavigation();
-  const [
-    activeCourseDetail,
-    errorMessage,
-    isLoading,
-    refreshing,
-    onDataRefresh,
-  ] = useCourseDetail(route.params.id);
-  const theme = useTheme;
+  const [activeCourseDetail, errorMessage, isLoading] = useCourseDetail(
+    route.params.id,
+  );
+
   const skillActivityIndicator = () => {
     return <Loader />;
   };
+
+  //FIXME - Work this out with Lokesh
   const shareCourseDetails = () => {
     const courseUrl = generateCourseUrl(activeCourseDetail.course_id);
     console.log('Generated deep link URL:', courseUrl);
@@ -52,11 +44,12 @@ const CourseDetail = ({ route }) => {
       message,
     });
   };
-  const generateCourseUrl = courseId => {
-    // Replace 'yourapp' with the deep link scheme or hostname of your app
+
+  const generateCourseUrl = (courseId: string) => {
     const deepLink = `skillhunt://course/${encodeURIComponent(courseId)}`;
     return deepLink;
   };
+
   const skillMessage = () => {
     return (
       <CourseContainer>
@@ -65,105 +58,78 @@ const CourseDetail = ({ route }) => {
     );
   };
 
-  const displayVideo = course => {
-    return (
-      <View>
-        <CourseVideo courseVideo={course.video} />
-      </View>
-    );
-  };
+  // FIXME - Analyze and introduce
+  // const displayVideo = course => {
+  //   return (
+  //     <View>
+  //       <CourseVideo courseVideo={course.video} />
+  //     </View>
+  //   );
+  // };
 
-  const displayImage = course => {
-    shLogger.debug('Course : ', course);
-    return (
-      <CourseDetailImage
-        source={{
-          uri: courseImage(course.image),
-        }}
-      />
-    );
-  };
-  const displayResult = () => {
-    console.log('Display Result : ', activeCourseDetail);
+  // FIXME - Analyze impact and remove it
+  // const displayImage = course => {
+  //   shLogger.debug('Course : ', course);
+  //   return (
+  //     <CourseDetailImage
+  //       source={{
+  //         uri: courseImage(course.image),
+  //       }}
+  //     />
+  //   );
+  // };
+
+  const displayCourseDetail = () => {
+    shLogger.debug('Displaying course details for : ', activeCourseDetail);
     return errorMessage === '' && activeCourseDetail != null
-      ? renderCourseCard()
+      ? renderCourseCard(activeCourseDetail as unknown as CourseType)
       : skillMessage();
   };
 
-  const isRecordedCourse = (courseMode: string) => {
-    shLogger.debug(
-      'isRecordedCourse : ',
-      courseMode,
-      Global.Constant.CourseMode.Recorded,
-    );
-    return courseMode === Global.Constant.CourseMode.Recorded;
-  };
+  //FIXME- Analyze impact and remove it
+  // const isRecordedCourse = (courseMode: string) => {
+  //   shLogger.debug(
+  //     'isRecordedCourse : ',
+  //     courseMode,
+  //     Global.Constant.CourseMode.Recorded,
+  //   );
+  //   return courseMode === Global.Constant.CourseMode.Recorded;
+  // };
 
-  const renderCourseCard = () => {
+  const renderCourseCard = (course: CourseType) => {
     return (
       <ScrollView>
-        <Card>
-          <View>
-            <ScrollView
-              refreshControl={
-                <RefreshControl
-                  refreshing={Boolean(refreshing)}
-                  onRefresh={onDataRefresh}
-                />
-              }>
-              {isRecordedCourse(activeCourseDetail.mode)
-                ? displayVideo(activeCourseDetail)
-                : displayImage(activeCourseDetail)}
-              <FlexView >
-                <CourseDetailModeView>
-                  <CourseMode course={activeCourseDetail} />
-                </CourseDetailModeView>
-                <FlexView direction="row" >
-                  <FlexView direction="column">
-                    <CourseTitle>{activeCourseDetail.title}</CourseTitle>
-                    <CourseAuthor>{activeCourseDetail.author}</CourseAuthor>
-                    <FrequencyView>
-                      <CourseFrequency course={activeCourseDetail} />
-                    </FrequencyView>
-                  </FlexView>
-                </FlexView>
-                <PriceBadge>
-                  <CoursePrice course={activeCourseDetail} />
-                </PriceBadge>
-              </FlexView>
-              <FlexView direction="column">
-                <CourseDesc>{activeCourseDetail.desc}</CourseDesc>
-              </FlexView>
-            </ScrollView>
-          </View>
-        </Card>
-        <Card>
-          <CourseAppSchedule course={activeCourseDetail} />
-        </Card>
-      </ScrollView >
+        <FlexView flexDirection="column" flexGrow="1">
+          <CourseDetailItem
+            course={course}
+            navigation={navigation}></CourseDetailItem>
+        </FlexView>
+        <FlexView flexDirection="column" flexGrow="1">
+          <CourseAppSchedule course={course} />
+        </FlexView>
+      </ScrollView>
     );
   };
 
+  //FIXME - Will have to revisit this. Discuss with Lokesh
   React.useEffect(() => {
-    console.log('CourseId received by the CourseDetail component:', route.params.id);
+    shLogger.info(
+      'CourseId received by the CourseDetail component:',
+      route.params.id,
+    );
     navigation.setOptions({
       headerRight: () => (
         <ShareView>
           <TouchableOpacity onPress={shareCourseDetails}>
-            <Icon
-              name="share-variant"
-              size={35}
-              color='white'
-            />
+            <Icon name="share-variant" size={24} color="white" />
           </TouchableOpacity>
         </ShareView>
       ),
     });
   }, [navigation, route.params.id]);
-  return <View>
-    {isLoading ? skillActivityIndicator() : displayResult()}
-  </View>;
+  return (
+    <View>{isLoading ? skillActivityIndicator() : displayCourseDetail()}</View>
+  );
 };
 
 export default CourseDetail;
-
