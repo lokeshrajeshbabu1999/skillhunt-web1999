@@ -36,7 +36,7 @@ export default function Home() {
     return (
       <Layout>
         <Box>
-          <Helmet>
+          <Head>
           <meta property="og:image" content="https://example.com/ogp.jpg" />
           <meta
             property="og:image:secure_url"
@@ -49,7 +49,7 @@ export default function Home() {
             property="og:image:alt"
             content="A shiny red apple with a bite taken out"
           />
-          </Helmet>
+          </Head>
           {home.map((homeItem) => (
             <Container key={homeItem.key} sx={{ mb: 8 }}>
               <Typography component="span" variant="h5" gutterBottom>

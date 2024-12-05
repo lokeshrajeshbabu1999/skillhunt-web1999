@@ -89,7 +89,7 @@ export default function CourseDetails() {
 
     return (
       <Container maxWidth="md">
-        <Helmet>
+        <Head>
           <title>{course?.title || "Course Title"}</title>
           <meta property="og:title" content={course?.title || "Course Title"} />
           <meta property="og:description" content={course?.desc || "Course Description"} />
@@ -100,7 +100,7 @@ export default function CourseDetails() {
           <meta name="twitter:title" content={course?.title || "Course Title"} />
           <meta name="twitter:description" content={course?.desc || "Course Description"} />
           <meta name="twitter:image" content={imageUrl} />
-        </Helmet>
+        </Head>
         <Card>
           <CardActionArea>
             <CardMedia

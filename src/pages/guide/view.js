@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import Layout from "../../component/Layout";
 import useArticle from "../../features/guides/hooks/useArticle";
 import useUserGuides from "../../features/guides/hooks/useUserGuides";
+import Head from "next/head";
 
 const GuideView = () => {
   const router = useRouter();
@@ -24,9 +25,9 @@ const GuideView = () => {
   return (
     <Layout>
       <Container>
-        <Helmet>
+        <Head>
           <title>{userGuide ? userGuide.title : "guideTitle"}</title>
-        </Helmet>
+        </Head>
         {isLoading ? (
           <Typography display="flex" justifyContent="flex-end">
             <CircularProgress />

@@ -12,7 +12,7 @@ export default function Home() {
   const displayResult = () => {
     return (
       <Box>
-        <Helmet>
+        <Head>
           <meta property="og:image" content="https://example.com/ogp.jpg" />
           <meta
             property="og:image:secure_url"
@@ -25,7 +25,7 @@ export default function Home() {
             property="og:image:alt"
             content="A shiny red apple with a bite taken out"
           />
-        </Helmet>
+        </Head>
 
         {home.map((homeItem) => (
           <Container key={homeItem.key} sx={{ mb: 8 }}>
