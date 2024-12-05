@@ -1,0 +1,30 @@
+name: Skill Hunt Web
+
+on:
+  push:
+    branches:
+      - "main-deprecated"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build React App
+        run: npm install && npm run build:prod
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_PROD_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_PROD_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync ./build s3://skillhunt-web-prod --delete
+      - name: Cloudfront Invalidation
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: "ECTV3U2A343WH"
+          PATHS: "/*"
+          AWS-ACCESS-KEY-ID: ${{ secrets.AWS_PROD_ACCESS_KEY_ID }}
+          AWS-SECRET-ACCESS-KEY: ${{ secrets.AWS_PROD_SECRET_ACCESS_KEY }}
+          AWS-REGION: ${{ secrets.AWS_REGION }}

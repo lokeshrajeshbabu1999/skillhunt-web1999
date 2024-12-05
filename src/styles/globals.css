@@ -1,0 +1,155 @@
+.nextLink {
+  text-decoration: none;
+}
+
+.guide-container {
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.8;
+  color: #333;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Article title */
+.guide-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+/* Section headers */
+.guide-container h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #444;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* Subheadings */
+.guide-container h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+/* Paragraph text */
+.guide-container p {
+  font-size: 1.125rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Blockquote */
+.guide-container blockquote {
+  font-style: italic;
+  color: #666;
+  border-left: 4px solid #ddd;
+  padding: 10px 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+/* Lists */
+.guide-container ul,
+.guide-container ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  /* list-style-position: inside; */
+  color: #555;
+}
+
+.guide-container ul li::marker {
+  color: #777;
+}
+
+.guide-container ol li::marker {
+  color: #555;
+}
+
+/* Code block */
+.guide-container pre {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+}
+
+.guide-container code {
+  color: #009688;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+}
+
+/* Links */
+.guide-container a {
+  color: #1a73e8;
+  text-decoration: none;
+  border-bottom: 1px solid #1a73e8;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.guide-container a:hover {
+  color: #0056b3;
+  border-bottom-color: #0056b3;
+}
+
+/* Images */
+.guide-container img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+/* Tables */
+.guide-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.guide-container table th,
+.guide-container table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.guide-container table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+/* Horizontal rule */
+.guide-container hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 30px 0;
+}
+
+/* Footer text */
+.guide-container .footer {
+  font-size: 0.875rem;
+  color: #999;
+  text-align: center;
+  margin-top: 40px;
+}

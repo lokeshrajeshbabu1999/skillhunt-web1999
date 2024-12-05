@@ -1,0 +1,42 @@
+name: Skill Hunt Web (Prod - React SSR)
+
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build the Next.js app
+        run: npm run build:prod
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_PROD_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_PROD_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Deploy app build to S3 bucket
+        run: aws s3 sync out s3://skillhunt-web-prod --delete
+
+      - name: Cloudfront Invalidation
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: "ECTV3U2A343WH"
+          PATHS: "/*"
+          AWS-ACCESS-KEY-ID: ${{ secrets.AWS_PROD_ACCESS_KEY_ID }}
+          AWS-SECRET-ACCESS-KEY: ${{ secrets.AWS_PROD_SECRET_ACCESS_KEY }}
+          AWS-REGION: ap-south-1

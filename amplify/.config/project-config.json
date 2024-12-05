@@ -2,16 +2,16 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "SkillArena",
+  "projectName": "skillhuntweb",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
-    "framework": "react-native",
+    "framework": "react",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "/",
-      "BuildCommand": "npx react-native start",
-      "StartCommand": "npx react-native start"
+      "DistributionDir": "build",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
     }
   }
 }

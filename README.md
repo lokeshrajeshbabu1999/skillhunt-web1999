@@ -1,114 +1,132 @@
-# Skill Hunt
+# SkillHunt Web
 
-- Skill Hunt is built with [React Native CLI](https://reactnative.dev/docs/environment-setup)
-- Currently it supports Android. But will be enhanced for ios
+SkillHunt React SSR application.
 
-## Development
+## Environments
 
-### Setting up the project locally
+- [Stage environment](https://d35r9h8hqd5b12.cloudfront.net/)
+- [Prod environment](https://dqb3ejqwotj5e.cloudfront.net/) or [SkillHunt](https://skillhunt.codrixtech.com)
 
-- Run `git clone https://github.com/CodrixWorkspace/SkillHunt.git' to close the repo locally
-- Run 'npm install' into the project main folder to install the required packages
+## Available Scripts
 
-### Actions on save
+### Run Application Locally
 
-- Make the below changes to settings.json that performs formatting and organize import during save
+Run `npm run dev` to run the application locally.
 
-```
-"editor.formatOnSave": true,
-"editor.codeActionsOnSave": {
-  "source.fixAll.eslint": true,
-  "source.organizeImports": true
-}
-```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### Start Metro
+### Dev Build
 
-- To start Metro run 'npx react-native start' inside your project folder
+Run `npm run build:dev` to generate a dev build
 
-### Start you application
+Run `npm run start` to run the dev build
 
-Let Metro Bundler run in its own terminal. Open a new terminal inside your React Native project folder. Run the following:
+### Prod Build
 
-```
-npx react-native run-android
-```
+Run `npm run build:prod` to generate a dev build
 
-To run the app on a specific device or emulator run the below command. Use `adb devices` to find your device id.
+Run `npm run start` to run the dev build
 
-`npx react-native run-android --deviceId 'deviceid'`
+### `npm test`
 
-### Start your environment
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Run `npm run android-dev` for dev environment
+### `npm run build`
 
-Run `npm run android` for prod environment
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Lint Checking
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-- Run 'npm run lint:fix' to check and fix lint errors
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-<!-- FIXME : Fill up with instruction for running the app on ios  -->
+### `npm run eject`
 
-### Pair a device
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- Go to Wireless `debugging > Pair device with pairing code`
-- Run `adb pair 10.0.0.243:42095` to pair your device (Use your device ip and port)
-- Run `adb connect 10.0.0.243:42095` to connect your device
-- Run `adb install app/build/outputs/apk/prod/release/app-prod-release.apk` to install an apk to the connected device
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Release setup and packging
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-### Release setup
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-- An upload key was generated using [keytool](https://reactnative.dev/docs/signed-apk-android)
-- The below properties were set in the `~/.gradle/gradle.properties` file
+## Learn More
 
-```text
-  MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
-  MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
-  MYAPP_UPLOAD_STORE_PASSWORD=*****
-  MYAPP_UPLOAD_KEY_PASSWORD=*****
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- Signing config was added to the `android/app/build.gradle` config file
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Generating the release apk for validation
+### Code Splitting
 
-- Update the versionCode and versionName in build.gradle file.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-- Run the following in a terminal:
+### Analyzing the Bundle Size
 
-```bash
-cd android
-./gradlew clean assembleProdRelease
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Generating the release AAB
+### Making a Progressive Web App
 
-- Update the versionCode and versionName in build.gradle file.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-- Run the following in a terminal:
+### Advanced Configuration
 
-```bash
-cd android
-./gradlew bundleProdRelease
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-- Locate the app bundle at /android/app/build/outputs/bundle
+### Deployment
 
-- Ensure the App access provided for review is working
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### Internal distribution validation
+### `npm run build` fails to minify
 
-Become a part of our internal testing [team](https://play.google.com/apps/internaltest/4701438721505499078)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-Install the app from [Play Store](https://play.google.com/store/apps/details?id=com.codrix.skill&hl=en-US&ah=0S_CC-tVBeRQh2KARpnLmSLljpg&pli=1)
+### Create S3 bucket in CLI
 
-## Managing Git Branches
+-Run `aws s3 mb <target> s3://<bucket-name>/`
+-Run `aws s3api create-bucket --bucket <Bucket Name> --region <Region> --create-bucket-configuration LocationConstraint=<Region>`
 
-Run `git fetch -p` to get your local branches in sync with repo
+### List S3 bucket in CLI
 
-Run `git branch --merged| egrep -v "(^\*|master|main|dev)"` to view already merged local branches
+-Run `aws s3 ls`
+-Run `aws s3api list-buckets`
 
-Switch to main branch and Run `git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git branch -d` to delete all local branches that are already merged into the currently checked out branch
+### Upload file in S3 in CLI
+
+-Run `aws s3 cp <File path> s3://<bucket-name>/`
+
+### Delete objects
+
+-Run `aws s3 rm  <target> s3://<bucket-name>/`
+
+### Create Distribution:
+
+Open a new json file(FILE NAME)
+
+-Run `aws cloudfront create-distribution --origin-domain-name <ORIGIN-NAME> --default-root-object index.html ><FILE-NAME>`
+
+### Update Distribution:
+
+-Run `aws cloudfront update-distribution --id <ID> --default-root-object index.html`
+
+### Get Distribution:
+
+-Run `aws cloudfront get-distribution --id <DISTRIBUTION ID>`
+
+### List Distribution:
+
+-Run `aws cloudfront list-distributions`
+
+### Get-distribution-config:
+
+-Run `aws cloudfront get-distribution-config --id <DISTRIBUTION ID>`
+
+### create-invalidation
+
+-Run `aws cloudfront create-invalidation --distribution-id <DISTRIBUTION ID> --paths "/*"`
+SEO and Bots: If SEO is important, consider implementing server-side rendering properly using a service like AWS Lambda@Edge or hosting your app on a server that can handle SSR.
+Security Headers: Ensure that you're serving your content with the appropriate security headers to protect against common web vulnerabilities.
+HTTPS Configuration: Make sure your CloudFront distribution is properly configured to use HTTPS, and that your SSL/TLS certificates are valid.
+
+https://chatgpt.com/share/66f4bf39-6660-8004-a6d3-a0853f683fb8

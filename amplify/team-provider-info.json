@@ -1,19 +1,49 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-skillarena-dev-30603-authRole",
-      "UnauthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillarena-dev-30603-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillarena-dev-30603-authRole",
+      "AuthRoleName": "amplify-skillhuntweb-dev-4b004-authRole",
+      "UnauthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillhuntweb-dev-4b004-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::169064206213:role/amplify-skillhuntweb-dev-4b004-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-skillarena-dev-30603-deployment",
-      "UnauthRoleName": "amplify-skillarena-dev-30603-unauthRole",
-      "StackName": "amplify-skillarena-dev-30603",
-      "StackId": "arn:aws:cloudformation:ap-south-1:169064206213:stack/amplify-skillarena-dev-30603/9d7ca9b0-a399-11ed-9d7b-0a07694b29de",
-      "AmplifyAppId": "d2kcdaxmbya09d"
+      "DeploymentBucketName": "amplify-skillhuntweb-dev-4b004-deployment",
+      "UnauthRoleName": "amplify-skillhuntweb-dev-4b004-unauthRole",
+      "StackName": "amplify-skillhuntweb-dev-4b004",
+      "StackId": "arn:aws:cloudformation:ap-south-1:169064206213:stack/amplify-skillhuntweb-dev-4b004/5f4dec30-3b41-11ef-8db5-0a6dab5c13a1",
+      "AmplifyAppId": "d2h02p5qpcwsgr"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2h02p5qpcwsgr",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "skillhuntwebf28a2ec5": {}
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-skillhuntweb-prod-224258-authRole",
+      "UnauthRoleArn": "arn:aws:iam::839101020065:role/amplify-skillhuntweb-prod-224258-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::839101020065:role/amplify-skillhuntweb-prod-224258-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-skillhuntweb-prod-224258-deployment",
+      "UnauthRoleName": "amplify-skillhuntweb-prod-224258-unauthRole",
+      "StackName": "amplify-skillhuntweb-prod-224258",
+      "StackId": "arn:aws:cloudformation:ap-south-1:839101020065:stack/amplify-skillhuntweb-prod-224258/6a68d780-65b0-11ef-99cb-068629e751e1",
+      "AmplifyAppId": "d2f5ogc8ahamw7"
     },
     "categories": {
       "auth": {
-        "skillarenae9c8a678": {}
+        "skillhuntwebf28a2ec5": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2f5ogc8ahamw7",
+          "type": "manual"
+        }
       }
     }
   }
